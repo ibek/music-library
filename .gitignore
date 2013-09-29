@@ -1,6 +1,11 @@
 *.class
+*.*~
 
 # Package Files #
 *.jar
 *.war
 *.ear
+/target/
+
+# Netbeans IDE #
+nb-configuration.xml
