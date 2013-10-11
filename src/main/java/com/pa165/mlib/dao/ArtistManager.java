@@ -6,6 +6,7 @@ package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Artist;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
  * Transaction are managed by container
  * @author brazdil
  */
+@Stateless
 public class ArtistManager {
     
     @PersistenceContext(unitName = "mlib-pu")

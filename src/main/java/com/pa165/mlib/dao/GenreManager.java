@@ -6,7 +6,7 @@ package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Genre;
 import java.util.List;
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext; 
 
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * Transaction are managed by container
  * @author brazdil
  */
-@Singleton
+@Stateless
 public class GenreManager {
     
     @PersistenceContext(unitName = "mlib-pu")

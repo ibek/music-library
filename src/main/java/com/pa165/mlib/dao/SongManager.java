@@ -1,10 +1,8 @@
 package com.pa165.mlib.dao;
 
-import com.pa165.mlib.entity.Album;
-import com.pa165.mlib.entity.Artist;
-import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,23 +11,24 @@ import javax.persistence.PersistenceContext;
  * Transactions are managed by container.
  * @author ibek
  */
+@Stateless
 public class SongManager {
     
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
     
-    public void addSong(Album song) {
+    public void addSong(Song song) {
         em.persist(song);
     }
     
-    public Album updateSong(Album song) {
+    public Song updateSong(Song song) {
         if (song == null) {
             return null;
         }
         return em.merge(song);
     }
     
-    public void removeSong(Album song) {
+    public void removeSong(Song song) {
         if (song != null && !em.contains(song)) {
             song = em.merge(song);
         }
