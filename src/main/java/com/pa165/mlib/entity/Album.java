@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Album implements Serializable {
     private String released;
     
     @OneToMany(mappedBy = "album")
+    @OrderBy("position")
     private List<Song> songs;
             
     public Long getId() {
