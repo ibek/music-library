@@ -1,14 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.pa165.mlib.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,6 +20,9 @@ public class Artist implements Serializable {
     private Long id;
     
     private String name;
+    
+    @OneToMany(mappedBy = "artist")
+    private List<Song> songs;
     
     public Long getId() {
         return id;
@@ -60,10 +61,24 @@ public class Artist implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    /**
+     * @return the songs
+     */
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    /**
+     * @param songs the songs to set
+     */
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
     
     @Override
     public String toString() {
-        return "Artist[ id=" + id + ", " + "name= " + name + " ]";
+        return "Artist{ id=" + id + ", name= " + name + " }";
     }
     
 }

@@ -1,11 +1,13 @@
 package com.pa165.mlib.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 public class Album implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +25,10 @@ public class Album implements Serializable {
     private String title;
     
     @Column(length = 4)
-    private String year;
+    private String released;
+    
+    @OneToMany(mappedBy = "album")
+    private List<Song> songs;
             
     public Long getId() {
         return id;
@@ -39,13 +45,33 @@ public class Album implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-    
-    public String getYear() {
-        return year;
+
+    /**
+     * @return the released
+     */
+    public String getReleased() {
+        return released;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    /**
+     * @param released the released to set
+     */
+    public void setReleased(String released) {
+        this.released = released;
+    }
+
+    /**
+     * @return the songs
+     */
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    /**
+     * @param songs the songs to set
+     */
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 
     @Override
@@ -70,7 +96,7 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album[ id=" + id + ", " + "title= " + title + "year= " + year + " ]";
+        return "Album{ id=" + id + ", " + ", title= " + title + ", released= " + getReleased() + "}";
     }
     
 }

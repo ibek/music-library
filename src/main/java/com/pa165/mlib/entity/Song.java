@@ -28,6 +28,12 @@ public class Song implements Serializable {
     
     @ManyToOne
     private Genre genre;
+    
+    @ManyToOne
+    private Album album;
+    
+    @ManyToOne
+    private Artist artist;
 
     @Override
     public int hashCode() {
@@ -133,6 +139,34 @@ public class Song implements Serializable {
      */
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    /**
+     * @return the album
+     */
+    public Album getAlbum() {
+        return album;
+    }
+
+    /**
+     * @param album the album to set
+     */
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    /**
+     * @return the artist
+     */
+    public Artist getArtist() {
+        return artist;
+    }
+
+    /**
+     * @param artist the artist to set
+     */
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     @Override
