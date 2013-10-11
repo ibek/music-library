@@ -29,6 +29,8 @@ public class Album implements Serializable {
     @Column(length = 4)
     private String released;
     
+    private String commentary;
+    
     @OneToMany(mappedBy = "album")
     @OrderBy("position")
     private List<Song> songs;
@@ -47,6 +49,14 @@ public class Album implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    
+    public String getCommentary() {
+        return commentary;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 
     /**
@@ -99,7 +109,9 @@ public class Album implements Serializable {
 
     @Override
     public String toString() {
-        return "Album{ id=" + id + ", " + ", title= " + title + ", released= " + getReleased() + "}";
+        return "Album{ id=" + id + ", " + 
+               ", title= " + title + 
+               ", released= " + released + "}";
     }
     
 }

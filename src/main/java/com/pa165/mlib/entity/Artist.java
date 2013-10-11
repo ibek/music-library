@@ -23,11 +23,25 @@ public class Artist implements Serializable {
     @Column(nullable = false)
     private String name;
     
+    private String commentary;
+    
     @OneToMany(mappedBy = "artist")
     private List<Song> songs;
     
     public Long getId() {
         return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -52,16 +66,12 @@ public class Artist implements Serializable {
         return true;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getName() {
-        return name;
+    public String getCommentary() {
+        return commentary;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 
     /**
@@ -80,7 +90,9 @@ public class Artist implements Serializable {
     
     @Override
     public String toString() {
-        return "Artist{ id=" + id + ", name= " + name + " }";
+        return "Artist{ id=" + id + 
+               ", name= " + name + 
+               ", commentary= " + commentary + " }";
     }
     
 }
