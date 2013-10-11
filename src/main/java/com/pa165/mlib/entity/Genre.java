@@ -2,7 +2,6 @@ package com.pa165.mlib.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -23,7 +22,7 @@ public class Genre implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + this.name.hashCode();
         return hash;
     }
 
@@ -36,7 +35,7 @@ public class Genre implements Serializable {
             return false;
         }
         final Genre other = (Genre) obj;
-        if (!Objects.equals(this.name, other.name)) {
+        if (!other.name.equals(this.name)) {
             return false;
         }
         return true;
