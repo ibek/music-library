@@ -2,6 +2,7 @@ package com.pa165.mlib.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Album implements Serializable {
     @Column(length = 4)
     private String released;
     
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     @OrderBy("position")
     private List<Song> songs;
             

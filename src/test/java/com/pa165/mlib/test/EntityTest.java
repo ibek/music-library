@@ -10,12 +10,8 @@ import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -91,7 +87,33 @@ public class EntityTest extends TestBase {
         assertEquals(2, results.size());
         assertTrue(results.contains(album1));
         assertTrue(results.contains(album2));
+    }
         
+    public void testArtistWithSongs() throws Exception {
+        Artist mike = new Artist();
+        mike.setName("the best of");
+        mike.setSongs(new ArrayList<Song>(){{
+            Song s1 = new Song();
+            s1.setTitle("s1");
+            s1.setPosition(0);
+            Song s2 = new Song();
+            s2.setTitle("s2");
+            s2.setPosition(1);
+            Song s3 = new Song();
+            s3.setTitle("s3");
+            s3.setPosition(2);
+            
+            add(s1);
+            add(s2);
+            add(s3);
+        }});
+        ArtistManager am = lookupBy(ArtistManager.class);
+        am.addArtist(mike);
+        mike = am.updateArtist(mike);
+        SongManager sm = lookupBy(SongManager.class);
+        List<Song> s2list = sm.getSongsWithTitle("s2");
+        assertEquals(1, s2list.size());
+        assertEquals(mike.getSongs().get(1), s2list.get(0));
     }
     
 }

@@ -2,6 +2,7 @@ package com.pa165.mlib.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Artist implements Serializable {
     @Column(nullable = false)
     private String name;
     
-    @OneToMany(mappedBy = "artist")
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<Song> songs;
     
     public Long getId() {

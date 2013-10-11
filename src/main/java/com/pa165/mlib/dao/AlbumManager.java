@@ -54,7 +54,7 @@ public class AlbumManager {
     }
     
     public List<Album> getAlbumsWithArtist(Artist artist) {
-        return em.createQuery("select distinct a from album a inner join a.songs as song inner join  song.artist as artist where artist.id = :artist")
+        return em.createQuery("select distinct a from Album a inner join a.songs as song inner join  song.artist as artist where artist.id = :artist")
                 .setParameter("artist", artist.getId())
                 .getResultList();
     }
