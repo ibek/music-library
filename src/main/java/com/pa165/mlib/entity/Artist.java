@@ -23,8 +23,6 @@ public class Artist implements Serializable {
     @Column(nullable = false)
     private String name;
     
-    private String commentary;
-    
     @OneToMany(mappedBy = "artist")
     private List<Song> songs;
     
@@ -66,14 +64,6 @@ public class Artist implements Serializable {
         return true;
     }
 
-    public String getCommentary() {
-        return commentary;
-    }
-
-    public void setCommentary(String commentary) {
-        this.commentary = commentary;
-    }
-
     /**
      * @return the songs
      */
@@ -91,8 +81,7 @@ public class Artist implements Serializable {
     @Override
     public String toString() {
         return "Artist{ id=" + id + 
-               ", name= " + name + 
-               ", commentary= " + commentary + " }";
+               ", name= " + name + " }";
     }
     
 }
