@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.pa165.mlib.dao;
+package com.pa165.mlib.dao.impl;
 
+import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.entity.Artist;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,7 +13,7 @@ import javax.persistence.PersistenceContext;
  * @author brazdil
  */
 @Stateless
-public class ArtistManager {
+public class ArtistDaoImpl implements ArtistDao {
     
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
@@ -25,6 +22,7 @@ public class ArtistManager {
      * Persists the given artist to persistence context
      * @param artist 
      */
+    @Override
     public void addArtist(Artist artist) {
         em.persist(artist);
     }
@@ -34,6 +32,7 @@ public class ArtistManager {
      * @param artist
      * @return 
      */
+    @Override
     public Artist updateArtist(Artist artist) {
         if (artist == null) {
             return null;
@@ -45,6 +44,7 @@ public class ArtistManager {
      * Remove the given artist from persistence context
      * @param artist 
      */
+    @Override
     public void removeArtist(Artist artist) {
         if(artist != null && !em.contains(artist)) {
             em.merge(artist);
@@ -56,6 +56,7 @@ public class ArtistManager {
      * Read all artists
      * @return 
      */
+    @Override
     public List<Artist> getAll() {
         return em.createQuery("SELECT a FROM Artist a")
                 .getResultList();
@@ -66,6 +67,7 @@ public class ArtistManager {
      * @param id
      * @return 
      */
+    @Override
     public Artist getArtist(Long id) {
         return (Artist) em.createQuery("SELECT a FROM Artist a WHERE a.id = :id")
                 .setParameter("id", id)
@@ -77,6 +79,7 @@ public class ArtistManager {
      * @param name
      * @return 
      */
+    @Override
     public List<Artist> getArtist(String name) {
         return em.createQuery("SELECT a FROM Artist a WHERE a.name = :name")
                 .setParameter("name", name)

@@ -1,11 +1,11 @@
 package com.pa165.mlib.test;
 
-import com.pa165.mlib.dao.AlbumManager;
-import com.pa165.mlib.dao.ArtistManager;
+import com.pa165.mlib.dao.impl.AlbumDaoImpl;
+import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import static org.junit.Assert.*;
 
-import com.pa165.mlib.dao.GenreManager;
-import com.pa165.mlib.dao.SongManager;
+import com.pa165.mlib.dao.impl.GenreDaoImpl;
+import com.pa165.mlib.dao.impl.SongDaoImpl;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
@@ -24,7 +24,7 @@ public class EntityTest extends TestBase {
     public void testGenrePersist() throws Exception {
         Genre rock = new Genre();
         rock.setName("rock");
-        GenreManager gm = lookupBy(GenreManager.class);
+        GenreDaoImpl gm = lookupBy(GenreDaoImpl.class);
         gm.addGenre(rock);
         Genre rock2 = gm.getGenre("rock");
         assertEquals(rock, rock2);
@@ -34,7 +34,7 @@ public class EntityTest extends TestBase {
     public void testSongSearch() throws Exception {
         Song lala = new Song();
         lala.setTitle("lala");
-        SongManager sm = lookupBy(SongManager.class);
+        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
         sm.addSong(lala);
         Song ohm = new Song();
         String ohmTitle = "ohm";
@@ -50,13 +50,13 @@ public class EntityTest extends TestBase {
         
         Artist artist1 = new Artist();
         artist1.setName("Yoshida Brothers");
-        ArtistManager arM = lookupBy(ArtistManager.class);
+        ArtistDaoImpl arM = lookupBy(ArtistDaoImpl.class);
         arM.addArtist(artist1);
         
         Album album1 = new Album();
         album1.setTitle("Best of Asia");
         album1.setReleased("2001");
-        AlbumManager am = lookupBy(AlbumManager.class);
+        AlbumDaoImpl am = lookupBy(AlbumDaoImpl.class);
         am.addAlbum(album1);
         
         Album album2 = new Album();
@@ -68,7 +68,7 @@ public class EntityTest extends TestBase {
         song1.setTitle("Comodo");
         song1.setArtist(artist1);
         song1.setAlbum(album1);
-        SongManager sm = lookupBy(SongManager.class);
+        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
         sm.addSong(song1);
         
         Song song2 = new Song();
@@ -108,10 +108,10 @@ public class EntityTest extends TestBase {
             add(s2);
             add(s3);
         }});
-        ArtistManager am = lookupBy(ArtistManager.class);
+        ArtistDaoImpl am = lookupBy(ArtistDaoImpl.class);
         am.addArtist(mike);
         mike = am.updateArtist(mike);
-        SongManager sm = lookupBy(SongManager.class);
+        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
         List<Song> s2list = sm.getSongsWithTitle("s2");
         assertEquals(1, s2list.size());
         assertEquals(mike.getSongs().get(1), s2list.get(0));

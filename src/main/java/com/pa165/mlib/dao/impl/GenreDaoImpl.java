@@ -1,9 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.pa165.mlib.dao;
+package com.pa165.mlib.dao.impl;
 
+import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.entity.Genre;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -16,7 +13,7 @@ import javax.persistence.PersistenceContext;
  * @author brazdil
  */
 @Stateless
-public class GenreManager {
+public class GenreDaoImpl implements GenreDao {
     
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
@@ -25,6 +22,7 @@ public class GenreManager {
      * Persists the given genre to persistence context
      * @param genre 
      */
+    @Override
     public void addGenre(Genre genre) {
         em.persist(genre);
     }
@@ -34,6 +32,7 @@ public class GenreManager {
      * @param genre
      * @return 
      */
+    @Override
     public Genre updateGenre(Genre genre) {
         if (genre == null) {
             return null;
@@ -45,6 +44,7 @@ public class GenreManager {
      * Remove the given genre from persistence context
      * @param genre 
      */
+    @Override
     public void removeGenre(Genre genre) {
         if(genre != null && !em.contains(genre)) {
             em.merge(genre);
@@ -56,6 +56,7 @@ public class GenreManager {
      * Read all genres
      * @return 
      */
+    @Override
     public List<Genre> getAll() {
         return em.createQuery("SELECT g FROM Genre g")
                 .getResultList();
@@ -66,6 +67,7 @@ public class GenreManager {
      * @param name
      * @return 
      */
+    @Override
     public Genre getGenre(String name) {
             return (Genre) em.createQuery("SELECT g FROM Genre g WHERE g.name = :name")
                 .setParameter("name", name)
