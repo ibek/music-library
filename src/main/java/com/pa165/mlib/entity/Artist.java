@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 public class Artist implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
     @Column(nullable = false)

@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 public class Song implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     
     private String title;

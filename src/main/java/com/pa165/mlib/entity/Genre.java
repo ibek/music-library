@@ -3,7 +3,10 @@ package com.pa165.mlib.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -15,6 +18,10 @@ import javax.persistence.OneToMany;
 public class Genre implements Serializable {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+    
+    @Column(nullable = false)
     private String name;
     
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)
@@ -42,6 +49,14 @@ public class Genre implements Serializable {
         return true;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     /**
      * @return the name
      */
