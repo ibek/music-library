@@ -89,6 +89,7 @@ public class EntityTest extends TestBase {
         assertTrue(results.contains(album2));
     }
         
+    @Test
     public void testArtistWithSongs() throws Exception {
         Artist mike = new Artist();
         mike.setName("the best of");
