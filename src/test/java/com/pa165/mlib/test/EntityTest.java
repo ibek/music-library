@@ -36,14 +36,18 @@ public class EntityTest extends TestBase {
     }
     
     @Test(expected = NoResultException.class)
-    public void testSongRemove() throws Exception {
+    public void testSongRemove() throws Throwable {
         Song s = new Song();
         s.setTitle("mysong");
         SongDao sd = lookupBy(SongDaoImpl.class);
         sd.addSong(s);
         Song s2 = sd.getSong(s.getId());
         sd.removeSong(s2);
-        sd.getSong(s.getId());
+        try {
+            sd.getSong(s.getId());
+        } catch (Exception ex) {
+            throw ex.getCause();
+        }
     }
     
     @Test
