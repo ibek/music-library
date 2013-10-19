@@ -58,7 +58,7 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public List<Artist> getAll() {
-        return em.createQuery("SELECT a FROM Artist a")
+        return em.createQuery("SELECT a FROM Artist a", Artist.class)
                 .getResultList();
     }
     
@@ -69,7 +69,7 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public Artist getArtist(Long id) {
-        return (Artist) em.createQuery("SELECT a FROM Artist a WHERE a.id = :id")
+        return em.createQuery("SELECT a FROM Artist a WHERE a.id = :id", Artist.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
@@ -81,7 +81,7 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public List<Artist> getArtist(String name) {
-        return em.createQuery("SELECT a FROM Artist a WHERE a.name = :name")
+        return em.createQuery("SELECT a FROM Artist a WHERE a.name = :name", Artist.class)
                 .setParameter("name", name)
                 .getResultList();
     }

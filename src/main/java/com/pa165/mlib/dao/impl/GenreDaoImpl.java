@@ -58,7 +58,7 @@ public class GenreDaoImpl implements GenreDao {
      */
     @Override
     public List<Genre> getAll() {
-        return em.createQuery("SELECT g FROM Genre g")
+        return em.createQuery("SELECT g FROM Genre g", Genre.class)
                 .getResultList();
     }
     
@@ -69,7 +69,7 @@ public class GenreDaoImpl implements GenreDao {
      */
     @Override
     public Genre getGenre(String name) {
-            return (Genre) em.createQuery("SELECT g FROM Genre g WHERE g.name = :name")
+            return em.createQuery("SELECT g FROM Genre g WHERE g.name = :name", Genre.class)
                 .setParameter("name", name)
                 .getSingleResult();
     }

@@ -59,7 +59,7 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public List<Album> getAll() {
-        return em.createQuery("SELECT a FROM Album a")
+        return em.createQuery("SELECT a FROM Album a", Album.class)
                 .getResultList();
     }
     
@@ -70,7 +70,7 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public Album getAlbum(long id) {
-        return (Album) em.createQuery("SELECT a FROM Album a WHERE a.id = :id")
+        return em.createQuery("SELECT a FROM Album a WHERE a.id = :id", Album.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
@@ -82,7 +82,7 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public List<Album> getAlbumsWithTitle(String title) {
-        return em.createQuery("SELECT a FROM Album a WHERE a.title = :title")
+        return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
                 .setParameter("title", title)
                 .getResultList();
     }
@@ -94,7 +94,7 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public List<Album> getAlbumsWithArtist(Artist artist) {
-        return em.createQuery("select distinct a from Album a inner join a.songs as song inner join  song.artist as artist where artist.id = :artist")
+        return em.createQuery("select distinct a from Album a inner join a.songs as song inner join  song.artist as artist where artist.id = :artist", Album.class)
                 .setParameter("artist", artist.getId())
                 .getResultList();
     }

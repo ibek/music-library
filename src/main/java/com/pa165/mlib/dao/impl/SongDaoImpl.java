@@ -58,7 +58,7 @@ public class SongDaoImpl implements SongDao {
      */
     @Override
     public List<Song> getAll() {
-        return em.createQuery("SELECT s FROM Song s")
+        return em.createQuery("SELECT s FROM Song s", Song.class)
                 .getResultList();
     }
     
@@ -69,7 +69,7 @@ public class SongDaoImpl implements SongDao {
      */
     @Override
     public Song getSong(long id) {
-        return (Song) em.createQuery("SELECT a FROM Album a WHERE a.id = :id")
+        return em.createQuery("SELECT s FROM Song s WHERE s.id = :id", Song.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
@@ -81,7 +81,7 @@ public class SongDaoImpl implements SongDao {
      */
     @Override
     public List<Song> getSongsWithTitle(String title) {
-        return em.createQuery("SELECT s FROM Song s WHERE s.title = :title")
+        return em.createQuery("SELECT s FROM Song s WHERE s.title = :title", Song.class)
                 .setParameter("title", title)
                 .getResultList();
     }
