@@ -1,5 +1,9 @@
 package com.pa165.mlib.test;
 
+import com.pa165.mlib.dao.AlbumDao;
+import com.pa165.mlib.dao.ArtistDao;
+import com.pa165.mlib.dao.GenreDao;
+import com.pa165.mlib.dao.SongDao;
 import com.pa165.mlib.dao.impl.AlbumDaoImpl;
 import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import static org.junit.Assert.*;
@@ -12,6 +16,7 @@ import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.NoResultException;
 import org.junit.Test;
 
 /**
@@ -24,17 +29,28 @@ public class EntityTest extends TestBase {
     public void testGenrePersist() throws Exception {
         Genre rock = new Genre();
         rock.setName("rock");
-        GenreDaoImpl gm = lookupBy(GenreDaoImpl.class);
+        GenreDao gm = lookupBy(GenreDaoImpl.class);
         gm.addGenre(rock);
         Genre rock2 = gm.getGenre("rock");
         assertEquals(rock, rock2);
+    }
+    
+    @Test(expected = NoResultException.class)
+    public void testSongRemove() throws Exception {
+        Song s = new Song();
+        s.setTitle("mysong");
+        SongDao sd = lookupBy(SongDaoImpl.class);
+        sd.addSong(s);
+        Song s2 = sd.getSong(s.getId());
+        sd.removeSong(s2);
+        sd.getSong(s.getId());
     }
     
     @Test
     public void testSongSearch() throws Exception {
         Song lala = new Song();
         lala.setTitle("lala");
-        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
+        SongDao sm = lookupBy(SongDaoImpl.class);
         sm.addSong(lala);
         Song ohm = new Song();
         String ohmTitle = "ohm";
@@ -50,13 +66,13 @@ public class EntityTest extends TestBase {
         
         Artist artist1 = new Artist();
         artist1.setName("Yoshida Brothers");
-        ArtistDaoImpl arM = lookupBy(ArtistDaoImpl.class);
+        ArtistDao arM = lookupBy(ArtistDaoImpl.class);
         arM.addArtist(artist1);
         
         Album album1 = new Album();
         album1.setTitle("Best of Asia");
         album1.setReleased("2001");
-        AlbumDaoImpl am = lookupBy(AlbumDaoImpl.class);
+        AlbumDao am = lookupBy(AlbumDaoImpl.class);
         am.addAlbum(album1);
         
         Album album2 = new Album();
@@ -68,7 +84,7 @@ public class EntityTest extends TestBase {
         song1.setTitle("Comodo");
         song1.setArtist(artist1);
         song1.setAlbum(album1);
-        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
+        SongDao sm = lookupBy(SongDaoImpl.class);
         sm.addSong(song1);
         
         Song song2 = new Song();
@@ -108,10 +124,10 @@ public class EntityTest extends TestBase {
             add(s2);
             add(s3);
         }});
-        ArtistDaoImpl am = lookupBy(ArtistDaoImpl.class);
+        ArtistDao am = lookupBy(ArtistDaoImpl.class);
         am.addArtist(mike);
         mike = am.updateArtist(mike);
-        SongDaoImpl sm = lookupBy(SongDaoImpl.class);
+        SongDao sm = lookupBy(SongDaoImpl.class);
         List<Song> s2list = sm.getSongsWithTitle("s2");
         assertEquals(1, s2list.size());
         assertEquals(mike.getSongs().get(1), s2list.get(0));
