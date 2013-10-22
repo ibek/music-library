@@ -5,12 +5,14 @@ import com.pa165.mlib.dto.Genre;
 import com.pa165.mlib.service.GenreService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author xbek
  */
+@Stateless
 public class GenreServiceImpl implements GenreService {
     
     @Inject
