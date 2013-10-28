@@ -1,6 +1,6 @@
 package com.pa165.mlib.service;
 
-import com.pa165.mlib.dto.Genre;
+import com.pa165.mlib.dto.GenreTO;
 import java.util.List;
 
 /**
@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface GenreService {
     
-    List<Genre> getAllGenres();
+    List<GenreTO> getAllGenres();
     
-    Genre createNewGenre(String name);
+    GenreTO createNewGenre(String name);
     
 }

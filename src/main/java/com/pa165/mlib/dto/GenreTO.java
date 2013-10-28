@@ -1,10 +1,11 @@
 package com.pa165.mlib.dto;
 
 /**
- *
+ * Genre Transfer Object
+ * 
  * @author xbek
  */
-public class Genre {
+public class GenreTO {
     
     private String name;
 
