@@ -16,13 +16,13 @@ public class Song implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
     
     private String title;
     
-    private int bitrate;
+    private Integer bitrate;
     
-    private int position;
+    private Integer position;
     
     private String commentary;
     
@@ -60,14 +60,14 @@ public class Song implements Serializable {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,28 +88,28 @@ public class Song implements Serializable {
     /**
      * @return the bitrate
      */
-    public int getBitrate() {
+    public Integer getBitrate() {
         return bitrate;
     }
 
     /**
      * @param bitrate the bitrate to set
      */
-    public void setBitrate(int bitrate) {
+    public void setBitrate(Integer bitrate) {
         this.bitrate = bitrate;
     }
 
     /**
      * @return the position
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
     /**
      * @param position the position to set
      */
-    public void setPosition(int position) {
+    public void setPosition(Integer position) {
         this.position = position;
     }
 
