@@ -1,15 +1,39 @@
 package com.pa165.mlib.dto;
 
-import com.pa165.mlib.entity.Song;
-import java.util.List;
-
 /**
  * Artist Transfer Object
  * 
- * @author                        ????? - this is just mock object so I can use it in my AlbumTO,
- *                                          someone please finish it
+ * @author Ragu
  */
 public class ArtistTO {
+
+    private Long id;
     
+    private String name;
+    
+    public ArtistTO() {
+    }
+
+    public ArtistTO(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+    
+     public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }    
     
 }
