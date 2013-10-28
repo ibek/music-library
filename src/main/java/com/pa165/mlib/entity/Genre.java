@@ -21,7 +21,7 @@ public class Genre implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL)

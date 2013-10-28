@@ -21,7 +21,7 @@ public class Artist implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)

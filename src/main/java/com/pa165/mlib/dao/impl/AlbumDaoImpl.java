@@ -76,12 +76,12 @@ public class AlbumDaoImpl implements AlbumDao {
     }
     
     /**
-     * Get all the albums with given title.
-     * @param title what should be albums called
-     * @return albums with defined title
+     * Get the album with a given title.
+     * @param title of the album in search
+     * @return album with defined title
      */
     @Override
-    public List<Album> getAlbumsWithTitle(String title) {
+    public List<Album> getAlbum(String title) {
         return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
                 .setParameter("title", title)
                 .getResultList();

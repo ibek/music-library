@@ -24,18 +24,18 @@ public interface AlbumDao {
     Album getAlbum(long id);
 
     /**
+     * Get the album with a given title.
+     * @param title of the album in search
+     * @return album with defined title
+     */
+    List<Album> getAlbum(String title);
+
+    /**
      * Get all the albums with given artist.
      * @param artist who is author of the required albums
      * @return albums with defined artist
      */
-    List<Album> getAlbumsWithArtist(Artist artist);
-
-    /**
-     * Get all the albums with given title.
-     * @param title what should be albums called
-     * @return albums with defined title
-     */
-    List<Album> getAlbumsWithTitle(String title);
+    List<Album> getAlbumWithArtist(Artist artist);
 
     /**
      * Get all the albums.

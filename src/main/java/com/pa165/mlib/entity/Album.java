@@ -24,7 +24,7 @@ public class Album implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String title;
     
     @Column(length = 4)
