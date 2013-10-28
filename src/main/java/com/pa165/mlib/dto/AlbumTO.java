@@ -12,6 +12,8 @@ public class AlbumTO {
     
     private String title;
     
+    private String cover;
+    
     private String released;
     
     private List<SongTO> songs;
@@ -25,6 +27,14 @@ public class AlbumTO {
         this.title = title;
     }
 
+    public String getCover() {
+        return cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+    
     public String getReleased() {
         return released;
     }
@@ -33,6 +43,7 @@ public class AlbumTO {
         this.released = released;
     }
 
+    
     public List<SongTO> getSongs() {
         return songs;
     }
