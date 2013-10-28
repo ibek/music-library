@@ -12,8 +12,8 @@ public interface ArtistService {
     
     List<ArtistTO> getAllArtists();
     
-    List<AlbumTO> getArtistByName(String name);
+    List<ArtistTO> getArtistByName(String name);
     
-    AlbumTO createNewArtist(String name, List<SongTO> songs);
+    ArtistTO createNewArtist(String name, List<SongTO> songs);
     
 }
