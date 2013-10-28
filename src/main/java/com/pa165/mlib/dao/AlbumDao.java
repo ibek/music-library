@@ -35,7 +35,7 @@ public interface AlbumDao {
      * @param artist who is author of the required albums
      * @return albums with defined artist
      */
-    List<Album> getAlbumWithArtist(Artist artist);
+    List<Album> getAlbumsWithArtist(Artist artist);
 
     /**
      * Get all the albums.
