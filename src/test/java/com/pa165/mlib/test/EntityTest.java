@@ -75,13 +75,13 @@ public class EntityTest extends TestBase {
         
         Album album1 = new Album();
         album1.setTitle("Best of Asia");
-        album1.setReleased("2001");
+        album1.setReleased(2001);
         AlbumDao am = lookupBy(AlbumDaoImpl.class);
         am.addAlbum(album1);
         
         Album album2 = new Album();
         album2.setTitle("Inside of the Sun");
-        album2.setReleased("2001");
+        album2.setReleased(2001);
         am.addAlbum(album2);
         
         Song song1 = new Song();

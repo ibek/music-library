@@ -28,7 +28,7 @@ public class Album implements Serializable {
     private String title;
     
     @Column(length = 4)
-    private String released;
+    private Integer released;
     
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
     @OrderBy("position")
@@ -53,14 +53,14 @@ public class Album implements Serializable {
     /**
      * @return the released
      */
-    public String getReleased() {
+    public Integer getReleased() {
         return released;
     }
 
     /**
      * @param released the released to set
      */
-    public void setReleased(String released) {
+    public void setReleased(Integer released) {
         this.released = released;
     }
 
