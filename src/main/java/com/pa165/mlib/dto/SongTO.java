@@ -7,7 +7,7 @@ import com.pa165.mlib.entity.Genre;
 /**
  * Song Transfer Object
  * 
- * Zenian
+ * @author brazdil
  */
 public class SongTO {
     
