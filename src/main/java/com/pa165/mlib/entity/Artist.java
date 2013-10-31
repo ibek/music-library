@@ -24,9 +24,6 @@ public class Artist implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
     
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-    private List<Song> songs;
-    
     public Long getId() {
         return id;
     }
@@ -63,20 +60,6 @@ public class Artist implements Serializable {
             return false;
         }
         return true;
-    }
-
-    /**
-     * @return the songs
-     */
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    /**
-     * @param songs the songs to set
-     */
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
     }
     
     @Override

@@ -1,9 +1,11 @@
 package com.pa165.mlib.utils;
 
 import com.pa165.mlib.dto.AlbumTO;
+import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
+import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
 import java.util.ArrayList;
@@ -59,6 +61,13 @@ public class EntityDTOTransformer {
         ato.setSongs(null);
        
         return ato;
+    }
+    
+    public ArtistTO tranformArtistTO(Artist artist) {
+        ArtistTO to = new ArtistTO();
+        to.setId(artist.getId());
+        to.setName(artist.getName());
+        return to;
     }
     
 }

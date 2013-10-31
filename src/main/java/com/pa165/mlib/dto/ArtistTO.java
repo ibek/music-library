@@ -1,16 +1,18 @@
 package com.pa165.mlib.dto;
 
+import java.util.Objects;
+
 /**
  * Artist Transfer Object
- * 
- * @author Ragu
+ *
+ * @author Ragu, ibek
  */
 public class ArtistTO {
 
     private Long id;
     
     private String name;
-    
+
     public ArtistTO() {
     }
 
@@ -18,8 +20,8 @@ public class ArtistTO {
         this.id = id;
         this.name = name;
     }
-    
-     public Long getId() {
+
+    public Long getId() {
         return id;
     }
 
@@ -27,13 +29,31 @@ public class ArtistTO {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }    
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ArtistTO other = (ArtistTO) obj;
+        return true;
+    }
     
 }

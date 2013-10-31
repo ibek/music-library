@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
 /**
@@ -35,6 +36,7 @@ public class Song implements Serializable {
     private Album album;
     
     @ManyToOne
+    @JoinTable
     private Artist artist;
 
     @Override
