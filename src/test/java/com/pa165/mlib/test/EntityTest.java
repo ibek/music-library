@@ -63,6 +63,35 @@ public void testGenreUpdate() throws Throwable {
 	assertEquals(g2, g3);
 
     }
+   
+@Test
+    public void testGetAllGenres() throws Exception  {
+	
+	GenreDao gm = lookupBy(GenreDaoImpl.class);
+	
+        List<Genre> gList = new ArrayList<Genre>();
+
+        assertEquals(gList, gm.getAll());
+        
+        Genre g1 = new Genre();
+	g1.setName("rock");
+        Genre g2 = new Genre();
+	g2.setName("Fetal");
+        Genre g3 = new Genre();
+	g3.setName("Rap");
+
+        gm.addGenre(g1);
+        gm.addGenre(g2);
+        gm.addGenre(g3);
+
+        gList.add(g1);
+        gList.add(g2);
+        gList.add(g3);
+
+        List<Genre> gListFromDAO = gm.getAll();;              
+        assertEquals(gList, gListFromDAO);
+        
+    }
     
     @Test
     public void testSongRemove() throws Throwable {
