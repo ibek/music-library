@@ -8,12 +8,20 @@ import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
 /**
  *
  * @author ibek
  */
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class ArtistServiceImpl implements ArtistService {
     
     @Inject
@@ -23,6 +31,7 @@ public class ArtistServiceImpl implements ArtistService {
     EntityDTOTransformer transformer;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public ArtistTO createNewArtist(String name) {
         Artist artist = new Artist();
         artist.setName(name);
@@ -36,6 +45,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist) {
         Artist artist = ad.getArtist(oldArtist.getId());
         artist.setName(newArtist.getName());
@@ -44,6 +54,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeArtist(Long id) {
         Artist artist = ad.getArtist(id);
         if (artist == null) {
@@ -54,6 +65,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeArtist(ArtistTO artist) {
         return removeArtist(artist.getId());
     }
