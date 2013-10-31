@@ -35,18 +35,14 @@ public class GenreServiceImpl implements GenreService {
         Genre g = new Genre();
         g.setName(name);
         gd.addGenre(g);
-        GenreTO ng = new GenreTO();
-        ng.setName(name);
-        return ng;
+        return transformer.transformGenreTO(g);
     }
 
     @Override
     public List<GenreTO> getAllGenres() {
         List<GenreTO> list = new ArrayList<>();
         for (Genre g : gd.getAll()) {
-            GenreTO dto = new GenreTO();
-            dto.setName(g.getName());
-            list.add(dto);
+            list.add(transformer.transformGenreTO(g));
         }
         return list;
     }
