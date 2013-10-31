@@ -12,7 +12,7 @@ public class AlbumTO {
     
     private String title;
     
-    private String cover;
+    private byte[] cover;
     
     private Integer released;
     
@@ -27,11 +27,11 @@ public class AlbumTO {
         this.title = title;
     }
 
-    public String getCover() {
+    public byte[] getCover() {
         return cover;
     }
 
-    public void setCover(String cover) {
+    public void setCover(byte[] cover) {
         this.cover = cover;
     }
     

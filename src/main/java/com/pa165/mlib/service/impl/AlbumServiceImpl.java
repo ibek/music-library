@@ -16,12 +16,14 @@ import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author brazdil
  */
+@Stateless
 public class AlbumServiceImpl implements AlbumService{
     
     @Inject
@@ -34,45 +36,47 @@ public class AlbumServiceImpl implements AlbumService{
     public List<AlbumTO> getAllAlbums(){
         List<AlbumTO> list = new ArrayList<>();
      
-        for (com.pa165.mlib.entity.Album a : albumDao.getAll()) {
-            AlbumTO ato = new AlbumTO();
-            
-            
-            
+        for (Album a : albumDao.getAll()) {
+            AlbumTO ato = transformer.transformAlbumTO(a);
             list.add(ato);
         }
         return list;
     }
     
     @Override
-    public List<AlbumTO> getAlbumByTitle(String title){
-        List<AlbumTO> list = new ArrayList<>();
-        
-        
-        return list;
+    public AlbumTO getAlbumByTitle(String title){
+        AlbumTO ato = transformer.transformAlbumTO(albumDao.getAlbum(title));
+        return ato;
     }
     
     @Override
     public List<AlbumTO> getAlbumByRelease(Integer year){
-        List<AlbumTO> list = new ArrayList<>();
         
+        List<AlbumTO> listAlbumTO = new ArrayList<>();
         
-        return list;
+        for (Album a : albumDao.getAll()) {
+            
+            AlbumTO ato = transformer.transformAlbumTO(a);
+            if (ato.getReleased() == year) {
+                listAlbumTO.add(ato);
+            }
+        }
+        return listAlbumTO;
     }
     
     @Override
-    public AlbumTO createNewAlbum(String title, Integer year, List<SongTO> songs){
+    public AlbumTO createNewAlbum(String title, byte[] cover, Integer year, List<SongTO> songs) {
         
-        AlbumTO albumTO = new AlbumTO();
-        
-        com.pa165.mlib.entity.Album album = new com.pa165.mlib.entity.Album();
+        Album album = new Album();
         
         album.setTitle(title);
         album.setReleased(year);
+        album.setCover(cover);
         
+        AlbumTO ato = transformer.transformAlbumTO(album);
+        ato.setSongs(songs);
         
-        
-        return albumTO;
+        return ato;
     }
     
     @Override
