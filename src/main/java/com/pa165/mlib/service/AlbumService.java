@@ -17,4 +17,10 @@ public interface AlbumService {
     
     AlbumTO createNewAlbum(String title, Integer year, List<SongTO> songs);
     
+    AlbumTO getAlbum(String title);
+    
+    AlbumTO updateAlbum(AlbumTO oldAlbum, AlbumTO newAlbum);
+    
+    boolean removeAlbum(String title);
+    
 }

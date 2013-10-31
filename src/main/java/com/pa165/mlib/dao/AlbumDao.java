@@ -28,7 +28,7 @@ public interface AlbumDao {
      * @param title of the album in search
      * @return album with defined title
      */
-    List<Album> getAlbum(String title);
+    Album getAlbum(String title);
 
     /**
      * Get all the albums with given artist.

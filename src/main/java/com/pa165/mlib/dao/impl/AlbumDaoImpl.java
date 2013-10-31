@@ -81,10 +81,10 @@ public class AlbumDaoImpl implements AlbumDao {
      * @return album with defined title
      */
     @Override
-    public List<Album> getAlbum(String title) {
+    public Album getAlbum(String title) {
         return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
                 .setParameter("title", title)
-                .getResultList();
+                .getSingleResult();
     }
     
     /**

@@ -50,14 +50,14 @@ public class EntityDTOTransformer {
         
         List<Song> songList = new ArrayList<>();
         songList = album.getSongs();
-
+        List<SongTO> songToList = new ArrayList<>();
+        
         for (Song s : songList) {
             
         }
         
-        /*
-        ato.setSongs(songList));
-        */
+        ato.setSongs(null);
+       
         return ato;
     }
     

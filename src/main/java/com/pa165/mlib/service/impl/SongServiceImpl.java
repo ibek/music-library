@@ -43,7 +43,7 @@ public class SongServiceImpl implements SongService {
         s.setPosition(position);
         s.setCommentary(commentary);
         s.setGenre(genreDao.getGenre(genre.getName()));
-        s.setAlbum(albumDao.getAlbum(album.getTitle()).get(0));
+        s.setAlbum(albumDao.getAlbum(album.getTitle()));
         //s.setArtist(artistDao.getArtist(artist.getName()));
             // uncomment when the AlbumTO method was implemented
         return getSongTO(s);
