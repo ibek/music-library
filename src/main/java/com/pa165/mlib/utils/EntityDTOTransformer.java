@@ -12,6 +12,9 @@ import javax.ejb.Stateless;
 public class EntityDTOTransformer {
     
     public GenreTO transformGenreTO(Genre genre) {
+        if (genre == null) {
+            return null;
+        }
         GenreTO gto = new GenreTO();
         gto.setName(genre.getName());
         return gto;

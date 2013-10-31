@@ -13,12 +13,10 @@ public interface GenreService {
     
     GenreTO getGenre(String name);
     
-    GenreTO updateGenre(GenreTO genre);
+    GenreTO updateGenre(GenreTO oldGenre, GenreTO newGenre);
     
-    boolean removeGenre(String genre);
+    boolean removeGenre(String name);
     
     List<GenreTO> getAllGenres();
-    
-    List<GenreTO> getGenres(String... names);
     
 }

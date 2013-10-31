@@ -50,22 +50,29 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public GenreTO updateGenre(GenreTO genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenreTO updateGenre(GenreTO oldGenre, GenreTO newGenre) {
+        Genre genre = gd.getGenre(oldGenre.getName());
+        genre.setName(newGenre.getName());
+        gd.updateGenre(genre);
+        return newGenre;
     }
 
     @Override
-    public boolean removeGenre(String genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<GenreTO> getGenres(String... names) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeGenre(String name) {
+        Genre genre = gd.getGenre(name);
+        if (genre == null) {
+            return false;
+        }
+        gd.removeGenre(genre);
+        return true;
     }
     
     public void setGenreDao(GenreDao genreDao) {
         this.gd = genreDao;
+    }
+    
+    public void setTransformer(EntityDTOTransformer transformer) {
+        this.transformer = transformer;
     }
     
 }
