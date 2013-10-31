@@ -5,6 +5,7 @@ import com.pa165.mlib.entity.Song;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -69,9 +70,15 @@ public class SongDaoImpl implements SongDao {
      */
     @Override
     public Song getSong(long id) {
-        return em.createQuery("SELECT s FROM Song s WHERE s.id = :id", Song.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        Song s = null;
+        try {
+            s = em.createQuery("SELECT s FROM Song s WHERE s.id = :id", Song.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            
+        }
+        return s;
     }
     
     /**

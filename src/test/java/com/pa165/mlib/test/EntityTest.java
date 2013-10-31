@@ -35,7 +35,7 @@ public class EntityTest extends TestBase {
         assertEquals(rock, rock2);
     }
     
-    @Test(expected = NoResultException.class)
+    @Test
     public void testSongRemove() throws Throwable {
         Song s = new Song();
         s.setTitle("mysong");
@@ -43,11 +43,8 @@ public class EntityTest extends TestBase {
         sd.addSong(s);
         Song s2 = sd.getSong(s.getId());
         sd.removeSong(s2);
-        try {
-            sd.getSong(s.getId());
-        } catch (Exception ex) {
-            throw ex.getCause();
-        }
+        Song empty = sd.getSong(s.getId());
+        assertNull(empty);
     }
     
     @Test
@@ -62,7 +59,7 @@ public class EntityTest extends TestBase {
         sm.addSong(ohm);
         List<Song> results = sm.getSongsWithTitle(ohmTitle);
         assertEquals(1, results.size());
-        assertEquals(results.get(0), ohm);
+        assertEquals(ohm.getTitle(), results.get(0).getTitle());
     }
     
     @Test
@@ -110,31 +107,25 @@ public class EntityTest extends TestBase {
     }
         
     @Test
-    public void testArtistWithSongs() throws Exception {
+    public void testArtistCRUD() throws Exception {
         Artist mike = new Artist();
-        mike.setName("the best of");
-        mike.setSongs(new ArrayList<Song>(){{
-            Song s1 = new Song();
-            s1.setTitle("s1");
-            s1.setPosition(0);
-            Song s2 = new Song();
-            s2.setTitle("s2");
-            s2.setPosition(1);
-            Song s3 = new Song();
-            s3.setTitle("s3");
-            s3.setPosition(2);
-            
-            add(s1);
-            add(s2);
-            add(s3);
-        }});
+        mike.setName("Mike");
         ArtistDao am = lookupBy(ArtistDaoImpl.class);
         am.addArtist(mike);
+        
+        Artist mike2 = am.getArtist(mike.getId());
+        assertEquals(mike, mike2);
+        
+        mike.setName("Michael");
         mike = am.updateArtist(mike);
-        SongDao sm = lookupBy(SongDaoImpl.class);
-        List<Song> s2list = sm.getSongsWithTitle("s2");
-        assertEquals(1, s2list.size());
-        assertEquals(mike.getSongs().get(1), s2list.get(0));
+        
+        mike2 = am.getArtist(mike.getId());
+        assertEquals("Michael", mike2.getName());
+        
+        am.removeArtist(mike2);
+        mike2 = am.getArtist(mike2.getId());
+        assertNull(mike2);
+        
     }
     
 }

@@ -5,6 +5,7 @@ import com.pa165.mlib.entity.Artist;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -47,7 +48,7 @@ public class ArtistDaoImpl implements ArtistDao {
     @Override
     public void removeArtist(Artist artist) {
         if(artist != null && !em.contains(artist)) {
-            em.merge(artist);
+            artist = em.merge(artist);
         }
         em.remove(artist);
     }
@@ -69,9 +70,15 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public Artist getArtist(Long id) {
-        return em.createQuery("SELECT a FROM Artist a WHERE a.id = :id", Artist.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        Artist a = null;
+        try {
+            a = em.createQuery("SELECT a FROM Artist a WHERE a.id = :id", Artist.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            
+        }
+        return a;
     }
     
     /**

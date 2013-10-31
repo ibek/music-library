@@ -6,6 +6,7 @@ import com.pa165.mlib.entity.Artist;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -70,9 +71,15 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public Album getAlbum(long id) {
-        return em.createQuery("SELECT a FROM Album a WHERE a.id = :id", Album.class)
-                .setParameter("id", id)
-                .getSingleResult();
+        Album a = null;
+        try {
+            a = em.createQuery("SELECT a FROM Album a WHERE a.id = :id", Album.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            
+        }
+        return a;
     }
     
     /**
@@ -82,9 +89,15 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public Album getAlbum(String title) {
-        return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
-                .setParameter("title", title)
-                .getSingleResult();
+        Album a = null;
+        try {
+            a = em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
+                    .setParameter("title", title)
+                    .getSingleResult();
+        } catch (Exception e) {
+            
+        }
+        return a;
     }
     
     /**

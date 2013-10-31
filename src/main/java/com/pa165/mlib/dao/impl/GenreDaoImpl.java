@@ -5,6 +5,7 @@ import com.pa165.mlib.entity.Genre;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext; 
 
 /**
@@ -69,8 +70,14 @@ public class GenreDaoImpl implements GenreDao {
      */
     @Override
     public Genre getGenre(String name) {
-            return em.createQuery("SELECT g FROM Genre g WHERE g.name = :name", Genre.class)
-                .setParameter("name", name)
-                .getSingleResult();
+         Genre g = null;
+         try {
+            g = em.createQuery("SELECT g FROM Genre g WHERE g.name = :name", Genre.class)
+                   .setParameter("name", name)
+                   .getSingleResult();
+         } catch (NoResultException e) {
+             
+         }
+         return g;
     }
 }

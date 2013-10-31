@@ -36,7 +36,6 @@ public class Song implements Serializable {
     private Album album;
     
     @ManyToOne
-    @JoinTable
     private Artist artist;
 
     @Override
