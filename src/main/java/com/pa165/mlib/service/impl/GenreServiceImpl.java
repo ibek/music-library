@@ -8,6 +8,10 @@ import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
 /**
@@ -15,6 +19,8 @@ import javax.inject.Inject;
  * @author xbek
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class GenreServiceImpl implements GenreService {
     
     @Inject
@@ -24,6 +30,7 @@ public class GenreServiceImpl implements GenreService {
     EntityDTOTransformer transformer;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public GenreTO createNewGenre(String name) {
         Genre g = new Genre();
         g.setName(name);
@@ -50,6 +57,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public GenreTO updateGenre(GenreTO oldGenre, GenreTO newGenre) {
         Genre genre = gd.getGenre(oldGenre.getName());
         genre.setName(newGenre.getName());
@@ -58,6 +66,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeGenre(String name) {
         Genre genre = gd.getGenre(name);
         if (genre == null) {
