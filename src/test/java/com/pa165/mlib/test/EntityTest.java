@@ -21,7 +21,7 @@ import org.junit.Test;
 
 /**
  *
- * @author ibek, brazdil
+ * @author ibek, brazdil, slatinsky
  */
 public class EntityTest extends TestBase {
 
@@ -33,6 +33,37 @@ public class EntityTest extends TestBase {
         gm.addGenre(rock);
         Genre rock2 = gm.getGenre("rock");
         assertEquals(rock, rock2);
+    }
+    
+   @Test
+public void testGenreRemove() throws Throwable {
+        Genre g = new Genre();
+        g.setName("newGenre");
+        GenreDao gm = lookupBy(GenreDaoImpl.class);
+        gm.addGenre(g);
+        Genre g2 = gm.getGenre(g.getName());
+        gm.removeGenre(g2);
+        try {
+            gm.getGenre(g.getName());
+        } catch (Exception ex) {
+            throw ex.getCause();
+        }
+    }
+   
+   @Test
+public void testGenreUpdate() throws Throwable {
+        Genre g = new Genre();
+        g.setName("newGenre");
+	g.setId(88L);
+        GenreDao gm = lookupBy(GenreDaoImpl.class);
+        gm.addGenre(g);
+        Genre g2 = gm.getGenre(g.getName());
+	g2.setName("updatedName");
+        gm.updateGenre(g2);
+        Genre g3 = gm.getGenre(g2.getName());
+
+	assertEquals(g2, g3);
+
     }
     
     @Test
