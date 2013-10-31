@@ -9,8 +9,16 @@ import java.util.List;
  */
 public interface GenreService {
     
+    GenreTO createNewGenre(String name);
+    
+    GenreTO getGenre(String name);
+    
+    GenreTO updateGenre(GenreTO genre);
+    
+    boolean removeGenre(String genre);
+    
     List<GenreTO> getAllGenres();
     
-    GenreTO createNewGenre(String name);
+    List<GenreTO> getGenres(String... names);
     
 }
