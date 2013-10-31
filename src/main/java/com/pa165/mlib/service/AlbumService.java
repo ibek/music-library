@@ -11,10 +11,6 @@ public interface AlbumService {
     
     List<AlbumTO> getAllAlbums();
     
-    AlbumTO getAlbumByTitle(String title);
-    
-    List<AlbumTO> getAlbumByRelease(Integer year);
-    
     AlbumTO createNewAlbum(String title, byte[] cover, Integer year, List<SongTO> songs);
     
     AlbumTO getAlbum(String title);

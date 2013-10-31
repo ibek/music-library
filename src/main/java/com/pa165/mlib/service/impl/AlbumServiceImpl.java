@@ -36,27 +36,6 @@ public class AlbumServiceImpl implements AlbumService{
     }
     
     @Override
-    public AlbumTO getAlbumByTitle(String title){
-        AlbumTO ato = transformer.transformAlbumTO(albumDao.getAlbum(title));
-        return ato;
-    }
-    
-    @Override
-    public List<AlbumTO> getAlbumByRelease(Integer year){
-        
-        List<AlbumTO> listAlbumTO = new ArrayList<>();
-        
-        for (Album a : albumDao.getAll()) {
-            
-            AlbumTO ato = transformer.transformAlbumTO(a);
-            if (ato.getReleased() == year) {
-                listAlbumTO.add(ato);
-            }
-        }
-        return listAlbumTO;
-    }
-    
-    @Override
     public AlbumTO createNewAlbum(String title, byte[] cover, Integer year, List<SongTO> songs) {
         
         Album album = new Album();
