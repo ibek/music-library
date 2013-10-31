@@ -83,4 +83,12 @@ public class ArtistServiceImpl implements ArtistService {
         return transformer.tranformArtistTO(ad.getArtist(name));
     }
     
+    public void setArtistDao(ArtistDao artistDao) {
+        this.ad = artistDao;
+    }
+    
+    public void setTransformer(EntityDTOTransformer transformer) {
+        this.transformer = transformer;
+    }
+    
 }

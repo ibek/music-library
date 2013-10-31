@@ -1,15 +1,19 @@
 package com.pa165.mlib.test;
 
 import com.pa165.mlib.dao.AlbumDao;
-import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.dto.AlbumTO;
+import com.pa165.mlib.dao.ArtistDao;
+import com.pa165.mlib.dao.GenreDao;
+import com.pa165.mlib.dto.ArtistTO;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.entity.Album;
-import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.service.impl.AlbumServiceImpl;
+import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.service.impl.ArtistServiceImpl;
 import com.pa165.mlib.service.impl.GenreServiceImpl;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -101,7 +105,39 @@ public class ServiceTest {
         
         boolean removed = as.removeAlbum("bestOf");
         assertTrue(removed);
+    }
+    
+    @Test
+    public void testArtistServiceCRUD() throws Exception {
         
+        ArtistServiceImpl as = new ArtistServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        as.setTransformer(transformer);
+        
+        ArtistDao ad = mock(ArtistDao.class);
+        Artist artist = new Artist();
+        artist.setName("Janis Joplin");
+        when(ad.getArtist("Janis Joplin")).thenReturn(artist);
+        when(ad.getArtist("Milos Zeman")).thenReturn(null);
+        as.setArtistDao(ad);
+        
+        ArtistTO a = as.createNewArtist("Michal Hašek");
+        assertEquals(a.getName(), "Michal Hašek");
+        
+        ArtistTO a2 = as.getArtist("Michal Hašek");
+        assertEquals(a, a2);
+        
+        a2.setName("Michal Prášek");
+        ArtistTO updated = as.updateArtist(a, a2);
+        assertEquals(a2, updated);
+        
+        /*
+        boolean removed = as.removeArtist();
+        assertFalse(removed); // the mock DAO returns null for trance Genre
+        GenreTO empty = gs.getGenre("trance");
+        assertNull(empty);
+        
+        */
     }
     
 }
