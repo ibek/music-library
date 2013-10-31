@@ -14,7 +14,7 @@ public class AlbumTO {
     
     private String cover;
     
-    private String released;
+    private Integer released;
     
     private List<SongTO> songs;
     
@@ -35,11 +35,11 @@ public class AlbumTO {
         this.cover = cover;
     }
     
-    public String getReleased() {
+    public Integer getReleased() {
         return released;
     }
 
-    public void setReleased(String released) {
+    public void setReleased(Integer released) {
         this.released = released;
     }
 
