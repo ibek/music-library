@@ -32,7 +32,7 @@ public class EntityDTOTransformer {
         SongTO sto = new SongTO();
         
         sto.setAlbum(transformAlbumTO(song.getAlbum()));
-        sto.setArtist(tranformArtistTO(song.getArtist()));
+        sto.setArtist(transformArtistTO(song.getArtist()));
         sto.setBitrate(song.getBitrate());
         sto.setCommentary(song.getCommentary());
         sto.setGenre(transformGenreTO(song.getGenre()));
@@ -65,7 +65,7 @@ public class EntityDTOTransformer {
         return ato;
     }
     
-    public ArtistTO tranformArtistTO(Artist artist) {
+    public ArtistTO transformArtistTO(Artist artist) {
         if (artist == null) {
             return null;
         }

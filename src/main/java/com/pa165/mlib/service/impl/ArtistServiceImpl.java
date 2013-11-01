@@ -35,7 +35,7 @@ public class ArtistServiceImpl implements ArtistService {
         Artist artist = new Artist();
         artist.setName(name);
         ad.addArtist(artist);
-        return transformer.tranformArtistTO(artist);
+        return transformer.transformArtistTO(artist);
     }
 
     @Override
@@ -68,14 +68,14 @@ public class ArtistServiceImpl implements ArtistService {
     public List<ArtistTO> getAllArtists() {
         List<ArtistTO> artists = new ArrayList<>();
         for (Artist artist : ad.getAll()) {
-            artists.add(transformer.tranformArtistTO(artist));
+            artists.add(transformer.transformArtistTO(artist));
         }
         return artists;
     }
 
     @Override
     public ArtistTO getArtist(String name) {
-        return transformer.tranformArtistTO(ad.getArtist(name));
+        return transformer.transformArtistTO(ad.getArtist(name));
     }
     
     public void setArtistDao(ArtistDao artistDao) {
