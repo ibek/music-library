@@ -35,7 +35,7 @@ public class EntityTest extends TestBase {
     }
     
    @Test
-public void testGenreRemove() throws Throwable {
+    public void testGenreRemove() throws Throwable {
         Genre g = new Genre();
         g.setName("newGenre");
         GenreDao gm = lookupBy(GenreDaoImpl.class);
@@ -50,7 +50,7 @@ public void testGenreRemove() throws Throwable {
     }
    
    @Test
-public void testGenreUpdate() throws Throwable {
+    public void testGenreUpdate() throws Throwable {
         Genre g = new Genre();
         g.setName("newGenre");
 	g.setId(88L);
@@ -164,7 +164,22 @@ public void testGenreUpdate() throws Throwable {
         assertTrue(results.contains(album1));
         assertTrue(results.contains(album2));
     }
-        
+    
+     @Test
+        public void testAlbumRemove() throws Throwable {
+        Album a = new Album();
+        a.setTitle("album1");
+        AlbumDao ad = lookupBy(AlbumDaoImpl.class);
+        ad.addAlbum(a);
+        Album a2 = ad.getAlbum(a.getId());
+        ad.removeAlbum(a2);
+        Album empty = ad.getAlbum(a.getId());
+        assertNull(empty);
+    }
+     
+
+     
+     
     @Test
     public void testArtistCRUD() throws Exception {
         Artist mike = new Artist();
@@ -186,5 +201,6 @@ public void testGenreUpdate() throws Throwable {
         assertNull(mike2);
         
     }
+   
     
 }
