@@ -29,11 +29,11 @@ public interface SongDao {
     Song getSong(long id);
 
     /**
-     * Get all the songs with given title.
+     * Get a song with the given title.
      * @param title what should be song called
-     * @return songs with defined title
+     * @return song with defined title
      */
-    List<Song> getSongsWithTitle(String title);
+    Song getSong(String title);
 
     /**
      * Remove song from the persistence context and database after the commit.

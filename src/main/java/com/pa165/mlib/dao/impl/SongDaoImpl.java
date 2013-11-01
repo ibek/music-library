@@ -87,10 +87,16 @@ public class SongDaoImpl implements SongDao {
      * @return songs with defined title
      */
     @Override
-    public List<Song> getSongsWithTitle(String title) {
-        return em.createQuery("SELECT s FROM Song s WHERE s.title = :title", Song.class)
-                .setParameter("title", title)
-                .getResultList();
+    public Song getSong(String title) {
+        Song s = null;
+        try {
+            s = em.createQuery("SELECT s FROM Song s WHERE s.title = :title", Song.class)
+                    .setParameter("title", title)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            
+        }
+        return s;
     }
     
 }

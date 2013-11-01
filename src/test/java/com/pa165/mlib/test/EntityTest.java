@@ -116,9 +116,9 @@ public void testGenreUpdate() throws Throwable {
         String ohmTitle = "ohm";
         ohm.setTitle(ohmTitle);
         sm.addSong(ohm);
-        List<Song> results = sm.getSongsWithTitle(ohmTitle);
-        assertEquals(1, results.size());
-        assertEquals(ohm.getTitle(), results.get(0).getTitle());
+        Song result = sm.getSong(ohmTitle);
+        assertNotNull(result);
+        assertEquals(ohm.getTitle(), result.getTitle());
     }
     
     @Test
