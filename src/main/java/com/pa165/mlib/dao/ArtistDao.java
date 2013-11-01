@@ -29,11 +29,11 @@ public interface ArtistDao {
     Artist getArtist(Long id);
 
     /**
-     * Read artist/-s via artist name
+     * Read artist via artist name
      * @param name
      * @return
      */
-    List<Artist> getArtist(String name);
+    Artist getArtist(String name);
 
     /**
      * Remove the given artist from persistence context

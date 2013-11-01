@@ -14,6 +14,8 @@ public interface ArtistService {
     
     ArtistTO getArtist(Long id);
     
+    ArtistTO getArtist(String name);
+    
     ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist);
             
     boolean removeArtist(Long id);
@@ -21,8 +23,6 @@ public interface ArtistService {
     boolean removeArtist(ArtistTO artist);
     
     List<ArtistTO> getAllArtists();
-    
-    List<ArtistTO> getArtistsByName(String name);
     
     
 }

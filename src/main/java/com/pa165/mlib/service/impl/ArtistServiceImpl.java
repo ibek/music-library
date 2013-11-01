@@ -79,12 +79,8 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public List<ArtistTO> getArtistsByName(String name) {
-        List<ArtistTO> artists = new ArrayList<>();
-        for (Artist artist : ad.getArtist(name)) {
-            artists.add(transformer.tranformArtistTO(artist));
-        }
-        return artists;
+    public ArtistTO getArtist(String name) {
+        return transformer.tranformArtistTO(ad.getArtist(name));
     }
     
 }
