@@ -14,6 +14,10 @@ import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
 /**
@@ -22,6 +26,8 @@ import javax.inject.Inject;
  * @author tomparys
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class SongServiceImpl implements SongService {
     
     @Inject
@@ -40,6 +46,7 @@ public class SongServiceImpl implements SongService {
     EntityDTOTransformer transformer;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public SongTO createNewSong(String title, Integer bitrate, Integer position, String commentary,
                                 GenreTO genre, AlbumTO album, ArtistTO artist) {
         Song s = new Song();
@@ -76,6 +83,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public SongTO updateSong(SongTO oldSong, SongTO newSong) {
         Song s = songDao.getSong(oldSong.getTitle());
         s.setTitle(newSong.getTitle());
@@ -96,6 +104,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeSong(String title) {
         Song song = songDao.getSong(title);
         if (song == null) {
@@ -107,6 +116,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeSong(SongTO song) {
         return removeSong(song.getTitle());
     }
