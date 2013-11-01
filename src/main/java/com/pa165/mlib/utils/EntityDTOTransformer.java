@@ -66,6 +66,9 @@ public class EntityDTOTransformer {
     }
     
     public ArtistTO tranformArtistTO(Artist artist) {
+        if (artist == null) {
+            return null;
+        }
         ArtistTO to = new ArtistTO();
         to.setId(artist.getId());
         to.setName(artist.getName());
