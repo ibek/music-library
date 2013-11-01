@@ -34,62 +34,7 @@ public class EntityTest extends TestBase {
         assertEquals(rock, rock2);
     }
     
-    @Test
-    public void testGenreRemove() throws Throwable {
-        Genre genre = new Genre();
-        genre.setName("pop");
-        GenreDao gd = lookupBy(GenreDaoImpl.class);
-        gd.addGenre(genre);
-        Genre g2 = gd.getGenre(genre.getName());
-        gd.removeGenre(g2);
-        Genre empty = gd.getGenre(genre.getName());
-        assertNull(empty);
-    }
-   
-   @Test
-    public void testGenreUpdate() throws Throwable {
-        Genre g = new Genre();
-        g.setName("newGenre");
-	g.setId(88L);
-        GenreDao gm = lookupBy(GenreDaoImpl.class);
-        gm.addGenre(g);
-        Genre g2 = gm.getGenre(g.getName());
-	g2.setName("updatedName");
-        gm.updateGenre(g2);
-        Genre g3 = gm.getGenre(g2.getName());
 
-	assertEquals(g2, g3);
-
-    }
-   
-@Test
-    public void testGetAllGenres() throws Exception  {
-	
-	GenreDao gm = lookupBy(GenreDaoImpl.class);
-	
-        List<Genre> gList = new ArrayList<>();
-
-        assertEquals(gList, gm.getAll());
-        
-        Genre g1 = new Genre();
-	g1.setName("rock");
-        Genre g2 = new Genre();
-	g2.setName("Fetal");
-        Genre g3 = new Genre();
-	g3.setName("Rap");
-
-        gm.addGenre(g1);
-        gm.addGenre(g2);
-        gm.addGenre(g3);
-
-        gList.add(g1);
-        gList.add(g2);
-        gList.add(g3);
-
-        List<Genre> gListFromDAO = gm.getAll();;              
-        assertEquals(gList, gListFromDAO);
-        
-    }
     
     @Test
     public void testSongRemove() throws Throwable {
