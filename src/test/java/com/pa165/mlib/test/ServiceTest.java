@@ -159,11 +159,35 @@ public class ServiceTest {
         ArtistTO updated = as.updateArtist(a, a2);
         assertEquals(a2, updated);
         
-        
         boolean removed = as.removeArtist("Lou Reed");
         assertTrue(removed);
-  
         
+        removed = as.removeArtist(a2);
+        assertTrue(removed);
     }
+    
+    @Test
+    public void testArtistServiceGetAll() throws Exception {
+        ArtistServiceImpl as = new ArtistServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        as.setTransformer(transformer);
+        ArtistDao ad = mock(ArtistDao.class);
+        
+        when(ad.getAll()).thenReturn(new ArrayList<Artist>(){{
+            Artist a1 = new Artist();
+            a1.setName("Billy Preston");
+            add(a1);
+            Artist a2 = new Artist();
+            a2.setName("Leon Russell");
+            add(a2);
+        }});
+        
+        as.setArtistDao(ad);
+        List<ArtistTO> all = as.getAllArtists();
+        assertEquals(2, all.size());
+        assertEquals("Billy Preston", all.get(0).getName());
+        assertEquals("Leon Russell", all.get(1).getName());
+    }
+   
     
 }

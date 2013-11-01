@@ -11,9 +11,7 @@ import java.util.List;
 public interface ArtistService {
     
     ArtistTO createNewArtist(String name);
-    
-    ArtistTO getArtist(Long id);
-    
+       
     ArtistTO getArtist(String name);
     
     ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist);

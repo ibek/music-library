@@ -39,11 +39,6 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public ArtistTO getArtist(Long id) {
-        return transformer.tranformArtistTO(ad.getArtist(id));
-    }
-
-    @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist) {
         Artist artist = ad.getArtist(oldArtist.getName());
