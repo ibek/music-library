@@ -34,19 +34,16 @@ public class EntityTest extends TestBase {
         assertEquals(rock, rock2);
     }
     
-   @Test
+    @Test
     public void testGenreRemove() throws Throwable {
         Genre g = new Genre();
-        g.setName("newGenre");
-        GenreDao gm = lookupBy(GenreDaoImpl.class);
-        gm.addGenre(g);
-        Genre g2 = gm.getGenre(g.getName());
-        gm.removeGenre(g2);
-        try {
-            gm.getGenre(g.getName());
-        } catch (Exception ex) {
-            throw ex.getCause();
-        }
+        g.setName("pop");
+        GenreDao gd = lookupBy(GenreDaoImpl.class);
+        gd.addGenre(g);
+        Genre g2 = gd.getGenre(g.getName());
+        gd.removeGenre(g2);
+        Genre empty = gd.getGenre(g.getName());
+        assertNull(empty);
     }
    
    @Test
@@ -165,7 +162,23 @@ public class EntityTest extends TestBase {
         assertTrue(results.contains(album2));
     }
     
-     @Test
+    @Test
+    public void testAlbumUpdate() throws Throwable {
+        Album album1 = new Album();
+        album1.setTitle("album1");
+        album1.setReleased(2006);
+        AlbumDao am = lookupBy(AlbumDaoImpl.class);
+        am.addAlbum(album1);
+        Album a2 = am.getAlbum(album1.getTitle());
+	a2.setTitle("updatedName");
+        am.updateAlbum(a2);
+        Album a3 = am.getAlbum(a2.getTitle());
+
+	assertEquals(a2, a3);
+
+    }
+    
+    @Test
         public void testAlbumRemove() throws Throwable {
         Album a = new Album();
         a.setTitle("album1");
@@ -177,7 +190,18 @@ public class EntityTest extends TestBase {
         assertNull(empty);
     }
      
-
+    @Test
+    public void testArtistRemove() throws Throwable {
+        Artist artist = new Artist();
+        artist.setName("Michael");
+        ArtistDao ad = lookupBy(ArtistDaoImpl.class);
+        ad.addArtist(artist);
+        Artist a2 = ad.getArtist(artist.getId());
+        ad.removeArtist(a2);
+        Artist empty = ad.getArtist(artist.getId());
+        assertNull(empty);
+    }    
+    
      
      
     @Test
@@ -201,6 +225,7 @@ public class EntityTest extends TestBase {
         assertNull(mike2);
         
     }
-   
+  
     
+
 }
