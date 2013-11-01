@@ -67,6 +67,9 @@ public class AlbumTO {
             return false;
         }
         final AlbumTO other = (AlbumTO) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
         return true;
     }
 

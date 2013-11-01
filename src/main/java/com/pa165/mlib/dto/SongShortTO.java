@@ -2,6 +2,7 @@ package com.pa165.mlib.dto;
 
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
+import java.util.Objects;
 
 /**
  *
@@ -53,6 +54,28 @@ public class SongShortTO {
      */
     public void setArtist(Artist artist) {
         this.artist = artist;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SongShortTO other = (SongShortTO) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        return true;
     }
     
 }

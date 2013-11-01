@@ -3,6 +3,7 @@ package com.pa165.mlib.dto;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
+import java.util.Objects;
 
 /**
  * Song Transfer Object
@@ -115,6 +116,28 @@ public class SongTO {
      */
     public void setArtist(ArtistTO artist) {
         this.artist = artist;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.title);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SongTO other = (SongTO) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        return true;
     }
     
     
