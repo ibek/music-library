@@ -13,9 +13,15 @@ public interface SongService {
     
     List<SongTO> getAllSongs();
     
-    List<SongTO> getSongByTitle(String title);
-    
     SongTO createNewSong(String title, Integer bitrate, Integer position, String commentary,
                             GenreTO genre, AlbumTO album, ArtistTO artist);
+    
+    SongTO getSong(String title);
+    
+    SongTO updateSong(SongTO oldSong, SongTO newSong);
+    
+    boolean removeSong(String title);
+    
+    boolean removeSong(SongTO song);
     
 }

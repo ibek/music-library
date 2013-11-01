@@ -10,6 +10,8 @@ import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Song;
 import com.pa165.mlib.service.SongService;
+import com.pa165.mlib.utils.EntityDTOTransformer;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -33,6 +35,9 @@ public class SongServiceImpl implements SongService {
     
     @Inject
     ArtistDao artistDao;
+    
+    @Inject
+    EntityDTOTransformer transformer;
 
     @Override
     public SongTO createNewSong(String title, Integer bitrate, Integer position, String commentary,
@@ -42,27 +47,89 @@ public class SongServiceImpl implements SongService {
         s.setBitrate(bitrate);
         s.setPosition(position);
         s.setCommentary(commentary);
-        s.setGenre(genreDao.getGenre(genre.getName()));
-        s.setAlbum(albumDao.getAlbum(album.getTitle()));
-        //s.setArtist(artistDao.getArtist(artist.getName()));
-            // uncomment when the AlbumTO method was implemented
-        return getSongTO(s);
+        if (genre != null) {
+            s.setGenre(genreDao.getGenre(genre.getName()));
+        }
+        if (album != null) {
+            s.setAlbum(albumDao.getAlbum(album.getTitle()));
+        }
+        if (artist != null) {
+            s.setArtist(artistDao.getArtist(artist.getName()));
+        }
+        songDao.addSong(s);
+        return transformer.transformSongTO(s);
     }
 
     @Override
     public List<SongTO> getAllSongs() {
-        return null;
+        List<SongTO> songs = new ArrayList<>();
+        
+        for (Song s : songDao.getAll()) {
+            songs.add(transformer.transformSongTO(s));
+        }
+        return songs;
     }
-    
+
     @Override
-    public List<SongTO> getSongByTitle(String title) {
-        return null;
+    public SongTO getSong(String title) {
+        return transformer.transformSongTO(songDao.getSong(title));
+    }
+
+    @Override
+    public SongTO updateSong(SongTO oldSong, SongTO newSong) {
+        Song s = songDao.getSong(oldSong.getTitle());
+        s.setTitle(newSong.getTitle());
+        s.setBitrate(newSong.getBitrate());
+        s.setPosition(newSong.getPosition());
+        s.setCommentary(newSong.getCommentary());
+        if (newSong.getGenre() != null) {
+            s.setGenre(genreDao.getGenre(newSong.getGenre().getName()));
+        }
+        if (newSong.getAlbum() != null) {
+            s.setAlbum(albumDao.getAlbum(newSong.getAlbum().getTitle()));
+        }
+        if (newSong.getArtist() != null) {
+            s.setArtist(artistDao.getArtist(newSong.getArtist().getName()));
+        }
+        songDao.updateSong(s);
+        return newSong;
+    }
+
+    @Override
+    public boolean removeSong(String title) {
+        Song song = songDao.getSong(title);
+        if (song == null) {
+            return false;
+        } else {
+            songDao.removeSong(song);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean removeSong(SongTO song) {
+        return removeSong(song.getTitle());
     }
     
-    private SongTO getSongTO(Song song) {
-        SongTO sto = new SongTO();
-        // todo after SongTO is implemented
-        return sto;
+
+    public void setSongDao(SongDao songDao) {
+        this.songDao = songDao;
+    }
+
+    public void setGenreDao(GenreDao genreDao) {
+        this.genreDao = genreDao;
+    }
+
+    public void setAlbumDao(AlbumDao albumDao) {
+        this.albumDao = albumDao;
+    }
+
+    public void setArtistDao(ArtistDao artistDao) {
+        this.artistDao = artistDao;
+    }
+        
+    public void setTransformer(EntityDTOTransformer transformer) {
+        this.transformer = transformer;
     }
     
 }
