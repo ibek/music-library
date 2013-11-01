@@ -134,38 +134,36 @@ public class ServiceTest {
     
     @Test
     public void testArtistServiceCRUD() throws Exception {
-       /** 
+       
         ArtistServiceImpl as = new ArtistServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
         as.setTransformer(transformer);
         
         ArtistDao ad = mock(ArtistDao.class);
         Artist artist = new Artist();
-        artist.setName("Janis Joplin");
+        artist.setName("Lou Reed");
         Artist artist2 = new Artist();
-        artist2.setName("Michal Hašek");
-        when(ad.getArtist("Janis Joplin")).thenReturn(artist);
-        when(ad.getArtist("Michal Hašek")).thenReturn(artist2);
-        when(ad.getArtist("Milos Zeman")).thenReturn(null);
+        artist2.setName("Velvet Underground");
+        when(ad.getArtist("Lou Reed")).thenReturn(artist);
+        when(ad.getArtist("Velvet Underground")).thenReturn(artist2);
+        when(ad.getArtist("James Bond")).thenReturn(null);
         as.setArtistDao(ad);
         
-        ArtistTO a = as.createNewArtist("Michal Hašek");
-        assertEquals(a.getName(), "Michal Hašek");
+        ArtistTO a = as.createNewArtist("Lou Reed");
+        assertEquals(a.getName(), "Lou Reed");
         
-        ArtistTO a2 = as.getArtist("Michal Hašek");
+        ArtistTO a2 = as.getArtist("Lou Reed");
         assertEquals(a, a2);
         
-        a2.setName("Michal Prášek");
+        a2.setName("Velvet Underground");
         ArtistTO updated = as.updateArtist(a, a2);
         assertEquals(a2, updated);
-        */
-        /*
-        boolean removed = as.removeArtist();
-        assertFalse(removed); // the mock DAO returns null for trance Genre
-        GenreTO empty = gs.getGenre("trance");
-        assertNull(empty);
         
-        */
+        
+        boolean removed = as.removeArtist("Lou Reed");
+        assertTrue(removed);
+  
+        
     }
     
 }

@@ -88,8 +88,14 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public Artist getArtist(String name) {
-        return em.createQuery("SELECT a FROM Artist a WHERE a.name = :name", Artist.class)
+        Artist a = null;
+        try {
+            a = em.createQuery("SELECT a FROM Artist a WHERE a.name = :name", Artist.class)
                 .setParameter("name", name)
                 .getSingleResult();
+        } catch (NoResultException e) {
+            
+        }
+        return a;
     }
 }

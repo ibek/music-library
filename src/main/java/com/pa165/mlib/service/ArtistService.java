@@ -18,7 +18,7 @@ public interface ArtistService {
     
     ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist);
             
-    boolean removeArtist(Long id);
+    boolean removeArtist(String name);
     
     boolean removeArtist(ArtistTO artist);
     

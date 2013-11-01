@@ -46,16 +46,16 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public ArtistTO updateArtist(ArtistTO oldArtist, ArtistTO newArtist) {
-        Artist artist = ad.getArtist(oldArtist.getId());
+        Artist artist = ad.getArtist(oldArtist.getName());
         artist.setName(newArtist.getName());
-        ad.updateArtist(artist);
+        ad.updateArtist(artist);       
         return newArtist;
     }
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public boolean removeArtist(Long id) {
-        Artist artist = ad.getArtist(id);
+    public boolean removeArtist(String name) {
+        Artist artist = ad.getArtist(name);
         if (artist == null) {
             return false;
         }
@@ -66,7 +66,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeArtist(ArtistTO artist) {
-        return removeArtist(artist.getId());
+        return removeArtist(artist.getName());
     }
 
     @Override
