@@ -51,13 +51,16 @@ public class EntityDTOTransformer {
         
         List<Song> songList = new ArrayList<>();
         songList = album.getSongs();
-        List<SongTO> songToList = new ArrayList<>();
+        List<SongTO> songToList = null;
         
-        for (Song s : songList) {
-            
+        if (songList != null) {
+            songToList = new ArrayList<>();
+            for (Song s : songList) {
+                songToList.add(transformSongTO(s));
+            }
         }
         
-        ato.setSongs(null);
+        ato.setSongs(songToList);
        
         return ato;
     }

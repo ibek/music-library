@@ -1,11 +1,15 @@
 package com.pa165.mlib.test;
 
+import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dao.GenreDao;
+import com.pa165.mlib.dto.AlbumTO;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.service.impl.AlbumServiceImpl;
 import com.pa165.mlib.service.impl.GenreServiceImpl;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -51,6 +55,8 @@ public class ServiceTest {
     @Test
     public void testGenreServiceGetAll() throws Exception {
         GenreServiceImpl gs = new GenreServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        gs.setTransformer(transformer);
         GenreDao gd = mock(GenreDao.class);
         
         when(gd.getAll()).thenReturn(new ArrayList<Genre>(){{
@@ -67,6 +73,35 @@ public class ServiceTest {
         assertEquals(2, all.size());
         assertEquals("rock", all.get(0).getName());
         assertEquals("trance", all.get(1).getName());
+    }
+    
+    @Test
+    public void testAlbumServiceCRUD() throws Exception {
+        AlbumServiceImpl as = new AlbumServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        as.setTransformer(transformer);
+        
+        AlbumDao ad = mock(AlbumDao.class);
+        Album album = new Album();
+        album.setTitle("bestOf");
+        album.setReleased(2013);
+        when(ad.getAlbum("bestOf")).thenReturn(album);
+        
+        as.setAlbumDao(ad);
+        AlbumTO bestOf = as.createNewAlbum("bestOf", null, 2013, null);
+        assertEquals("bestOf", bestOf.getTitle());
+        assertEquals(2013, (int) bestOf.getReleased());
+        
+        AlbumTO bestOf2 = as.getAlbum("bestOf");
+        assertEquals(bestOf, bestOf2);
+        
+        bestOf2.setReleased(2012);
+        bestOf2 = as.updateAlbum(bestOf, bestOf2);
+        assertEquals(2012, (int) bestOf2.getReleased());
+        
+        boolean removed = as.removeAlbum("bestOf");
+        assertTrue(removed);
+        
     }
     
 }

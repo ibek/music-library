@@ -96,4 +96,12 @@ public class AlbumServiceImpl implements AlbumService{
         return true;
     }
     
+    public void setAlbumDao(AlbumDao albumDao) {
+        this.albumDao = albumDao;
+    }
+    
+    public void setTransformer(EntityDTOTransformer transformer) {
+        this.transformer = transformer;
+    }
+    
 }
