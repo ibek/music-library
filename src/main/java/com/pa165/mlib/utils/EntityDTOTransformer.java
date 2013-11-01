@@ -31,11 +31,11 @@ public class EntityDTOTransformer {
     public SongTO transformSongTO(Song song) {
         SongTO sto = new SongTO();
         
-        sto.setAlbum(song.getAlbum());
-        sto.setArtist(song.getArtist());
+        sto.setAlbum(transformAlbumTO(song.getAlbum()));
+        sto.setArtist(tranformArtistTO(song.getArtist()));
         sto.setBitrate(song.getBitrate());
         sto.setCommentary(song.getCommentary());
-        sto.setGenre(song.getGenre());
+        sto.setGenre(transformGenreTO(song.getGenre()));
         sto.setPosition(song.getPosition());
         sto.setTitle(song.getTitle());
         

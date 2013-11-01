@@ -15,9 +15,9 @@ public class SongTO {
     private Integer bitrate;
     private Integer position;
     private String commentary;
-    private Genre genre;
-    private Album album;
-    private Artist artist;
+    private GenreTO genre;
+    private AlbumTO album;
+    private ArtistTO artist;
 
     /**
      * @return the title
@@ -78,42 +78,42 @@ public class SongTO {
     /**
      * @return the genre
      */
-    public Genre getGenre() {
+    public GenreTO getGenre() {
         return genre;
     }
 
     /**
      * @param genre the genre to set
      */
-    public void setGenre(Genre genre) {
+    public void setGenre(GenreTO genre) {
         this.genre = genre;
     }
 
     /**
      * @return the album
      */
-    public Album getAlbum() {
+    public AlbumTO getAlbum() {
         return album;
     }
 
     /**
      * @param album the album to set
      */
-    public void setAlbum(Album album) {
+    public void setAlbum(AlbumTO album) {
         this.album = album;
     }
 
     /**
      * @return the artist
      */
-    public Artist getArtist() {
+    public ArtistTO getArtist() {
         return artist;
     }
 
     /**
      * @param artist the artist to set
      */
-    public void setArtist(Artist artist) {
+    public void setArtist(ArtistTO artist) {
         this.artist = artist;
     }
     
