@@ -2,7 +2,6 @@ package com.pa165.mlib.service.impl;
 
 import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dto.ArtistTO;
-import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.utils.EntityDTOTransformer;

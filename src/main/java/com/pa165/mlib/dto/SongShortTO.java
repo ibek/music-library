@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.pa165.mlib.dto;
 
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
-import com.pa165.mlib.entity.Genre;
 
 /**
  *

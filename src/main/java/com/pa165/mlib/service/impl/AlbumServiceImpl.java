@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.pa165.mlib.service.impl;
 
 import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
-import com.pa165.mlib.entity.Song;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
