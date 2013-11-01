@@ -92,28 +92,6 @@ public class EntityTest extends TestBase {
     }
     
     @Test
-    public void testSongCRUD() throws Exception {
-        Song song = new Song();
-        song.setTitle("song1");
-        SongDao sm = lookupBy(SongDaoImpl.class);
-        sm.addSong(song);
-        
-        Song song2 = sm.getSong(song.getId());
-        assertEquals(song, song2);
-        
-        song.setTitle("TheSong");
-        song = sm.updateSong(song);
-        
-        song2 = sm.getSong(song.getId());
-        assertEquals("TheSong", song2.getTitle());
-        
-        sm.removeSong(song2);
-        song2 = sm.getSong(song2.getId());
-        assertNull(song2);
-        
-    }
-
-    @Test
     public void testSongRemove() throws Throwable {
         Song s = new Song();
         s.setTitle("mysong");
