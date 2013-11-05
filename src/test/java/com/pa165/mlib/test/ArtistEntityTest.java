@@ -17,7 +17,7 @@ public class ArtistEntityTest extends EntityTestBase {
     @Test
     public void testArtistRemove() throws Throwable {
         Artist artist = new Artist();
-        artist.setName("Michael");
+        artist.setName("George");
         ArtistDaoImpl ad = new ArtistDaoImpl();
         EntityManager em = getTestEntityManager();
         ad.setEntityManager(em);
