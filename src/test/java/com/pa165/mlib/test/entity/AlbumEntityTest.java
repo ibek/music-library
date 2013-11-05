@@ -1,4 +1,4 @@
-package com.pa165.mlib.test;
+package com.pa165.mlib.test.entity;
 
 import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dao.ArtistDao;
@@ -9,6 +9,7 @@ import com.pa165.mlib.dao.impl.SongDaoImpl;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Song;
+import com.pa165.mlib.test.EntityTestBase;
 import java.util.List;
 import javax.persistence.EntityManager;
 import static org.junit.Assert.assertEquals;

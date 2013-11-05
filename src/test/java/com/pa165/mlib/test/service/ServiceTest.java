@@ -1,4 +1,4 @@
-package com.pa165.mlib.test;
+package com.pa165.mlib.test.service;
 
 import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dto.AlbumTO;

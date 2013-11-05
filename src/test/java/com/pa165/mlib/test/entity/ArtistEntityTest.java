@@ -1,8 +1,9 @@
-package com.pa165.mlib.test;
+package com.pa165.mlib.test.entity;
 
 import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.test.EntityTestBase;
 import javax.persistence.EntityManager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
