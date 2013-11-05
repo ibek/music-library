@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class Artist implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column(nullable = false, unique = true)

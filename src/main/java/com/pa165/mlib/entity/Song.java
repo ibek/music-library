@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 public class Song implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column(nullable = false, unique = true)
@@ -39,6 +39,9 @@ public class Song implements Serializable {
 
     @Override
     public int hashCode() {
+        if (id == null) {
+            return -1;
+        }
         int hash = 3;
         hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;

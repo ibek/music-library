@@ -76,8 +76,13 @@ public class GenreDaoImpl implements GenreDao {
                    .setParameter("name", name)
                    .getSingleResult();
          } catch (NoResultException e) {
-             
+             e.printStackTrace();
          }
          return g;
     }
+    
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+    
 }

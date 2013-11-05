@@ -99,4 +99,8 @@ public class SongDaoImpl implements SongDao {
         return s;
     }
     
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+    
 }

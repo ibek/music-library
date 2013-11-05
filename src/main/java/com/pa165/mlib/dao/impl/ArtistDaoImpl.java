@@ -98,4 +98,9 @@ public class ArtistDaoImpl implements ArtistDao {
         }
         return a;
     }
+    
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+    
 }

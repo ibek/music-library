@@ -112,4 +112,8 @@ public class AlbumDaoImpl implements AlbumDao {
                 .getResultList();
     }
     
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+    
 }
