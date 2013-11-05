@@ -9,6 +9,10 @@ import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
 /**
@@ -16,6 +20,8 @@ import javax.inject.Inject;
  * @author brazdil
  */
 @Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 public class AlbumServiceImpl implements AlbumService{
     
     @Inject
@@ -36,6 +42,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
     
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public AlbumTO createNewAlbum(String title, byte[] cover, Integer year, List<SongTO> songs) {
         
         Album album = new Album();
@@ -56,6 +63,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
     
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public AlbumTO updateAlbum(AlbumTO oldAlbum, AlbumTO newAlbum) {
         
         Album album = albumDao.getAlbum(oldAlbum.getTitle());
@@ -65,6 +73,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
     
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeAlbum(String title) {
         
         Album album = albumDao.getAlbum(title);
