@@ -46,6 +46,24 @@
             <artifactId>derbyclient</artifactId>
             <version>10.10.1.1</version>
         </dependency>
+        <!-- glassfish-->
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-static-shell</artifactId>
+            <version>3.1.1</version>
+            <scope>test</scope>         
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+            <version>3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.ejb</artifactId>
+            <version>3.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -94,6 +112,27 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.glassfish</groupId>
+                <artifactId>maven-embedded-glassfish-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <goalPrefix>glassfish</goalPrefix>
+                    <app>target/${artifactId}-${version}.${packaging}</app>
+                    <port>8080</port>
+                    <autoDelete>true</autoDelete>
+                    <contextRoot>pa165</contextRoot>
+                    <name>com.pa165.mlib_1.0-SNAPSHOT</name>
+                    <configFile>${basedir}/src/main/resources/domain.xml</configFile>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.glassfish</groupId>
+                        <artifactId>javax.ejb</artifactId>
+                        <version>3.1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
