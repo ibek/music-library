@@ -16,7 +16,7 @@ public interface GenreService {
     
     GenreTO updateGenre(GenreTO oldGenre, GenreTO newGenre);
     
-    boolean removeGenre(String name);
+    boolean removeGenre(GenreTO genre);
     
     List<GenreTO> getAllGenres();
     

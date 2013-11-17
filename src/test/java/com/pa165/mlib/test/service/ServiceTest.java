@@ -55,7 +55,9 @@ public class ServiceTest {
         GenreTO updated = gs.updateGenre(g, g2);
         assertEquals(g2, updated);
         
-        boolean removed = gs.removeGenre("trance");
+        GenreTO gto = new GenreTO();
+        gto.setName("trance");
+        boolean removed = gs.removeGenre(gto);
         assertFalse(removed); // the mock DAO returns null for trance Genre
         GenreTO empty = gs.getGenre("trance");
         assertNull(empty);

@@ -1,2 +1,2 @@
-![logo](http://img7.imageshack.us/img7/7343/qt81.png)
+![logo](https://raw.github.com/ibek/music-library/master/src/main/webapp/resources/logo.png)
 =============

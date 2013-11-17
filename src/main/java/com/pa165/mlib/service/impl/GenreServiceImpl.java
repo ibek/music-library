@@ -64,8 +64,8 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public boolean removeGenre(String name) {
-        Genre genre = gd.getGenre(name);
+    public boolean removeGenre(GenreTO genreTO) {
+        Genre genre = gd.getGenre(genreTO.getName());
         if (genre == null) {
             return false;
         }

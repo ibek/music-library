@@ -30,6 +30,10 @@ public class GenreManager implements Serializable {
     
     private GenreTO gto = new GenreTO();
     
+    private void init() {
+        gto = new GenreTO();
+    }
+    
     public GenreService getService() {
         return service;
     }
@@ -42,9 +46,15 @@ public class GenreManager implements Serializable {
         logger.log(Level.INFO, "Creating {0}", gto);
         try {
             service.createNewGenre(gto);
+            init();
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The genre cannot be created because it already exists."));
         }
+    }
+    
+    public void remove(GenreTO genre) {
+        logger.log(Level.INFO, "Removing {0}", genre);
+        service.removeGenre(genre);
     }
     
 }
