@@ -2,40 +2,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
-    <h:head>
-        <title>Music Library</title>
-    </h:head>
-    <h:body>
-        <h:graphicImage value="/resources/logo.png" width="466" height="105" />
-        <h:form>
-            <h:button value="Home" outcome="home"/>
-            <h:button value="Genres" outcome="genres"/>
-            <h:button value="Artists" outcome="artists"/>
-            <h:button value="Albums" outcome="albums"/>
-            <h:button value="Songs" outcome="songs"/>
-        </h:form>
-        <h1>Genres</h1>
-        <h:messages globalOnly="true"/>
-        <h:form>
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Name: " />
-                <h:inputText value="#{genreManager.genreTO.name}" required="true" />
-                <h:commandButton value="Create" action="#{genreManager.create()}" />
-            </h:panelGrid>
-        </h:form>
-        <h:form>
-            <h:dataTable value="#{genreManager.service.allGenres}" var="g">
-                <h:column>
-                    <f:facet name="header">Genre</f:facet>
-                        #{g.name}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Operation</f:facet>
-                    <h:commandButton value="Remove" action="#{genreManager.remove(g)}" />
-                </h:column>
-            </h:dataTable>
-        </h:form>
-    </h:body>
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <body>
+        <ui:composition template="/template.xhtml">
+            <ui:define name="content">
+                <h1>Genres</h1>
+                <h:messages globalOnly="true"/>
+                <h:form>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel value="Name: " />
+                        <h:inputText value="#{genreManager.genreTO.name}" required="true" />
+                        <h:commandButton value="Create" action="#{genreManager.create()}" />
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+                    <h:dataTable value="#{genreManager.service.allGenres}" var="g">
+                        <h:column>
+                            <f:facet name="header">Genre</f:facet>
+                                #{g.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Operation</f:facet>
+                            <h:commandButton value="Remove" action="#{genreManager.remove(g)}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
 </html>
 
