@@ -3,6 +3,7 @@ package com.pa165.mlib.service.impl;
 import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public ArtistTO createNewArtist(String name) {
+    public ArtistTO createNewArtist(ArtistTO artistTO) throws DuplicateException {
         Artist artist = new Artist();
-        artist.setName(name);
+        artist.setName(artistTO.getName());
         ad.addArtist(artist);
         return transformer.transformArtistTO(artist);
     }

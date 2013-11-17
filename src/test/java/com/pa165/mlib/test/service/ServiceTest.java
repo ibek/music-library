@@ -157,7 +157,9 @@ public class ServiceTest {
         when(ad.getArtist("James Bond")).thenReturn(null);
         as.setArtistDao(ad);
         
-        ArtistTO a = as.createNewArtist("Lou Reed");
+        ArtistTO ato = new ArtistTO();
+        ato.setName("Lou Reed");
+        ArtistTO a = as.createNewArtist(ato);
         assertEquals(a.getName(), "Lou Reed");
         
         ArtistTO a2 = as.getArtist("Lou Reed");

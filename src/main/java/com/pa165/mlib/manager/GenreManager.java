@@ -1,4 +1,4 @@
-package com.pa165.mlib.bean;
+package com.pa165.mlib.manager;
 
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.exception.DuplicateException;

@@ -1,6 +1,7 @@
 package com.pa165.mlib.service;
 
 import com.pa165.mlib.dto.ArtistTO;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface ArtistService {
     
-    ArtistTO createNewArtist(String name);
+    ArtistTO createNewArtist(ArtistTO artist) throws DuplicateException;
        
     ArtistTO getArtist(String name);
     

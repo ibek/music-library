@@ -1,6 +1,7 @@
 package com.pa165.mlib.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  * Artist Transfer Object
@@ -11,6 +12,7 @@ public class ArtistTO {
 
     private Long id;
     
+    @NotNull
     private String name;
 
     public ArtistTO() {
@@ -57,6 +59,12 @@ public class ArtistTO {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{ id=" + id + 
+               ", name= " + name + " }";
     }
     
 }

@@ -1,6 +1,7 @@
 package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public interface ArtistDao {
      * Persists the given artist to persistence context
      * @param artist
      */
-    void addArtist(Artist artist);
+    void addArtist(Artist artist) throws DuplicateException;
 
     /**
      * Read all artists
