@@ -1,6 +1,7 @@
 package com.pa165.mlib.service;
 
 import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface GenreService {
     
-    GenreTO createNewGenre(String name);
+    GenreTO createNewGenre(GenreTO genre) throws DuplicateException ;
     
     GenreTO getGenre(String name);
     

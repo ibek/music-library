@@ -2,11 +2,16 @@ package com.pa165.mlib.dao.impl;
 
 import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext; 
+import javax.persistence.PersistenceContext;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  * Genre DAO
@@ -16,6 +21,9 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class GenreDaoImpl implements GenreDao {
     
+    @Inject
+    Logger logger;
+    
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
     
@@ -24,8 +32,16 @@ public class GenreDaoImpl implements GenreDao {
      * @param genre 
      */
     @Override
-    public void addGenre(Genre genre) {
-        em.persist(genre);
+    public void addGenre(Genre genre) throws DuplicateException {
+        try {
+            em.persist(genre);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Cannot create a new genre due to: {0}", ex.getMessage());
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                throw new DuplicateException();
+            }
+            throw ex;
+        }
     }
     
     /**
@@ -59,7 +75,7 @@ public class GenreDaoImpl implements GenreDao {
      */
     @Override
     public List<Genre> getAll() {
-        return em.createQuery("SELECT g FROM Genre g", Genre.class)
+        return em.createQuery("SELECT g FROM Genre g ORDER BY g.name", Genre.class)
                 .getResultList();
     }
     

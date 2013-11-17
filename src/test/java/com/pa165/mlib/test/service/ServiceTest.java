@@ -43,7 +43,9 @@ public class ServiceTest {
         when(gd.getGenre("trance")).thenReturn(null);
         gs.setGenreDao(gd);
         
-        GenreTO g = gs.createNewGenre("rock");
+        GenreTO ng = new GenreTO();
+        ng.setName("rock");
+        GenreTO g = gs.createNewGenre(ng);
         assertEquals(g.getName(), "rock");
         
         GenreTO g2 = gs.getGenre("rock");

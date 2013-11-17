@@ -1,6 +1,7 @@
 package com.pa165.mlib.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  * Genre Transfer Object
@@ -9,6 +10,7 @@ import java.util.Objects;
  */
 public class GenreTO {
     
+    @NotNull
     private String name;
 
     /**
@@ -45,6 +47,11 @@ public class GenreTO {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre{ name=" + name + "}";
     }
     
 }

@@ -3,6 +3,7 @@ package com.pa165.mlib.service.impl;
 import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.GenreService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public GenreTO createNewGenre(String name) {
+    public GenreTO createNewGenre(GenreTO genre) throws DuplicateException {
         Genre g = new Genre();
-        g.setName(name);
+        g.setName(genre.getName());
         gd.addGenre(g);
         return transformer.transformGenreTO(g);
     }

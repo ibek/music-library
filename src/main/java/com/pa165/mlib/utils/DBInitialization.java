@@ -1,5 +1,7 @@
 package com.pa165.mlib.utils;
 
+import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.GenreService;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -20,9 +22,17 @@ public class DBInitialization {
     @PostConstruct
     public void init() {
         System.out.println("initializing database ...");
-        gs.createNewGenre("Alternative");
-        gs.createNewGenre("Pop");
-        gs.createNewGenre("Rock");
+        GenreTO genre = new GenreTO();
+        genre.setName("Alternative");
+        try {
+            gs.createNewGenre(genre);
+            genre.setName("Pop");
+            gs.createNewGenre(genre);
+            genre.setName("Rock");
+            gs.createNewGenre(genre);
+        } catch (DuplicateException ex) {
+            
+        }
     }
     
 }

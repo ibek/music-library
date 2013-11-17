@@ -1,6 +1,7 @@
 package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public interface GenreDao {
      * Persists the given genre to persistence context
      * @param genre
      */
-    void addGenre(Genre genre);
+    void addGenre(Genre genre) throws DuplicateException;
 
     /**
      * Read all genres

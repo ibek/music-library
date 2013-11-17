@@ -15,7 +15,15 @@
             <h:button value="Songs" outcome="songs"/>
         </h:form>
         <h1>Genres</h1>
-        <h:dataTable value="#{genre.service.allGenres}" var="g">
+        <h:messages globalOnly="true"/>
+        <h:form>
+            <h:panelGrid columns="3">
+                <h:outputLabel value="Name: " />
+                <h:inputText value="#{genreManager.genreTO.name}" required="true" />
+                <h:commandButton value="Create" action="#{genreManager.create()}" />
+            </h:panelGrid>
+        </h:form>
+        <h:dataTable value="#{genreManager.service.allGenres}" var="g">
             <h:column>
                 <f:facet name="header">Genre</f:facet>
                     #{g.name}
