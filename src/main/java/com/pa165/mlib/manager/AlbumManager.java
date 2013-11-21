@@ -9,17 +9,24 @@ package com.pa165.mlib.manager;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author brazdil
  */
-public class AlbumManager {
+@SessionScoped
+@ManagedBean
+@Named
+public class AlbumManager implements Serializable {
     
     @Inject
     transient Logger logger;

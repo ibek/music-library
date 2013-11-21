@@ -19,7 +19,6 @@ import org.hibernate.exception.ConstraintViolationException;
  * Transactions are managed by container.
  * @author ibek
  */
-@Stateless
 public class AlbumDaoImpl implements AlbumDao {
     
     @Inject

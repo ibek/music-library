@@ -56,7 +56,7 @@ public class EntityDTOTransformer {
         ato.setCover(album.getCover());
         ato.setReleased(album.getReleased());
         
-        List<Song> songList = new ArrayList<>();
+       /** List<Song> songList = new ArrayList<>();
         songList = album.getSongs();
         List<SongTO> songToList = null;
         
@@ -65,9 +65,9 @@ public class EntityDTOTransformer {
             for (Song s : songList) {
                 songToList.add(transformSongTO(s));
             }
-        }
+        }*/
         
-        ato.setSongs(songToList);
+        //ato.setSongs(songToList);
        
         return ato;
     }

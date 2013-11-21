@@ -13,7 +13,6 @@ import javax.persistence.PersistenceContext;
  * Transactions are managed by container.
  * @author ibek
  */
-@Stateless
 public class SongDaoImpl implements SongDao {
     
     @PersistenceContext(unitName = "mlib-pu")

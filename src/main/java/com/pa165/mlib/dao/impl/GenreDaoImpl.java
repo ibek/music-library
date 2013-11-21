@@ -18,7 +18,6 @@ import org.hibernate.exception.ConstraintViolationException;
  * Transaction are managed by container
  * @author brazdil
  */
-@Stateless
 public class GenreDaoImpl implements GenreDao {
     
     @Inject

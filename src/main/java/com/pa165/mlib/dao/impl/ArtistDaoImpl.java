@@ -18,7 +18,6 @@ import org.hibernate.exception.ConstraintViolationException;
  *
  * @author brazdil
  */
-@Stateless
 public class ArtistDaoImpl implements ArtistDao {
     
     @Inject

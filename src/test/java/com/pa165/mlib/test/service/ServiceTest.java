@@ -100,7 +100,11 @@ public class ServiceTest {
         when(ad.getAlbum("bestOf")).thenReturn(album);
         
         as.setAlbumDao(ad);
-        AlbumTO bestOf = as.createNewAlbum("bestOf", null, 2013, null);
+        AlbumTO ato = new AlbumTO();
+        ato.setTitle("bestOf");
+        ato.setReleased(2013);
+        
+        AlbumTO bestOf = as.createNewAlbum(ato);
         assertEquals("bestOf", bestOf.getTitle());
         assertEquals(2013, (int) bestOf.getReleased());
         
