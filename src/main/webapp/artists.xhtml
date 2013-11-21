@@ -12,25 +12,25 @@
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
                     <h:panelGrid columns="3">
-                        <h:outputLabel value="Name: " />
+                        <h:outputLabel value="#{msg.artistName}: " />
                         <h:inputText value="#{artistManager.artistTO.name}" required="true" />
-                        <h:commandButton value="Create" action="#{artistManager.create()}" />
+                        <h:commandButton value="#{msg.create}" action="#{artistManager.create()}" />
                     </h:panelGrid>
                 </h:form>
                 <h:form>
                     <c:set var="allArtists" value="#{artistManager.service.allArtists}" scope="request" />
                     <h:dataTable value="#{allArtists}" var="a" rendered="#{not empty allArtists}">
                         <h:column>
-                            <f:facet name="header">Id</f:facet>
+                            <f:facet name="header">#{msg.id}</f:facet>
                                 #{a.id}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Name</f:facet>
+                            <f:facet name="header">#{msg.artistName}</f:facet>
                                 #{a.name}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Operation</f:facet>
-                            <h:commandButton value="Remove" action="#{artistManager.remove(a)}" />
+                            <f:facet name="header">#{msg.operation}</f:facet>
+                            <h:commandButton value="#{msg.remove}" action="#{artistManager.remove(a)}" />
                         </h:column>
                     </h:dataTable>
                 </h:form>

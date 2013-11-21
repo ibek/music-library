@@ -12,21 +12,21 @@
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
                     <h:panelGrid columns="3">
-                        <h:outputLabel value="Name: " />
+                        <h:outputLabel value="#{msg.genreName}: " />
                         <h:inputText value="#{genreManager.genreTO.name}" required="true" />
-                        <h:commandButton value="Create" action="#{genreManager.create()}" />
+                        <h:commandButton value="#{msg.create}" action="#{genreManager.create()}" />
                     </h:panelGrid>
                 </h:form>
                 <h:form>
                     <c:set var="allGenres" value="#{genreManager.service.allGenres}" scope="request" />
                     <h:dataTable value="#{allGenres}" var="g" rendered="#{not empty allGenres}">
                         <h:column>
-                            <f:facet name="header">Genre</f:facet>
+                            <f:facet name="header">#{msg.genre}</f:facet>
                                 #{g.name}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Operation</f:facet>
-                            <h:commandButton value="Remove" action="#{genreManager.remove(g)}" />
+                            <f:facet name="header">#{msg.operation}</f:facet>
+                            <h:commandButton value="#{msg.remove}" action="#{genreManager.remove(g)}" />
                         </h:column>
                     </h:dataTable>
                 </h:form>
