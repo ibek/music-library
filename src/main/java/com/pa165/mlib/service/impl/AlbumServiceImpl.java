@@ -4,6 +4,7 @@ import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -43,18 +44,17 @@ public class AlbumServiceImpl implements AlbumService{
     
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public AlbumTO createNewAlbum(String title, byte[] cover, Integer year, List<SongTO> songs) {
+    public AlbumTO createNewAlbum(AlbumTO albumTO) throws DuplicateException{
         
         Album album = new Album();
         
-        album.setTitle(title);
-        album.setReleased(year);
-        album.setCover(cover);
+        album.setTitle(albumTO.getTitle());
+        album.setReleased(albumTO.getReleased());
+        album.setCover(albumTO.getCover());
         
-        AlbumTO ato = transformer.transformAlbumTO(album);
-        ato.setSongs(songs);
+        albumDao.addAlbum(album);
         
-        return ato;
+        return transformer.transformAlbumTO(album);
     }
     
     @Override
@@ -82,6 +82,12 @@ public class AlbumServiceImpl implements AlbumService{
         }
         albumDao.removeAlbum(album);
         return true;
+    }
+    
+    @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public boolean removeAlbum(AlbumTO album) {
+        return removeAlbum(album.getTitle());
     }
     
     public void setAlbumDao(AlbumDao albumDao) {

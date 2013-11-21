@@ -1,11 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
                 <h1>Albums</h1>
+                <h:messages globalOnly="true"/>
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Title: " />
+                        <h:inputText value="#{albumManager.albumTO.title}" required="true" />
+                        <h:outputLabel value="Released: " />
+                        <h:inputText value="#{albumManager.albumTO.released}" required="false" />                        
+                        <h:commandButton value="Create" action="#{albumManager.create()}" />
+                    </h:panelGrid>
+                </h:form>
+                <h:form>
+                    <c:set var="allAlbums" value="#{albumManager.service.allAlbums}" scope="request" />
+                    <h:dataTable value="#{allAlbums}" var="a" rendered="#{not empty allAlbums}">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                                #{a.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Title</f:facet>
+                                #{a.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Released</f:facet>
+                                #{a.released}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Operation</f:facet>
+                            <h:commandButton value="Remove" action="#{albumManager.remove(a)}" />
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </body>

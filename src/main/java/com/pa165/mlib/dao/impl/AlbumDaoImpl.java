@@ -3,11 +3,16 @@ package com.pa165.mlib.dao.impl;
 import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  * Album DAO.
@@ -17,6 +22,9 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class AlbumDaoImpl implements AlbumDao {
     
+    @Inject
+    Logger logger;
+    
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
     
@@ -25,8 +33,16 @@ public class AlbumDaoImpl implements AlbumDao {
      * @param album to be persisted
      */
     @Override
-    public void addAlbum(Album album) {
-        em.persist(album);
+    public void addAlbum(Album album) throws DuplicateException {
+        try {
+            em.persist(album);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Cannot create a new album due to: {0}", ex.getMessage());
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                throw new DuplicateException();
+            }
+            throw ex;
+        }
     }
     
     /**

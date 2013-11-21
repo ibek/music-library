@@ -2,6 +2,7 @@ package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public interface AlbumDao {
      * Persist the given album to persistence context.
      * @param album to be persisted
      */
-    void addAlbum(Album album);
+    void addAlbum(Album album) throws DuplicateException;
 
     /**
      * Get album with given unique identifier.
