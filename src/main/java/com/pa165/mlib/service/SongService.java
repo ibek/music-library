@@ -4,6 +4,7 @@ import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -13,8 +14,7 @@ public interface SongService {
     
     List<SongTO> getAllSongs();
     
-    SongTO createNewSong(String title, Integer bitrate, Integer position, String commentary,
-                            GenreTO genre, AlbumTO album, ArtistTO artist);
+    SongTO createNewSong(SongTO song) throws DuplicateException;
     
     SongTO getSong(String title);
     

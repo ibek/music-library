@@ -217,6 +217,12 @@ public class ServiceTest {
         Integer position = 3;
         String commentary = "Social Commentary";
         
+        SongTO testSong = new SongTO();
+        testSong.setTitle(title);
+        testSong.setBitrate(bitrate);
+        testSong.setPosition(position);
+        testSong.setCommentary(commentary);
+        
         Song s = new Song();
         s.setTitle(title);
         s.setBitrate(bitrate);
@@ -225,7 +231,8 @@ public class ServiceTest {
         
         when(songDao.getSong(title)).thenReturn(s);       
         
-        SongTO proTestSong = songService.createNewSong(title, bitrate, position, commentary, null, null, null);
+        //SongTO proTestSong = songService.createNewSong(title, bitrate, position, commentary, null, null, null);
+        SongTO proTestSong = songService.createNewSong(testSong);
         assertEquals(title, proTestSong.getTitle());
         assertEquals(bitrate, proTestSong.getBitrate());
         assertEquals(position, proTestSong.getPosition());

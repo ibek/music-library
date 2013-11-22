@@ -9,6 +9,7 @@ import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Song;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.SongService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -47,21 +48,20 @@ public class SongServiceImpl implements SongService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public SongTO createNewSong(String title, Integer bitrate, Integer position, String commentary,
-                                GenreTO genre, AlbumTO album, ArtistTO artist) {
+    public SongTO createNewSong(SongTO song) throws DuplicateException {
         Song s = new Song();
-        s.setTitle(title);
-        s.setBitrate(bitrate);
-        s.setPosition(position);
-        s.setCommentary(commentary);
-        if (genre != null) {
-            s.setGenre(genreDao.getGenre(genre.getName()));
+        s.setTitle(song.getTitle());
+        s.setBitrate(song.getBitrate());
+        s.setPosition(song.getPosition());
+        s.setCommentary(song.getCommentary());
+        if (song.getGenre() != null) {
+            s.setGenre(genreDao.getGenre(song.getGenre().getName()));
         }
-        if (album != null) {
-            s.setAlbum(albumDao.getAlbum(album.getTitle()));
+        if (song.getAlbum() != null) {
+            s.setAlbum(albumDao.getAlbum(song.getAlbum().getTitle()));
         }
-        if (artist != null) {
-            s.setArtist(artistDao.getArtist(artist.getName()));
+        if (song.getArtist() != null) {
+            s.setArtist(artistDao.getArtist(song.getArtist().getName()));
         }
         songDao.addSong(s);
         return transformer.transformSongTO(s);
