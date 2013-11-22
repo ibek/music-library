@@ -1,8 +1,14 @@
 package com.pa165.mlib.utils;
 
+import com.pa165.mlib.dto.AlbumTO;
+import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.exception.DuplicateException;
+import com.pa165.mlib.service.AlbumService;
+import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.service.GenreService;
+import com.pa165.mlib.service.SongService;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -17,19 +23,51 @@ import javax.inject.Inject;
 public class DBInitialization {
     
     @Inject
-    GenreService gs;
+    SongService songService;
+    
+    @Inject
+    ArtistService artistService;
+    
+    @Inject
+    AlbumService albumService;
+    
+    @Inject
+    GenreService genreService;
     
     @PostConstruct
     public void init() {
         System.out.println("initializing database ...");
         GenreTO genre = new GenreTO();
-        genre.setName("Alternative");
+        AlbumTO album = new AlbumTO();
+        ArtistTO artist = new ArtistTO();
+        SongTO song = new SongTO();
+        
         try {
-            gs.createNewGenre(genre);
+            genre.setName("Alternative");
+            genreService.createNewGenre(genre);
             genre.setName("Pop");
-            gs.createNewGenre(genre);
+            genreService.createNewGenre(genre);
             genre.setName("Rock");
-            gs.createNewGenre(genre);
+            genreService.createNewGenre(genre);
+            
+            album.setTitle("The Dark Side of the Moon");
+            album.setReleased(1973);
+            albumService.createNewAlbum(album);
+            album.setTitle("Wish You Were Here");
+            album.setReleased(1975);
+            albumService.createNewAlbum(album);
+            
+            artist.setName("Roger Waters");
+            artistService.createNewArtist(artist);
+            artist.setName("Pink Floyd");
+            artistService.createNewArtist(artist);
+            
+            song.setTitle("Shine On You Crazy Diamond");
+            song.setAlbum(album);
+            song.setArtist(artist);
+            song.setGenre(genre);
+            songService.createNewSong(song);
+            
         } catch (DuplicateException ex) {
             
         }
