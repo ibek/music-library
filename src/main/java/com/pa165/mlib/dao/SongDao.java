@@ -1,6 +1,7 @@
 package com.pa165.mlib.dao;
 
 import com.pa165.mlib.entity.Song;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public interface SongDao {
      * Persist the given song to persistence context.
      * @param song to be persisted
      */
-    void addSong(Song song);
+    void addSong(Song song) throws DuplicateException;
 
     /**
      * Get all the songs.

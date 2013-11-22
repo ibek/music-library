@@ -2,11 +2,15 @@ package com.pa165.mlib.dao.impl;
 
 import com.pa165.mlib.dao.SongDao;
 import com.pa165.mlib.entity.Song;
+import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
-import javax.ejb.Stateless;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import org.hibernate.exception.ConstraintViolationException;
 
 /**
  * Song DAO.
@@ -14,7 +18,10 @@ import javax.persistence.PersistenceContext;
  * @author ibek
  */
 public class SongDaoImpl implements SongDao {
-    
+
+    @Inject
+    Logger logger;
+
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
     
@@ -23,8 +30,16 @@ public class SongDaoImpl implements SongDao {
      * @param song to be persisted
      */
     @Override
-    public void addSong(Song song) {
-        em.persist(song);
+    public void addSong(Song song) throws DuplicateException {
+        try {
+            em.persist(song);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "Cannot create a new song due to: {0}", ex.getMessage());
+            if (ex.getCause() instanceof ConstraintViolationException) {
+                throw new DuplicateException();
+            }
+            throw ex;
+        }
     }
     
     /**
