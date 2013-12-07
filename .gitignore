@@ -9,3 +9,10 @@
 
 # Netbeans IDE #
 nb-configuration.xml
+/api/target/
+/business/target/
+/web/target/
+/mlib-api/target/
+/mlib-ear/target/
+/mlib-ejb/target/
+/mlib-web/target/
