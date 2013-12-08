@@ -1,15 +1,21 @@
 package com.pa165.mlib.dto;
 
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Genre Transfer Object
  * 
  * @author xbek
  */
+@XmlRootElement
 public class GenreTO {
     
     private String name;
+    
+    public GenreTO() {
+        
+    }
 
     /**
      * @return the name
