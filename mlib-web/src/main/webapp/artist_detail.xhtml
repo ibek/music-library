@@ -21,7 +21,7 @@
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg.artistName}: " />
-                        <h:inputText value="#{artistManager.artistTO.name}" required="true" />
+                        <h:inputText value="#{artistManager.artistTO.name}" required="true"  readonly="#{not empty param['artist_name']}" />
                     </h:panelGrid>
                     <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{empty param['artist_name']}" />
                     <h:commandButton value="#{msg.remove}" action="#{artistManager.remove}" />

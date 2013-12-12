@@ -24,21 +24,24 @@
                         <h:inputText value="#{s.title}" required="true" />
 
                         <h:outputLabel value="#{msg.artist}: " />
-                        <h:selectOneMenu value="#{songManager.formArtist}">
-                            <f:selectItems value="#{songManager.artistService.allArtists}" var="a" itemLabel="#{a.name}" itemValue="#{a.name}" />
+                        <h:selectOneMenu value="#{s.artist}">
+                            <f:selectItems value="#{songManager.artistService.allArtists}" var="ar" itemLabel="#{ar.name}" itemValue="#{ar}" />
+                            <f:converter converterId = "artistConverter"/>  
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{msg.album}: " />
-                        <h:selectOneMenu value="#{songManager.formAlbum}">
-                            <f:selectItems value="#{songManager.albumService.allAlbums}" var="a" itemLabel="#{a.title}" itemValue="#{a.title}" />
+                        <h:selectOneMenu value="#{s.album}">
+                            <f:selectItems value="#{songManager.albumService.allAlbums}" var="a" itemLabel="#{a.title}" itemValue="#{a}" />
+                            <f:converter converterId = "albumConverter"/>  
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{msg.songPosition}: " />
                         <h:inputText value="#{s.position}" required="false" />
 
                         <h:outputLabel value="#{msg.genre}: " />
-                        <h:selectOneMenu value="#{songManager.formGenre}">
-                            <f:selectItems value="#{songManager.genreService.allGenres}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />
+                        <h:selectOneMenu value="#{s.genre}">
+                            <f:selectItems value="#{songManager.genreService.allGenres}" var="g" itemLabel="#{g.name}" itemValue="#{g}" />
+                            <f:converter converterId = "genreConverter"/>  
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{msg.bitrate}: " />
@@ -47,7 +50,6 @@
                         <h:outputLabel value="#{msg.commentary}: " />
                         <h:inputText value="#{s.commentary}" required="false" />
 
-                        <h:commandButton value="#{msg.create}" action="#{songManager.create()}" />
                     </h:panelGrid>
                     
                     <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title']}" />

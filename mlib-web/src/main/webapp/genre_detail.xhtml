@@ -21,7 +21,7 @@
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg.genreName}: " />
-                        <h:inputText value="#{genreManager.genreTO.name}" required="true" />
+                        <h:inputText value="#{genreManager.genreTO.name}" required="true" readonly="#{not empty param['genre_name']}" />
                     </h:panelGrid>
                     <h:commandButton value="#{msg.create}" action="#{genreManager.create}" rendered="#{empty param['genre_name']}" />
                     <h:commandButton value="#{msg.remove}" action="#{genreManager.remove}" />

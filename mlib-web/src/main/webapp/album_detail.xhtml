@@ -42,7 +42,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.songTitle}</f:facet>
-                                #{song.title}
+                            <h:button value="#{song.title}" outcome="song_detail">
+                                    <f:param name="song_title" value="#{song.title}"/>
+                            </h:button>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.artist}</f:facet>

@@ -43,9 +43,6 @@ public class SongManager implements Serializable {
     GenreService genreService;
     
     private SongTO songTO = new SongTO();
-    private String formAlbum;
-    private String formArtist;
-    private String formGenre;
     
     public SongTO init() {
         songTO = new SongTO();
@@ -76,44 +73,8 @@ public class SongManager implements Serializable {
     public SongTO getSongTO() {
         return songTO;
     }
-
-    public String getFormAlbum() {
-        return formAlbum;
-    }
-
-    public void setFormAlbum(String formAlbum) {
-        this.formAlbum = formAlbum;
-    }
-
-    public String getFormArtist() {
-        return formArtist;
-    }
-
-    public void setFormArtist(String formArtist) {
-        this.formArtist = formArtist;
-    }
-
-    public String getFormGenre() {
-        return formGenre;
-    }
-
-    public void setFormGenre(String formGenre) {
-        this.formGenre = formGenre;
-    }
-    
-    
     
     public String create() {
-        if (formAlbum != null && !"".equals(formAlbum)) {
-            songTO.setAlbum(albumService.getAlbum(formAlbum));
-        }
-        if (formArtist != null && !"".equals(formArtist)) {
-            songTO.setArtist(artistService.getArtist(formArtist));
-        }
-        if (formGenre != null && !"".equals(formGenre)) {
-            songTO.setGenre(genreService.getGenre(formGenre));
-        }
-        
         logger.log(Level.INFO, "Creating {0}", songTO);
         try {
             songService.createNewSong(songTO);
