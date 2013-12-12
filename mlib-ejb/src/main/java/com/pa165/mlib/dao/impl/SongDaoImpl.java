@@ -126,7 +126,7 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> getSongsInAlbum(long album_id) {
-        return em.createQuery("SELECT s FROM Song s WHERE s.album.id = :albumId", Song.class)
+        return em.createQuery("SELECT s FROM Song s WHERE s.album.id = :albumId ORDER BY s.position", Song.class)
                 .setParameter("albumId", album_id)
                 .getResultList();
     }
