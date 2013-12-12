@@ -1,5 +1,6 @@
 package com.pa165.mlib.manager;
 
+import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
@@ -7,6 +8,7 @@ import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.service.GenreService;
 import com.pa165.mlib.service.SongService;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
@@ -119,6 +121,10 @@ public class SongManager implements Serializable {
         logger.log(Level.INFO, "Removing {0}", song);
         songService.removeSong(song);
         init();
+    }
+    
+    public List<SongTO> getSongsInAlbum(AlbumTO album) {
+        return songService.getSongsInAlbum(album);
     }
     
 }

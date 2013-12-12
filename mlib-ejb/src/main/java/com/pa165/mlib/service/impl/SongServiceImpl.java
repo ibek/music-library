@@ -8,6 +8,7 @@ import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
+import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Song;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.SongService;
@@ -140,6 +141,20 @@ public class SongServiceImpl implements SongService {
         
     public void setTransformer(EntityDTOTransformer transformer) {
         this.transformer = transformer;
+    }
+
+    @Override
+    public List<SongTO> getSongsInAlbum(AlbumTO album) {
+        Album a = albumDao.getAlbum(album.getTitle());
+        List<SongTO> songs = new ArrayList<>();
+        if (a == null) {
+            return songs;
+        }
+        
+        for (Song s : songDao.getSongsInAlbum(a.getId())) {
+            songs.add(transformer.transformSongTO(s));
+        }
+        return songs;
     }
     
 }

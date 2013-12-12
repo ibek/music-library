@@ -30,6 +30,36 @@
                         <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum}" />
                     
                 </h:form>
+                
+                <h:form>
+                    <c:set var="songs" value="#{songManager.getSongsInAlbum(a)}" scope="request" />
+                    <h:dataTable value="#{songs}" var="song" rendered="#{not empty songs}">
+                        <h:column>
+                            <f:facet name="header">#{msg.songTitle}</f:facet>
+                                #{song.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.artist}</f:facet>
+                                #{song.artist.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.songPosition}</f:facet>
+                                #{song.position}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.genre}</f:facet>
+                                #{song.genre.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.bitrate}</f:facet>
+                                #{song.bitrate}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">#{msg.commentary}</f:facet>
+                                #{song.commentary}
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
             </ui:define>
         </ui:composition>
     </body>

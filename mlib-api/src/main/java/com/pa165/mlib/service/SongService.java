@@ -14,6 +14,8 @@ public interface SongService {
     
     List<SongTO> getAllSongs();
     
+    List<SongTO> getSongsInAlbum(AlbumTO album);
+    
     SongTO createNewSong(SongTO song) throws DuplicateException;
     
     SongTO getSong(String title);

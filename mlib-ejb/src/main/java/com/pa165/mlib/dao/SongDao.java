@@ -23,6 +23,12 @@ public interface SongDao {
     List<Song> getAll();
 
     /**
+     * Get all the songs from album.
+     * @return the songs from album
+     */
+    List<Song> getSongsInAlbum(long album_id);
+
+    /**
      * Get song with given unique identifier.
      * @param id unique identifier for song
      * @return song

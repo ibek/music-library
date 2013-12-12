@@ -13,8 +13,8 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.exception.ConstraintViolationException;
 
 /**
- * Song DAO.
- * Transactions are managed by container.
+ * Song DAO. Transactions are managed by container.
+ *
  * @author ibek
  */
 public class SongDaoImpl implements SongDao {
@@ -24,9 +24,10 @@ public class SongDaoImpl implements SongDao {
 
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
-    
+
     /**
      * Persist the given song to persistence context.
+     *
      * @param song to be persisted
      */
     @Override
@@ -41,9 +42,11 @@ public class SongDaoImpl implements SongDao {
             throw ex;
         }
     }
-    
+
     /**
-     * Update the given song in persistence context and database after the commit.
+     * Update the given song in persistence context and database after the
+     * commit.
+     *
      * @param song to be updated
      * @return updated song
      */
@@ -54,9 +57,10 @@ public class SongDaoImpl implements SongDao {
         }
         return em.merge(song);
     }
-    
+
     /**
      * Remove song from the persistence context and database after the commit.
+     *
      * @param song to be removed
      */
     @Override
@@ -66,9 +70,10 @@ public class SongDaoImpl implements SongDao {
         }
         em.remove(song);
     }
-    
+
     /**
      * Get all the songs.
+     *
      * @return all the songs
      */
     @Override
@@ -76,9 +81,10 @@ public class SongDaoImpl implements SongDao {
         return em.createQuery("SELECT s FROM Song s", Song.class)
                 .getResultList();
     }
-    
+
     /**
      * Get song with given unique identifier.
+     *
      * @param id unique identifier for song
      * @return song
      */
@@ -90,13 +96,14 @@ public class SongDaoImpl implements SongDao {
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (NoResultException e) {
-            
+
         }
         return s;
     }
-    
+
     /**
      * Get all the songs with given title.
+     *
      * @param title what should be song called
      * @return songs with defined title
      */
@@ -108,13 +115,20 @@ public class SongDaoImpl implements SongDao {
                     .setParameter("title", title)
                     .getSingleResult();
         } catch (NoResultException e) {
-            
+
         }
         return s;
     }
-    
+
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }
-    
+
+    @Override
+    public List<Song> getSongsInAlbum(long album_id) {
+        return em.createQuery("SELECT s FROM Song s WHERE s.album.id = :albumId", Song.class)
+                .setParameter("albumId", album_id)
+                .getResultList();
+    }
+
 }
