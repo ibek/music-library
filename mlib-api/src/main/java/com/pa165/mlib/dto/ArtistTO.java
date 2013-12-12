@@ -1,12 +1,14 @@
 package com.pa165.mlib.dto;
 
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Artist Transfer Object
  *
  * @author Ragu, ibek
  */
+@XmlRootElement
 public class ArtistTO {
 
     private Long id;
