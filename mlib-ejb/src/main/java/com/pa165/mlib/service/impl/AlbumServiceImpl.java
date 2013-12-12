@@ -1,9 +1,12 @@
 package com.pa165.mlib.service.impl;
 
 import com.pa165.mlib.dao.AlbumDao;
+import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dto.AlbumTO;
+import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
+import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
@@ -27,6 +30,9 @@ public class AlbumServiceImpl implements AlbumService{
     
     @Inject
     AlbumDao albumDao;
+    
+    @Inject
+    ArtistDao artistDao;
     
     @Inject
     EntityDTOTransformer transformer;
@@ -96,6 +102,19 @@ public class AlbumServiceImpl implements AlbumService{
     
     public void setTransformer(EntityDTOTransformer transformer) {
         this.transformer = transformer;
+    }
+
+    @Override
+    public List<AlbumTO> getAlbumsWithArtist(ArtistTO artist) {
+        List<AlbumTO> list = new ArrayList<>();
+        
+        Artist art = artistDao.getArtist(artist.getId());
+     
+        for (Album a : albumDao.getAlbumsWithArtist(art)) {
+            AlbumTO ato = transformer.transformAlbumTO(a);
+            list.add(ato);
+        }
+        return list;
     }
     
 }

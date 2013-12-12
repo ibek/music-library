@@ -7,9 +7,11 @@
 package com.pa165.mlib.manager;
 
 import com.pa165.mlib.dto.AlbumTO;
+import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
@@ -77,6 +79,10 @@ public class AlbumManager implements Serializable {
         service.updateAlbum(service.getAlbum(albumTO.getTitle()), albumTO);
         //init();
         return "albums";
+    }
+    
+    public List<AlbumTO> getAlbumsWithArtist(ArtistTO artist) {
+        return service.getAlbumsWithArtist(artist);
     }
     
 }

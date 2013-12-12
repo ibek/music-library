@@ -31,6 +31,8 @@
                     
                 </h:form>
                 
+                <h2>#{msg.songs}</h2>
+                
                 <h:form>
                     <c:set var="songs" value="#{songManager.getSongsInAlbum(a)}" scope="request" />
                     <h:dataTable value="#{songs}" var="song" rendered="#{not empty songs}">
@@ -40,7 +42,9 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.artist}</f:facet>
-                                #{song.artist.name}
+                            <h:button value="#{song.artist.name}" outcome="artist_detail">
+                                    <f:param name="artist_name" value="#{song.artist.name}"/>
+                            </h:button>
                         </h:column>
                         <h:column>
                             <f:facet name="header">#{msg.songPosition}</f:facet>
