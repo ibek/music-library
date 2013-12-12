@@ -40,6 +40,11 @@ public class AlbumManager implements Serializable {
         albumTO = new AlbumTO();
     }
     
+    public AlbumTO init(String name) {
+        albumTO = service.getAlbum(name);
+        return albumTO;
+    }
+    
     public AlbumService getService() {
         return service;
     }
@@ -48,20 +53,30 @@ public class AlbumManager implements Serializable {
         return albumTO;
     }
     
-    public void create() {
+    public String create() {
         logger.log(Level.INFO, "Creating {0}", albumTO);
         try {
             service.createNewAlbum(albumTO);
             init();
         } catch (DuplicateException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The artist cannot be created because it already exists."));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The album cannot be created because it already exists."));
+            return "album_detail";
         }
+        return "albums";
     }
     
-    public void remove(AlbumTO album) {
-        logger.log(Level.INFO, "Removing {0}", album);
-        service.removeAlbum(album);
+    public String removeAlbum() {
+        logger.log(Level.INFO, "Removing {0}", albumTO);
+        service.removeAlbum(albumTO);
         init();
+        return "albums";
+    }
+    
+    public String updateAlbum() {
+        logger.log(Level.INFO, "Updating {0}", albumTO);
+        service.updateAlbum(service.getAlbum(albumTO.getTitle()), albumTO);
+        init();
+        return "albums";
     }
     
 }
