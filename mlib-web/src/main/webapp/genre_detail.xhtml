@@ -10,26 +10,23 @@
             <ui:define name="content">
                 <h1>#{msg.genres}</h1>
                 <h:messages globalOnly="true" class="message"/>
+                
+                <c:if test="#{not empty param['genre_name']}">
+                    <c:set var="a" value="#{genreManager.init(param['genre_name'])}" scope="request" />
+                </c:if>
+                <c:if test="#{empty param['genre_name']}">
+                    <c:set var="a" value="#{genretManager.init()}" scope="request" />
+                </c:if>
+                
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg.genreName}: " />
                         <h:inputText value="#{genreManager.genreTO.name}" required="true" />
-                        <h:commandButton value="#{msg.create}" action="#{genreManager.create()}" />
                     </h:panelGrid>
+                    <h:commandButton value="#{msg.create}" action="#{genreManager.create}" rendered="#{empty param['genre_name']}" />
+                    <h:commandButton value="#{msg.remove}" action="#{genreManager.remove}" />
                 </h:form>
-                <h:form>
-                    <c:set var="allGenres" value="#{genreManager.service.allGenres}" scope="request" />
-                    <h:dataTable value="#{allGenres}" var="g" rendered="#{not empty allGenres}">
-                        <h:column>
-                            <f:facet name="header">#{msg.genre}</f:facet>
-                                #{g.name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">#{msg.operation}</f:facet>
-                            <h:commandButton value="#{msg.remove}" action="#{genreManager.remove(g)}" />
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
+                
             </ui:define>
         </ui:composition>
     </body>
