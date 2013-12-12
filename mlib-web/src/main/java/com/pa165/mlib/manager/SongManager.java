@@ -47,8 +47,14 @@ public class SongManager implements Serializable {
     private String formArtist;
     private String formGenre;
     
-    public void init() {
+    public SongTO init() {
         songTO = new SongTO();
+        return songTO;
+    }
+    
+    public SongTO init(String title) {
+        songTO = songService.getSong(title);
+        return songTO;
     }
 
     public SongService getSongService() {
@@ -97,7 +103,7 @@ public class SongManager implements Serializable {
     
     
     
-    public void create() {
+    public String create() {
         if (formAlbum != null && !"".equals(formAlbum)) {
             songTO.setAlbum(albumService.getAlbum(formAlbum));
         }
@@ -114,13 +120,23 @@ public class SongManager implements Serializable {
             init();
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The song cannot be created because a song with this title already exists."));
+            return "song_detail";
         }
+        return "songs";
     }
     
-    public void remove(SongTO song) {
-        logger.log(Level.INFO, "Removing {0}", song);
-        songService.removeSong(song);
-        init();
+    public String updateSong() {
+        logger.log(Level.INFO, "Updating {0}", songTO);
+        songService.updateSong(songService.getSong(songTO.getTitle()), songTO);
+        //init();
+        return "songs";
+    }
+    
+    public String removeSong() {
+        logger.log(Level.INFO, "Removing {0}", songTO);
+        songService.removeSong(songTO);
+        //init();
+        return "songs";
     }
     
     public List<SongTO> getSongsInAlbum(AlbumTO album) {
