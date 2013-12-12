@@ -30,8 +30,14 @@ public class ArtistManager implements Serializable {
     
     private ArtistTO artistTO = new ArtistTO();
     
-    public void init() {
+    public ArtistTO init() {
         artistTO = new ArtistTO();
+        return artistTO;
+    }
+    
+    public ArtistTO init(String name) {
+        artistTO = service.getArtist(name);
+        return artistTO;
     }
     
     public ArtistService getService() {
@@ -42,20 +48,29 @@ public class ArtistManager implements Serializable {
         return artistTO;
     }
     
-    public void create() {
+    public String create() {
         logger.log(Level.INFO, "Creating {0}", artistTO);
         try {
             service.createNewArtist(artistTO);
             init();
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The artist cannot be created because it already exists."));
+            return "artist_detail";
         }
+        
+        return "artists";
     }
     
     public void remove(ArtistTO artist) {
         logger.log(Level.INFO, "Removing {0}", artist);
         service.removeArtist(artist);
         init();
+    }
+    
+    public String remove() {
+        logger.log(Level.INFO, "Removing {0}", artistTO);
+        service.removeArtist(artistTO);
+        return "artists";
     }
     
 }

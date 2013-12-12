@@ -10,29 +10,21 @@
             <ui:define name="content">
                 <h1>#{msg.artists}</h1>
                 <h:messages globalOnly="true" class="message"/>
+                
+                <c:if test="#{not empty param['artist_name']}">
+                    <c:set var="a" value="#{artistManager.init(param['artist_name'])}" scope="request" />
+                </c:if>
+                <c:if test="#{empty param['artist_name']}">
+                    <c:set var="a" value="#{artistManager.init()}" scope="request" />
+                </c:if>
+                
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg.artistName}: " />
                         <h:inputText value="#{artistManager.artistTO.name}" required="true" />
-                        <h:commandButton value="#{msg.create}" action="#{artistManager.create()}" />
                     </h:panelGrid>
-                </h:form>
-                <h:form>
-                    <c:set var="allArtists" value="#{artistManager.service.allArtists}" scope="request" />
-                    <h:dataTable value="#{allArtists}" var="a" rendered="#{not empty allArtists}">
-                        <h:column>
-                            <f:facet name="header">#{msg.id}</f:facet>
-                                #{a.id}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">#{msg.artistName}</f:facet>
-                                #{a.name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">#{msg.operation}</f:facet>
-                            <h:commandButton value="#{msg.remove}" action="#{artistManager.remove(a)}" />
-                        </h:column>
-                    </h:dataTable>
+                    <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{empty param['artist_name']}" />
+                    <h:commandButton value="#{msg.remove}" action="#{artistManager.remove}" />
                 </h:form>
             </ui:define>
         </ui:composition>
