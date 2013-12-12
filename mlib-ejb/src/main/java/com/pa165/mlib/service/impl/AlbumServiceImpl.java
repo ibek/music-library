@@ -65,9 +65,9 @@ public class AlbumServiceImpl implements AlbumService{
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public AlbumTO updateAlbum(AlbumTO oldAlbum, AlbumTO newAlbum) {
-        
         Album album = albumDao.getAlbum(oldAlbum.getTitle());
         album.setTitle(newAlbum.getTitle());
+        album.setReleased(newAlbum.getReleased());
         albumDao.updateAlbum(album);        
         return newAlbum;
     }

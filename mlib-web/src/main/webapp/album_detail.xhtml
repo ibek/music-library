@@ -15,7 +15,7 @@
                     <c:set var="a" value="#{albumManager.init(param['album_name'])}" scope="request" />
                 </c:if>
                 <c:if test="#{empty param['album_name']}">
-                    <c:set var="a" value="#{albumManager.albumTO}" scope="request" />
+                    <c:set var="a" value="#{albumManager.init()}" scope="request" />
                 </c:if>
                 <h:form>
                     <h:panelGrid columns="2">
@@ -23,10 +23,12 @@
                         <h:inputText value="#{a.title}" required="#{empty param['album_name']}" readonly="#{not empty param['album_name']}" />
                         <h:outputLabel value="#{msg.released}: " />
                         <h:inputText value="#{a.released}" required="false" />                        
-                        <h:commandButton value="#{msg.update}" action="#{albumManager.updateAlbum()}" rendered="#{not empty param['album_name']}" />
-                        <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum()}" rendered="#{not empty param['album_name']}" />
-                        <h:commandButton value="#{msg.create}" action="#{albumManager.create()}" rendered="#{empty param['album_name']}" />
                     </h:panelGrid>
+                    <h:commandButton value="#{msg.create}" action="#{albumManager.create}" rendered="#{empty param['album_name']}" />
+                    
+                        <h:commandButton value="#{msg.update}" action="#{albumManager.updateAlbum}" />
+                        <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum}" />
+                    
                 </h:form>
             </ui:define>
         </ui:composition>

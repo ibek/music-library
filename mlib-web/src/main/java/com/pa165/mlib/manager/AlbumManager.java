@@ -36,8 +36,9 @@ public class AlbumManager implements Serializable {
     
     private AlbumTO albumTO = new AlbumTO();
     
-    public void init() {
+    public AlbumTO init() {
         albumTO = new AlbumTO();
+        return albumTO;
     }
     
     public AlbumTO init(String name) {
@@ -57,7 +58,6 @@ public class AlbumManager implements Serializable {
         logger.log(Level.INFO, "Creating {0}", albumTO);
         try {
             service.createNewAlbum(albumTO);
-            init();
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The album cannot be created because it already exists."));
             return "album_detail";
@@ -68,14 +68,14 @@ public class AlbumManager implements Serializable {
     public String removeAlbum() {
         logger.log(Level.INFO, "Removing {0}", albumTO);
         service.removeAlbum(albumTO);
-        init();
+        //init();
         return "albums";
     }
     
     public String updateAlbum() {
         logger.log(Level.INFO, "Updating {0}", albumTO);
         service.updateAlbum(service.getAlbum(albumTO.getTitle()), albumTO);
-        init();
+        //init();
         return "albums";
     }
     
