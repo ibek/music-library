@@ -4,7 +4,6 @@ import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.ArtistTO;
-import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.exception.DuplicateException;
@@ -56,7 +55,6 @@ public class AlbumServiceImpl implements AlbumService{
         
         album.setTitle(albumTO.getTitle());
         album.setReleased(albumTO.getReleased());
-        album.setCover(albumTO.getCover());
         
         albumDao.addAlbum(album);
         

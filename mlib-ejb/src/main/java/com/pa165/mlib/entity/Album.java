@@ -27,8 +27,6 @@ public class Album implements Serializable {
     @Column(nullable = false, unique = true)
     private String title;
     
-    private byte[] cover;
-    
     @Column(length = 4)
     private Integer released;
     
@@ -50,14 +48,6 @@ public class Album implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-    
-    public byte[] getCover() {
-        return cover;
-    }
-
-    public void setCover(byte[] cover) {
-        this.cover = cover;
     }
 
     /**

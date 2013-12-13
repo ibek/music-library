@@ -5,7 +5,7 @@ import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
- * Album Service
+ * Artist Service
  * 
  * @author ibek
  */
