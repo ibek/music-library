@@ -3,9 +3,11 @@ package com.pa165.mlib.test.entity;
 import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.test.EntityTestBase;
+import java.util.List;
 import javax.persistence.EntityManager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -32,18 +34,20 @@ public class ArtistEntityTest extends EntityTestBase {
     public void testGetAll() throws Throwable {
         Artist artist = new Artist();
         artist.setName("Hugo");
+        Artist artist2 = new Artist();
+        artist2.setName("Kokoska");
         ArtistDaoImpl ad = new ArtistDaoImpl();
         EntityManager em = getTestEntityManager();
         ad.setEntityManager(em);
         em.getTransaction().begin();
         ad.addArtist(artist);
+        ad.addArtist(artist2);
         em.getTransaction().commit();
-        Artist a2 = ad.getArtist(artist.getId());
-        em.getTransaction().begin();
-        ad.removeArtist(a2);
-        em.getTransaction().commit();
-        Artist empty = ad.getArtist(artist.getId());
-        assertNull(empty);
+        List<Artist> list = ad.getAll();
+        assertTrue(list != null);
+        assertTrue(list.contains(artist));
+        assertTrue(list.contains(artist2));
+        
     }
     
     @Test

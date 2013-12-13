@@ -125,6 +125,27 @@ public class AlbumEntityTest extends EntityTestBase {
     }
     
     @Test
+    public void testGetAll() throws Throwable {
+        Album album1 = new Album();
+        album1.setTitle("album14");
+        album1.setReleased(2006);
+        Album album2 = new Album();
+        album2.setTitle("album24");
+        album2.setReleased(2012);
+        
+        AlbumDaoImpl am = new AlbumDaoImpl();
+        EntityManager em = getTestEntityManager();
+        am.setEntityManager(em);
+        em.getTransaction().begin();
+        am.addAlbum(album1);
+        am.addAlbum(album2);
+        em.getTransaction().commit();
+        List<Album> list = am.getAll();
+        assertTrue(list.contains(album1));
+        assertTrue(list.contains(album2));
+    }
+    
+    @Test
     public void testGetAlbumById() throws Throwable {
         Album album1 = new Album();
         album1.setTitle("album13");
