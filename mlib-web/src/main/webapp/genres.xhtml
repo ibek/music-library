@@ -17,7 +17,7 @@
                 </h:form>
 
                 <c:set var="allGenres" value="#{genreManager.service.allGenres}" scope="request" />
-                <rich:dataGrid value="#{allGenres}" var="g" columns="3" elements="9" rendered="#{not empty allGenres}" >
+                <rich:dataGrid value="#{allGenres}" var="g" columns="3" elements="9" rendered="#{not empty allGenres}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{g.name}" outcome="genre_detail">

@@ -18,7 +18,7 @@
                 </h:form>
                 
                 <c:set var="allSongs" value="#{songManager.songService.allSongs}" scope="request" />
-                <rich:dataGrid value="#{allSongs}" var="s" columns="3" elements="9" rendered="#{not empty allSongs}" >
+                <rich:dataGrid value="#{allSongs}" var="s" columns="3" elements="9" rendered="#{not empty allSongs}" styleClass="grid" >
                      <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{s.title}" outcome="song_detail">

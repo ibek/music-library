@@ -16,7 +16,7 @@
                     </h:button>
                 </h:form>
                 <c:set var="allAlbums" value="#{albumManager.service.allAlbums}" scope="request" />
-                <rich:dataGrid value="#{allAlbums}" var="a" columns="3" elements="9" rendered="#{not empty allAlbums}" >
+                <rich:dataGrid value="#{allAlbums}" var="a" columns="3" elements="9" rendered="#{not empty allAlbums}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{a.title}" outcome="album_detail">
