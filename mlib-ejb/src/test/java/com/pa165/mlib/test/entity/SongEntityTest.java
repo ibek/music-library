@@ -17,9 +17,56 @@ import org.junit.Test;
 public class SongEntityTest extends EntityTestBase {
     
     @Test
+    public void testSongAdd() throws Throwable {
+        Song s = new Song();
+        s.setTitle("mysong1");
+        SongDaoImpl sd = new SongDaoImpl();
+        EntityManager em = getTestEntityManager();
+        sd.setEntityManager(em);
+        em.getTransaction().begin();
+        sd.addSong(s);
+        em.getTransaction().commit();
+        Song s2 = sd.getSong(s.getId());
+        assertEquals(s2, s);
+    }
+    
+    @Test
+    public void testSongUpdate() throws Throwable {
+        Song s = new Song();
+        s.setTitle("mysong2");
+        SongDaoImpl sd = new SongDaoImpl();
+        EntityManager em = getTestEntityManager();
+        sd.setEntityManager(em);
+        em.getTransaction().begin();
+        sd.addSong(s);
+        em.getTransaction().commit();
+        Song s2 = sd.getSong(s.getId());
+        s2.setTitle("mysong2new");
+        em.getTransaction().begin();
+        sd.updateSong(s2);
+        em.getTransaction().commit();
+        Song s3 = sd.getSong(s.getId());
+        assertEquals(s3.getTitle(), "mysong2new");
+    }
+    
+    @Test
+    public void testGetSongById() throws Throwable {
+        Song s = new Song();
+        s.setTitle("mysong3");
+        SongDaoImpl sd = new SongDaoImpl();
+        EntityManager em = getTestEntityManager();
+        sd.setEntityManager(em);
+        em.getTransaction().begin();
+        sd.addSong(s);
+        em.getTransaction().commit();
+        Song s2 = sd.getSong(s.getId());
+        assertEquals(s2, s);
+    }
+    
+    @Test
     public void testSongRemove() throws Throwable {
         Song s = new Song();
-        s.setTitle("mysong");
+        s.setTitle("mysong4");
         SongDaoImpl sd = new SongDaoImpl();
         EntityManager em = getTestEntityManager();
         sd.setEntityManager(em);
@@ -32,6 +79,20 @@ public class SongEntityTest extends EntityTestBase {
         em.getTransaction().commit();
         Song empty = sd.getSong(s.getId());
         assertNull(empty);
+    }
+    
+    @Test
+    public void testGetSongByTitle() throws Throwable {
+        Song s = new Song();
+        s.setTitle("mysong5");
+        SongDaoImpl sd = new SongDaoImpl();
+        EntityManager em = getTestEntityManager();
+        sd.setEntityManager(em);
+        em.getTransaction().begin();
+        sd.addSong(s);
+        em.getTransaction().commit();
+        Song s2 = sd.getSong(s.getTitle());
+        assertEquals(s2, s);
     }
     
     @Test
