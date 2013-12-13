@@ -17,7 +17,7 @@
                 </h:form>
                 
                 <c:set var="allArtists" value="#{artistManager.service.allArtists}" scope="request" />
-                <rich:dataGrid value="#{allArtists}" var="a" columns="3" elements="9" rendered="#{not empty allArtists}" >
+                <rich:dataGrid value="#{allArtists}" var="a" columns="3" elements="9" rendered="#{not empty allArtists}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{a.name}" outcome="artist_detail">

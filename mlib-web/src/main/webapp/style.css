@@ -21,11 +21,12 @@ h1 {
 
 #menu {
     width: 100%;
-    height: 30px;
+    height: 25px;
     text-align: center;
-    background-color: white;
+    background-color: #111;
     font-size: 18px;
-    border: 2px solid grey;
+    border: 4px solid #004a7e;
+    border-top: none;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -khtml-border-radius: 5px;
@@ -33,26 +34,38 @@ h1 {
 }
 
 #main_content {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    background-color: #dedede;
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background-color: #ddd;
     margin-top: 20px;
-    border: 2px solid grey;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
+    border: 4px solid #004a7e;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
 }
 
-.menu_button:hover {
-    border-bottom: 5px solid #004a7e;
+.menu_button {
+    width: 80px;
+    height: 25px;
+    background-color: #004a7e !important;
+    background: #004a7e !important;
+    color: white !important;
+    font-weight: bold !important;
 }
 
 .message {
     list-style-type: none;
     color: red;
+    font-weight: bold;
+}
+
+.grid {
+    background-color: #004a7e !important;
 }
 
 table {
