@@ -15,6 +15,7 @@ public class RestApplication extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<Class<?>>();
         resources.add(GenreResource.class);
+        resources.add(ArtistResource.class);
         return resources;
     }
 

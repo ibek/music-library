@@ -11,3 +11,5 @@
     4. mvn embedded-glassfish:run
     5. open http://localhost:8080/pa165
 
+#REST client
+Can be found in github repository [music-library-client](https://github.com/tomparys/music-library-client).
