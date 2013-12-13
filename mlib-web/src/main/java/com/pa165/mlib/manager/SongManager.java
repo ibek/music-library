@@ -1,17 +1,12 @@
 package com.pa165.mlib.manager;
 
 import com.pa165.mlib.dto.AlbumTO;
-import com.pa165.mlib.dto.ArtistTO;
-import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.service.GenreService;
 import com.pa165.mlib.service.SongService;
-import com.pa165.mlib.utils.AlbumConverter;
-import com.pa165.mlib.utils.ArtistConverter;
-import com.pa165.mlib.utils.GenreConverter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +15,6 @@ import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -47,15 +41,6 @@ public class SongManager implements Serializable {
     
     @Inject
     GenreService genreService;
-    
-    @Inject
-    GenreConverter genreConverter;
-    
-    @Inject
-    ArtistConverter artistConverter;
-    
-    @Inject
-    AlbumConverter albumConverter;
     
     private SongTO songTO;
     
@@ -128,9 +113,9 @@ public class SongManager implements Serializable {
     }
     
     private void convert() {
-        songTO.setGenre((GenreTO) genreConverter.getAsObject(null, null, genre));
-        songTO.setArtist((ArtistTO) artistConverter.getAsObject(null, null, getArtist()));
-        songTO.setAlbum((AlbumTO) albumConverter.getAsObject(null, null, getAlbum()));
+        songTO.setGenre(genreService.getGenre(genre));
+        songTO.setArtist(artistService.getArtist(artist));
+        songTO.setAlbum(albumService.getAlbum(album));
     }
     
     public List<SongTO> getSongsInAlbum(AlbumTO album) {
