@@ -8,8 +8,6 @@ import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 
 /**
@@ -53,22 +51,7 @@ public class EntityDTOTransformer {
         AlbumTO ato = new AlbumTO();
         
         ato.setTitle(album.getTitle());
-        ato.setCover(album.getCover());
-        ato.setReleased(album.getReleased());
-        
-       /** List<Song> songList = new ArrayList<>();
-        songList = album.getSongs();
-        List<SongTO> songToList = null;
-        
-        if (songList != null) {
-            songToList = new ArrayList<>();
-            for (Song s : songList) {
-                songToList.add(transformSongTO(s));
-            }
-        }*/
-        
-        //ato.setSongs(songToList);
-       
+        ato.setReleased(album.getReleased());      
         return ato;
     }
     

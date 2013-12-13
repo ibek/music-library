@@ -1,14 +1,14 @@
 package com.pa165.mlib.service;
 
 import com.pa165.mlib.dto.AlbumTO;
-import com.pa165.mlib.dto.ArtistTO;
-import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.exception.DuplicateException;
 import java.util.List;
 
 /**
- * Album Service
+ * Song service
+ * 
+ * @author brazdil
  */
 public interface SongService {
     

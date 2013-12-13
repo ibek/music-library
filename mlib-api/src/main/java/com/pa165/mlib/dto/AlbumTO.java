@@ -12,8 +12,6 @@ public class AlbumTO {
     
     private String title;
     
-    private byte[] cover;
-    
     private Integer released;
     
     private List<SongTO> songs;
@@ -25,14 +23,6 @@ public class AlbumTO {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public byte[] getCover() {
-        return cover;
-    }
-
-    public void setCover(byte[] cover) {
-        this.cover = cover;
     }
     
     public Integer getReleased() {
