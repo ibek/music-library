@@ -1,6 +1,5 @@
 package com.pa165.mlib.test.entity;
 
-import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.test.EntityTestBase;
@@ -16,9 +15,23 @@ import org.junit.Test;
 public class ArtistEntityTest extends EntityTestBase {
 
     @Test
-    public void testArtistRemove() throws Throwable {
+    public void testAddArtist() throws Throwable {
         Artist artist = new Artist();
-        artist.setName("George");
+        artist.setName("Ales");
+        ArtistDaoImpl ad = new ArtistDaoImpl();
+        EntityManager em = getTestEntityManager();
+        ad.setEntityManager(em);
+        em.getTransaction().begin();
+        ad.addArtist(artist);
+        em.getTransaction().commit();
+        Artist a2 = ad.getArtist(artist.getId());
+        assertEquals(artist, a2);
+    }
+    
+    @Test
+    public void testGetAll() throws Throwable {
+        Artist artist = new Artist();
+        artist.setName("Hugo");
         ArtistDaoImpl ad = new ArtistDaoImpl();
         EntityManager em = getTestEntityManager();
         ad.setEntityManager(em);
@@ -31,6 +44,52 @@ public class ArtistEntityTest extends EntityTestBase {
         em.getTransaction().commit();
         Artist empty = ad.getArtist(artist.getId());
         assertNull(empty);
+    }
+    
+    @Test
+    public void testGetArtistById() throws Throwable {
+        Artist artist = new Artist();
+        artist.setName("Kamil");
+        ArtistDaoImpl ad = new ArtistDaoImpl();
+        EntityManager em = getTestEntityManager();
+        ad.setEntityManager(em);
+        em.getTransaction().begin();
+        ad.addArtist(artist);
+        em.getTransaction().commit();
+        Artist a2 = ad.getArtist(artist.getId());
+        assertEquals(artist, a2);
+    }
+    
+    @Test
+    public void testArtistRemove() throws Throwable {
+        Artist artist = new Artist();
+        artist.setName("Lukas");
+        ArtistDaoImpl ad = new ArtistDaoImpl();
+        EntityManager em = getTestEntityManager();
+        ad.setEntityManager(em);
+        em.getTransaction().begin();
+        ad.addArtist(artist);
+        em.getTransaction().commit();
+        Artist a2 = ad.getArtist(artist.getId());
+        em.getTransaction().begin();
+        ad.removeArtist(a2);
+        em.getTransaction().commit();
+        Artist empty = ad.getArtist(artist.getId());
+        assertNull(empty);
+    }
+    
+    @Test
+    public void testGetArtistByName() throws Throwable {
+        Artist artist = new Artist();
+        artist.setName("George");
+        ArtistDaoImpl ad = new ArtistDaoImpl();
+        EntityManager em = getTestEntityManager();
+        ad.setEntityManager(em);
+        em.getTransaction().begin();
+        ad.addArtist(artist);
+        em.getTransaction().commit();
+        Artist a2 = ad.getArtist(artist.getName());
+        assertEquals(artist, a2);
     }
     
     @Test

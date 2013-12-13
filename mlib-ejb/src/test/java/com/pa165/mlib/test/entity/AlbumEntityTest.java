@@ -85,11 +85,27 @@ public class AlbumEntityTest extends EntityTestBase {
         assertTrue(results.contains(album1));
         assertTrue(results.contains(album2));
     }
+    
+    @Test
+    public void testAddAlbum() throws Throwable {
+        Album album1 = new Album();
+        album1.setTitle("album11");
+        album1.setReleased(2006);
+        AlbumDaoImpl am = new AlbumDaoImpl();
+        EntityManager em = getTestEntityManager();
+        am.setEntityManager(em);
+        
+        em.getTransaction().begin();
+        am.addAlbum(album1);
+        em.getTransaction().commit();
+        Album a2 = am.getAlbum(album1.getTitle());
+        assertEquals(album1, a2);
+    }
 
     @Test
     public void testAlbumUpdate() throws Throwable {
         Album album1 = new Album();
-        album1.setTitle("album1");
+        album1.setTitle("album12");
         album1.setReleased(2006);
         AlbumDaoImpl am = new AlbumDaoImpl();
         EntityManager em = getTestEntityManager();
@@ -107,11 +123,42 @@ public class AlbumEntityTest extends EntityTestBase {
         assertEquals(a2, a3);
 
     }
+    
+    @Test
+    public void testGetAlbumById() throws Throwable {
+        Album album1 = new Album();
+        album1.setTitle("album13");
+        album1.setReleased(2006);
+        AlbumDaoImpl am = new AlbumDaoImpl();
+        EntityManager em = getTestEntityManager();
+        am.setEntityManager(em);
+        em.getTransaction().begin();
+        am.addAlbum(album1);
+        em.getTransaction().commit();
+        Album a2 = am.getAlbum(album1.getId());
+        assertEquals(album1, a2);
+    }
+    
+    @Test
+    public void testGetAlbumByTitle() throws Throwable {
+        Album album1 = new Album();
+        album1.setTitle("album15");
+        album1.setReleased(2006);
+        AlbumDaoImpl am = new AlbumDaoImpl();
+        EntityManager em = getTestEntityManager();
+        am.setEntityManager(em);
+        em.getTransaction().begin();
+        am.addAlbum(album1);
+        em.getTransaction().commit();
+        Album a3 = am.getAlbum(album1.getTitle());
+        assertEquals(album1, a3);
+
+    }
 
     @Test
     public void testAlbumRemove() throws Throwable {
         Album a = new Album();
-        a.setTitle("album1");
+        a.setTitle("album16");
         AlbumDaoImpl ad = new AlbumDaoImpl();
         EntityManager em = getTestEntityManager();
         ad.setEntityManager(em);
