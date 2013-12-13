@@ -1,23 +1,11 @@
 package com.pa165.mlib.test.service;
 
-import com.pa165.mlib.dao.AlbumDao;
-import com.pa165.mlib.dto.AlbumTO;
-import com.pa165.mlib.dao.ArtistDao;
-import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.dao.SongDao;
-import com.pa165.mlib.dto.ArtistTO;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
-import com.pa165.mlib.entity.Album;
-import com.pa165.mlib.service.impl.AlbumServiceImpl;
-import com.pa165.mlib.entity.Artist;
-import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
-import com.pa165.mlib.service.impl.ArtistServiceImpl;
-import com.pa165.mlib.service.impl.GenreServiceImpl;
 import com.pa165.mlib.service.impl.SongServiceImpl;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
@@ -30,57 +18,146 @@ import org.junit.Test;
  */
 public class SongServiceTest {
     
+    private static final String title = "Title";
+    private static final String newTitle = "Remastered";
+    private static final Integer bitrate = 256;
+    private static final Integer position = 3;
+    private static final String commentary = "Social Commentary";
+        
     @Test
-    public void testSongServiceCRUD() throws Exception {
+    public void createNewSongTest() throws Exception {
         SongServiceImpl songService = new SongServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
         songService.setTransformer(transformer);
         SongDao songDao = mock(SongDao.class);
         songService.setSongDao(songDao);
         
-        String title = "Title";
-        Integer bitrate = 256;
-        Integer position = 3;
-        String commentary = "Social Commentary";
+        SongTO testSong = new SongTO();
+        testSong.setTitle(title);
+        testSong.setBitrate(bitrate);
+        testSong.setPosition(position);
+        testSong.setCommentary(commentary);
+        Song s = new Song();
+        s.setTitle(title);
+        s.setBitrate(bitrate);
+        s.setPosition(position);
+        s.setCommentary(commentary);
+        when(songDao.getSong(title)).thenReturn(s);       
+        
+        SongTO proTestSong = songService.createNewSong(testSong);
+        assertEquals(title, proTestSong.getTitle());
+        assertEquals(bitrate, proTestSong.getBitrate());
+        assertEquals(position, proTestSong.getPosition());
+        assertEquals(commentary, proTestSong.getCommentary());
+    }
+    
+    @Test
+    public void getSongTest() throws Exception {
+        SongServiceImpl songService = new SongServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        songService.setTransformer(transformer);
+        SongDao songDao = mock(SongDao.class);
+        songService.setSongDao(songDao);
         
         SongTO testSong = new SongTO();
         testSong.setTitle(title);
         testSong.setBitrate(bitrate);
         testSong.setPosition(position);
         testSong.setCommentary(commentary);
-        
         Song s = new Song();
         s.setTitle(title);
         s.setBitrate(bitrate);
         s.setPosition(position);
         s.setCommentary(commentary);
-        
         when(songDao.getSong(title)).thenReturn(s);       
         
-        //SongTO proTestSong = songService.createNewSong(title, bitrate, position, commentary, null, null, null);
         SongTO proTestSong = songService.createNewSong(testSong);
-        assertEquals(title, proTestSong.getTitle());
-        assertEquals(bitrate, proTestSong.getBitrate());
-        assertEquals(position, proTestSong.getPosition());
-        assertEquals(commentary, proTestSong.getCommentary());
-        
         SongTO protiTestSong = songService.getSong(title);
         assertEquals(proTestSong, protiTestSong);
+    }
+    
+    @Test
+    public void updateSongTest() throws Exception {
+        SongServiceImpl songService = new SongServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        songService.setTransformer(transformer);
+        SongDao songDao = mock(SongDao.class);
+        songService.setSongDao(songDao);
         
-        String newTitle = "Remastered";
+        SongTO testSong = new SongTO();
+        testSong.setTitle(title);
+        testSong.setBitrate(bitrate);
+        testSong.setPosition(position);
+        testSong.setCommentary(commentary);
+        Song s = new Song();
+        s.setTitle(title);
+        s.setBitrate(bitrate);
+        s.setPosition(position);
+        s.setCommentary(commentary);
+        when(songDao.getSong(title)).thenReturn(s);       
+        
+        SongTO proTestSong = songService.createNewSong(testSong);
+        SongTO protiTestSong = songService.getSong(title);
+        
         protiTestSong.setTitle(newTitle);
         protiTestSong = songService.updateSong(proTestSong, protiTestSong);
         assertEquals(newTitle, protiTestSong.getTitle());
+    }
+    
+    @Test
+    public void removeSongByTitleTest() throws Exception {
+        SongServiceImpl songService = new SongServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        songService.setTransformer(transformer);
+        SongDao songDao = mock(SongDao.class);
+        songService.setSongDao(songDao);
         
+        SongTO testSong = new SongTO();
+        testSong.setTitle(title);
+        testSong.setBitrate(bitrate);
+        testSong.setPosition(position);
+        testSong.setCommentary(commentary);
+        Song s = new Song();
+        s.setTitle(title);
+        s.setBitrate(bitrate);
+        s.setPosition(position);
+        s.setCommentary(commentary);
+        when(songDao.getSong(title)).thenReturn(s);       
+        
+        SongTO proTestSong = songService.createNewSong(testSong);
+        SongTO protiTestSong = songService.getSong(title);
         boolean removed = songService.removeSong(title);
-        assertTrue(removed);
-        
-        removed = songService.removeSong(proTestSong);
         assertTrue(removed);
     }
     
     @Test
-    public void testSongServiceGetAll() throws Exception {
+    public void removeSongByTOTest() throws Exception {
+        SongServiceImpl songService = new SongServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        songService.setTransformer(transformer);
+        SongDao songDao = mock(SongDao.class);
+        songService.setSongDao(songDao);
+        
+        SongTO testSong = new SongTO();
+        testSong.setTitle(title);
+        testSong.setBitrate(bitrate);
+        testSong.setPosition(position);
+        testSong.setCommentary(commentary);
+        Song s = new Song();
+        s.setTitle(title);
+        s.setBitrate(bitrate);
+        s.setPosition(position);
+        s.setCommentary(commentary);
+        when(songDao.getSong(title)).thenReturn(s);       
+        
+        SongTO proTestSong = songService.createNewSong(testSong);
+        SongTO protiTestSong = songService.getSong(title);
+        boolean removed = songService.removeSong(proTestSong);
+        assertTrue(removed);
+    }
+    
+    @Test
+    public void getAllSongsTest() throws Exception {
         SongServiceImpl songService = new SongServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
         songService.setTransformer(transformer);

@@ -5,8 +5,6 @@ import com.pa165.mlib.dao.ArtistDao;
 import com.pa165.mlib.dao.GenreDao;
 import com.pa165.mlib.dao.SongDao;
 import com.pa165.mlib.dto.AlbumTO;
-import com.pa165.mlib.dto.ArtistTO;
-import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Song;
