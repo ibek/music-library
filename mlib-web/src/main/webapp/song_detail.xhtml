@@ -21,8 +21,8 @@
                 <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg.songTitle}: " />
-                        <h:inputText value="#{s.title}" required="true" />
-
+                        <h:inputText value="#{s.title}" required="true" readonly="#{not empty param['song_title']}" />
+                        
                         <h:outputLabel value="#{msg.artist}: " />
                         <h:selectOneMenu value="#{s.artist}">
                             <f:selectItems value="#{songManager.artistService.allArtists}" var="ar" itemLabel="#{ar.name}" itemValue="#{ar}" />
