@@ -136,6 +136,17 @@ public class SongTO {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Song{ title=" + title + 
+                ", bitrate=" + bitrate + 
+                ", position=" + position + 
+                ", commentary=" + commentary + 
+                ", genre=" + genre + 
+                ", album=" + album + 
+                ", artist=" + artist + "}";
+    }
     
     
 }

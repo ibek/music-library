@@ -8,18 +8,20 @@ package com.pa165.mlib.utils;
 
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.service.GenreService;
+import java.io.Serializable;
+import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author ibek
  */
-@FacesConverter(value="genreConverter", forClass = GenreTO.class)
-public class GenreConverter implements Converter {
+@Named
+public class GenreConverter implements Converter, Serializable {
     
     @Inject
     GenreService gs;

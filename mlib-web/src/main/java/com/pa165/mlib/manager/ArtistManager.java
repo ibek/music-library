@@ -61,12 +61,6 @@ public class ArtistManager implements Serializable {
         return "artists";
     }
     
-    public void remove(ArtistTO artist) {
-        logger.log(Level.INFO, "Removing {0}", artist);
-        service.removeArtist(artist);
-        init();
-    }
-    
     public String remove() {
         logger.log(Level.INFO, "Removing {0}", artistTO);
         service.removeArtist(artistTO);

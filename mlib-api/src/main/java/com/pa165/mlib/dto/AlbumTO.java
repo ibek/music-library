@@ -63,4 +63,10 @@ public class AlbumTO {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Album{ title= " + title + 
+               ", released= " + released + "}";
+    }
+
 }

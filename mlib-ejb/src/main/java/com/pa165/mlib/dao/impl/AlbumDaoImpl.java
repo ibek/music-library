@@ -4,6 +4,7 @@ import com.pa165.mlib.dao.AlbumDao;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.exception.DuplicateException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -121,6 +122,9 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public List<Album> getAlbumsWithArtist(Artist artist) {
+        if (artist == null) {
+            return new ArrayList<>();
+        }
         return em.createQuery("select distinct a from Album a inner join a.songs as song inner join  song.artist as artist where artist.id = :artist", Album.class)
                 .setParameter("artist", artist.getId())
                 .getResultList();

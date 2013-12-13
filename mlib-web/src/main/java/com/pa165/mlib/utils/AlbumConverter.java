@@ -9,18 +9,20 @@ package com.pa165.mlib.utils;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.service.GenreService;
+import java.io.Serializable;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author ibek
  */
-@FacesConverter(value="albumConverter", forClass = AlbumTO.class)
-public class AlbumConverter implements Converter {
+@Named
+public class AlbumConverter implements Converter, Serializable {
     
     @Inject
     AlbumService as;

@@ -8,7 +8,7 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.artists}</h1>
+                <h1>#{msg.artist}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 
                 <c:if test="#{not empty param['artist_name']}">

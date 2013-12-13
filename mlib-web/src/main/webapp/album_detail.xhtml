@@ -9,7 +9,7 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.albums}</h1>
+                <h1>#{msg.album}</h1>
                 <h:messages globalOnly="true"/>
                 <c:if test="#{not empty param['album_name']}">
                     <c:set var="a" value="#{albumManager.init(param['album_name'])}" scope="request" />
