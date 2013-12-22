@@ -3,13 +3,18 @@ package com.pa165.mlib.utils;
 import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.dto.Role;
 import com.pa165.mlib.dto.SongTO;
+import com.pa165.mlib.dto.UserTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.service.GenreService;
 import com.pa165.mlib.service.SongService;
+import com.pa165.mlib.service.UserService;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RunAs;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -20,6 +25,8 @@ import javax.inject.Inject;
  */
 @Startup
 @Singleton
+@DeclareRoles("admin")
+@RunAs("admin")
 public class DBInitialization {
     
     @Inject

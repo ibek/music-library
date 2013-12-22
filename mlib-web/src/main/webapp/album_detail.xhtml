@@ -20,14 +20,14 @@
                 <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg.title}: " />
-                        <h:inputText value="#{a.title}" required="#{empty param['album_name']}" readonly="#{not empty param['album_name']}" />
+                        <h:inputText value="#{a.title}" required="#{empty param['album_name']}" readonly="#{not empty param['album_name'] or !loginManager.loggedIn}" />
                         <h:outputLabel value="#{msg.released}: " />
-                        <h:inputText value="#{a.released}" required="false" />                        
+                        <h:inputText value="#{a.released}" required="false" readonly="#{!loginManager.loggedIn}" />                        
                     </h:panelGrid>
-                    <h:commandButton value="#{msg.create}" action="#{albumManager.create}" rendered="#{empty param['album_name']}" />
+                    <h:commandButton value="#{msg.create}" action="#{albumManager.create}" rendered="#{empty param['album_name'] and loginManager.loggedIn}" />
                     
-                        <h:commandButton value="#{msg.update}" action="#{albumManager.updateAlbum}" />
-                        <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum}" />
+                    <h:commandButton value="#{msg.update}" action="#{albumManager.updateAlbum}" rendered="#{loginManager.loggedIn}" />
+                    <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum}" rendered="#{loginManager.loggedIn}" />
                     
                 </h:form>
                 

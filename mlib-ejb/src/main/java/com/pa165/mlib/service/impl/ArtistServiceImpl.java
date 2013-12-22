@@ -8,6 +8,9 @@ import com.pa165.mlib.service.ArtistService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -19,9 +22,10 @@ import javax.inject.Inject;
  *
  * @author ibek
  */
+@MlibService
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@DeclareRoles({"admin", "user"})
+@RolesAllowed({"admin", "user"})
 public class ArtistServiceImpl implements ArtistService {
     
     @Inject
@@ -66,6 +70,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @PermitAll
     public List<ArtistTO> getAllArtists() {
         List<ArtistTO> artists = new ArrayList<>();
         for (Artist artist : ad.getAll()) {
@@ -75,6 +80,7 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
+    @PermitAll
     public ArtistTO getArtist(String name) {
         return transformer.transformArtistTO(ad.getArtist(name));
     }

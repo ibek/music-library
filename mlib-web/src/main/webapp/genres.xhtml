@@ -12,7 +12,7 @@
                 <h1>#{msg.genres}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="genre_detail">
+                    <h:button value="#{msg.create}" outcome="genre_detail" rendered="#{facesContext.externalContext.isUserInRole('admin')}">
                     </h:button>
                 </h:form>
 

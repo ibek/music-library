@@ -11,6 +11,9 @@ import com.pa165.mlib.service.AlbumService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -22,9 +25,10 @@ import javax.inject.Inject;
  *
  * @author brazdil
  */
+@MlibService
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@DeclareRoles({"admin", "user"})
+@RolesAllowed({"admin", "user"})
 public class AlbumServiceImpl implements AlbumService{
     
     @Inject
@@ -37,6 +41,7 @@ public class AlbumServiceImpl implements AlbumService{
     EntityDTOTransformer transformer;
     
     @Override
+    @PermitAll
     public List<AlbumTO> getAllAlbums(){
         List<AlbumTO> list = new ArrayList<>();
      
@@ -62,6 +67,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
     
     @Override
+    @PermitAll
     public AlbumTO getAlbum(String title) {
         return transformer.transformAlbumTO(albumDao.getAlbum(title));
     }
@@ -103,6 +109,7 @@ public class AlbumServiceImpl implements AlbumService{
     }
 
     @Override
+    @PermitAll
     public List<AlbumTO> getAlbumsWithArtist(ArtistTO artist) {
         List<AlbumTO> list = new ArrayList<>();
         

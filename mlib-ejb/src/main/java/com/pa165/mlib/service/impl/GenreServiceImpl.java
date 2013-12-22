@@ -8,6 +8,9 @@ import com.pa165.mlib.service.GenreService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -19,9 +22,10 @@ import javax.inject.Inject;
  *
  * @author xbek
  */
+@MlibService
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@DeclareRoles({"admin", "user"})
+@RolesAllowed("admin")
 public class GenreServiceImpl implements GenreService {
     
     @Inject
@@ -40,6 +44,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @PermitAll
     public List<GenreTO> getAllGenres() {
         List<GenreTO> list = new ArrayList<>();
         for (Genre g : gd.getAll()) {
@@ -49,6 +54,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
+    @PermitAll
     public GenreTO getGenre(String name) {
         return transformer.transformGenreTO(gd.getGenre(name));
     }

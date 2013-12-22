@@ -68,6 +68,18 @@
           <property name="file" value="${com.sun.aas.instanceRoot}/config/keyfile" />
           <property name="jaas-context" value="fileRealm" />
         </auth-realm>
+        <auth-realm name="mlib" classname="com.sun.enterprise.security.auth.realm.jdbc.JDBCRealm">
+          <property name="jaas-context" value="jdbcRealm"></property>
+          <property name="encoding" value="Hex"></property>
+          <property name="password-column" value="passwordHash"></property>
+          <property name="datasource-jndi" value="jdbc/dynamicDB"></property>
+          <property name="group-table" value="USERS_GROUPS"></property>
+          <property name="charset" value="UTF-8"></property>
+          <property name="user-table" value="MlibUser"></property>
+          <property name="group-name-column" value="roleid"></property>
+          <property name="digest-algorithm" value="SHA-256"></property>
+          <property name="user-name-column" value="username"></property>
+        </auth-realm>
         <auth-realm name="certificate" classname="com.sun.enterprise.security.auth.realm.certificate.CertificateRealm" />
         <jacc-provider policy-provider="com.sun.enterprise.security.provider.PolicyWrapper" name="default" policy-configuration-factory-provider="com.sun.enterprise.security.provider.PolicyConfigurationFactoryImpl">
           <property name="repository" value="${com.sun.aas.instanceRoot}/generated/policy" />

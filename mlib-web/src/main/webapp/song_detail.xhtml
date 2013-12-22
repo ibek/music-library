@@ -21,15 +21,15 @@
                 <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg.songTitle}: " />
-                        <h:inputText value="#{s.title}" required="true" readonly="#{not empty param['song_title']}" />
+                        <h:inputText value="#{s.title}" required="true" readonly="#{not empty param['song_title'] or !loginManager.loggedIn}" />
                         
                         <h:outputLabel value="#{msg.artist}: " />
-                        <h:selectOneMenu value="#{songManager.artist}">
+                        <h:selectOneMenu value="#{songManager.artist}" readonly="#{!loginManager.loggedIn}">
                             <f:selectItems value="#{songManager.artistService.allArtists}" var="ar" itemLabel="#{ar.name}" itemValue="#{ar.name}" />
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{msg.album}: " />
-                        <h:selectOneMenu value="#{songManager.album}">
+                        <h:selectOneMenu value="#{songManager.album}" readonly="#{!loginManager.loggedIn}">
                             <f:selectItems value="#{songManager.albumService.allAlbums}" var="a" itemLabel="#{a.title}" itemValue="#{a.title}" />
                         </h:selectOneMenu>
 
@@ -37,21 +37,21 @@
                         <h:inputText value="#{s.position}" required="false" />
 
                         <h:outputLabel value="#{msg.genre}: " />
-                        <h:selectOneMenu value="#{songManager.genre}">
+                        <h:selectOneMenu value="#{songManager.genre}" readonly="#{!loginManager.loggedIn}">
                             <f:selectItems value="#{songManager.genreService.allGenres}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />
                         </h:selectOneMenu>
 
                         <h:outputLabel value="#{msg.bitrate}: " />
-                        <h:inputText value="#{s.bitrate}" required="false" />
+                        <h:inputText value="#{s.bitrate}" required="false" readonly="#{!loginManager.loggedIn}" />
 
                         <h:outputLabel value="#{msg.commentary}: " />
-                        <h:inputText value="#{s.commentary}" required="false" />
+                        <h:inputText value="#{s.commentary}" required="false" readonly="#{!loginManager.loggedIn}" />
 
                     </h:panelGrid>
                     
-                    <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title']}" />
-                    <h:commandButton value="#{msg.update}" action="#{songManager.updateSong}" />
-                    <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong}" />
+                    <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title'] and loginManager.loggedIn}" />
+                    <h:commandButton value="#{msg.update}" action="#{songManager.updateSong}" rendered="#{loginManager.loggedIn}" />
+                    <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong}" rendered="#{loginManager.loggedIn}" />
                 </h:form>
                
             </ui:define>

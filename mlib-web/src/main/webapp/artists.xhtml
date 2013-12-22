@@ -12,7 +12,7 @@
                 <h1>#{msg.artists}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="artist_detail">
+                    <h:button value="#{msg.create}" outcome="artist_detail" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 

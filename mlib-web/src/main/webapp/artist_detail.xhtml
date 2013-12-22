@@ -21,10 +21,10 @@
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputLabel value="#{msg.artistName}: " />
-                        <h:inputText value="#{artistManager.artistTO.name}" required="true"  readonly="#{not empty param['artist_name']}" />
+                        <h:inputText value="#{artistManager.artistTO.name}" required="true"  readonly="#{not empty param['artist_name'] or !loginManager.loggedIn}" />
                     </h:panelGrid>
-                    <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{empty param['artist_name']}" />
-                    <h:commandButton value="#{msg.remove}" action="#{artistManager.remove}" />
+                    <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{empty param['artist_name'] and loginManager.loggedIn}" />
+                    <h:commandButton value="#{msg.remove}" action="#{artistManager.remove}" rendered="#{loginManager.loggedIn}" />
                 </h:form>
                 
                 <h2>#{msg.albums}</h2>

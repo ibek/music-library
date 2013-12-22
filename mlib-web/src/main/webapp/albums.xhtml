@@ -12,7 +12,7 @@
                 <h1>#{msg.albums}</h1>
                 <h:messages globalOnly="true"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="album_detail">
+                    <h:button value="#{msg.create}" outcome="album_detail" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 <c:set var="allAlbums" value="#{albumManager.service.allAlbums}" scope="request" />

@@ -13,6 +13,9 @@ import com.pa165.mlib.service.SongService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -25,9 +28,10 @@ import javax.inject.Inject;
  * 
  * @author tomparys
  */
+@MlibService
 @Stateless
-@TransactionManagement(TransactionManagementType.CONTAINER)
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@DeclareRoles({"admin", "user"})
+@RolesAllowed({"admin", "user"})
 public class SongServiceImpl implements SongService {
     
     @Inject
@@ -67,6 +71,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @PermitAll
     public List<SongTO> getAllSongs() {
         List<SongTO> songs = new ArrayList<>();
         
@@ -77,6 +82,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @PermitAll
     public SongTO getSong(String title) {
         return transformer.transformSongTO(songDao.getSong(title));
     }
@@ -142,6 +148,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    @PermitAll
     public List<SongTO> getSongsInAlbum(AlbumTO album) {
         Album a = albumDao.getAlbum(album.getTitle());
         List<SongTO> songs = new ArrayList<>();

@@ -4,10 +4,12 @@ import com.pa165.mlib.dto.AlbumTO;
 import com.pa165.mlib.dto.ArtistTO;
 import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.dto.SongTO;
+import com.pa165.mlib.dto.UserTO;
 import com.pa165.mlib.entity.Album;
 import com.pa165.mlib.entity.Artist;
 import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.Song;
+import com.pa165.mlib.entity.User;
 import javax.ejb.Stateless;
 
 /**
@@ -63,6 +65,15 @@ public class EntityDTOTransformer {
         to.setId(artist.getId());
         to.setName(artist.getName());
         return to;
+    }
+    
+    public UserTO transformUserTO(User user) {
+        if (user == null) {
+            return null;
+        }
+        UserTO uto = new UserTO();
+        uto.setUsername(user.getUsername());
+        return uto;
     }
     
 }
