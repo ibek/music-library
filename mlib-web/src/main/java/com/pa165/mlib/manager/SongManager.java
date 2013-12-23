@@ -50,8 +50,11 @@ public class SongManager implements Serializable {
     
     private String album = "";
     
-    public SongTO init() {
+    public SongTO initNew(String album) {
         songTO = new SongTO();
+        if (album != null) {
+            this.album = album;
+        }
         return songTO;
     }
     
@@ -88,12 +91,12 @@ public class SongManager implements Serializable {
         logger.log(Level.INFO, "Creating {0}", songTO);
         try {
             songService.createNewSong(songTO);
-            init();
+            initNew("");
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The song cannot be created because a song with this title already exists."));
-            return "song_detail";
+            return "/song_detail";
         }
-        return "songs";
+        return "/songs";
     }
     
     public String updateSong() {
@@ -101,7 +104,7 @@ public class SongManager implements Serializable {
         logger.log(Level.INFO, "Updating {0}", songTO);
         songService.updateSong(songService.getSong(songTO.getTitle()), songTO);
         //init();
-        return "songs";
+        return "/songs";
     }
     
     public String removeSong() {
@@ -109,7 +112,13 @@ public class SongManager implements Serializable {
         logger.log(Level.INFO, "Removing {0}", songTO);
         songService.removeSong(songTO);
         //init();
-        return "songs";
+        return "/songs";
+    }
+    
+    public String removeSong(SongTO song, String returnPath) {
+        logger.log(Level.INFO, "Removing {0}", song);
+        songService.removeSong(song);
+        return returnPath;
     }
     
     private void convert() {

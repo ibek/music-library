@@ -30,8 +30,8 @@ import javax.inject.Inject;
  */
 @MlibService
 @Stateless
-@DeclareRoles({"admin", "user"})
-@RolesAllowed({"admin", "user"})
+@DeclareRoles({"ADMIN", "USER"})
+@RolesAllowed({"ADMIN", "USER"})
 public class SongServiceImpl implements SongService {
     
     @Inject

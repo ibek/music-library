@@ -13,7 +13,7 @@
                 <h:messages globalOnly="true" class="message"/>
                 
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="song_detail" rendered="#{loginManager.loggedIn}">
+                    <h:button value="#{msg.create}" outcome="/song_detail" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 
@@ -21,7 +21,7 @@
                 <rich:dataGrid value="#{allSongs}" var="s" columns="3" elements="9" rendered="#{not empty allSongs}" styleClass="grid" >
                      <rich:panel>
                         <f:facet name="header">
-                            <h:button value="#{s.title}" outcome="song_detail">
+                            <h:button value="#{s.title}" outcome="/song_detail">
                                     <f:param name="song_title" value="#{s.title}"/>
                             </h:button>
                         </f:facet>

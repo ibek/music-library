@@ -19,7 +19,6 @@
                         <h:outputLabel value="#{msg.password}:" />
                         <h:inputSecret id="password" value="#{credentialsManager.password}" />
                     </h:panelGrid>
-                    <h:outputText value="#{text.loginFailed}" style="color:red;" rendered="#{param['loginFailed']}"/><br/>
                     <h:commandButton id="login" value="#{msg.login}"
                                      action="#{loginManager.login}" rendered="#{!loginManager.loggedIn}" />
                     <h:commandButton id="logout" value="#{msg.logout}"

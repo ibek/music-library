@@ -29,8 +29,8 @@ import javax.inject.Inject;
  */
 @MlibService
 @Stateless
-@DeclareRoles({"admin", "user"})
-@RolesAllowed("admin")
+@DeclareRoles({"ADMIN", "USER"})
+@RolesAllowed("ADMIN")
 public class UserServiceImpl implements UserService {
     
     @Inject
@@ -44,22 +44,25 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public UserTO createNewUser(UserTO user, Role... groups) throws DuplicateException {
+    public UserTO createNewUser(UserTO user, Role role) throws DuplicateException {
         User u = new User();
         u.setUsername(user.getUsername());
         try {
-            u.setPasswordHash(new String(MessageDigest.getInstance("sha-256").digest(user.getPassword().getBytes())));
-        } catch (NoSuchAlgorithmException ex) {
+            byte[] hash = MessageDigest.getInstance("sha-256").digest(user.getPassword().getBytes("UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.length; i++) {
+                sb.append(Integer.toString((hash[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            u.setPasswordHash(sb.toString());
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
         ud.addUser(u);
-        for (int i=0; groups!=null && i<groups.length; ++i) {
-            Group g = new Group();
-            g.setRole(groups[i]);
-            g.setUser(u);
-            gd.addGroup(g);
-        }
+        Group g = new Group();
+        g.setRole(role);
+        g.setUser(u);
+        gd.addGroup(g);
         return transformer.transformUserTO(u);
     }
 

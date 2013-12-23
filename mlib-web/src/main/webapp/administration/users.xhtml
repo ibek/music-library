@@ -9,20 +9,17 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.genres}</h1>
+                <h1>#{msg.users}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="/genre_detail" rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}">
+                    <h:button value="#{msg.create}" outcome="/administration/newuser">
                     </h:button>
                 </h:form>
 
-                <c:set var="allGenres" value="#{genreManager.service.allGenres}" scope="request" />
-                <rich:dataGrid value="#{allGenres}" var="g" columns="3" elements="9" rendered="#{not empty allGenres}" styleClass="grid" >
+                <rich:dataGrid value="#{loginManager.us.allUsers}" var="u" columns="3" elements="9" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
-                            <h:button value="#{g.name}" outcome="/genre_detail">
-                                    <f:param name="genre_name" value="#{g.name}"/>
-                            </h:button>        
+                            #{u.username}        
                         </f:facet>
                     </rich:panel>
                     <f:facet name="footer">

@@ -33,6 +33,18 @@
     <welcome-file-list>
         <welcome-file>home.jsf</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>Administration</display-name>
+        <web-resource-collection>
+            <web-resource-name>Administration</web-resource-name>
+            <description/>
+            <url-pattern>/administration/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>mlib</realm-name>
@@ -43,10 +55,10 @@
     </login-config>
     <security-role>
         <description>The role to see content</description>
-        <role-name>user</role-name>
+        <role-name>USER</role-name>
     </security-role>
     <security-role>
         <description>The role to administrative content</description>
-        <role-name>admin</role-name>
+        <role-name>ADMIN</role-name>
     </security-role>
 </web-app>

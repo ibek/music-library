@@ -55,16 +55,16 @@ public class ArtistManager implements Serializable {
             init();
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The artist cannot be created because it already exists."));
-            return "artist_detail";
+            return "/artist_detail";
         }
         
-        return "artists";
+        return "/artists";
     }
     
     public String remove() {
         logger.log(Level.INFO, "Removing {0}", artistTO);
         service.removeArtist(artistTO);
-        return "artists";
+        return "/artists";
     }
     
 }

@@ -62,23 +62,23 @@ public class AlbumManager implements Serializable {
             service.createNewAlbum(albumTO);
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The album cannot be created because it already exists."));
-            return "album_detail";
+            return "/album_detail";
         }
-        return "albums";
+        return "/albums";
     }
     
     public String removeAlbum() {
         logger.log(Level.INFO, "Removing {0}", albumTO);
         service.removeAlbum(albumTO);
         //init();
-        return "albums";
+        return "/albums";
     }
     
     public String updateAlbum() {
         logger.log(Level.INFO, "Updating {0}", albumTO);
         service.updateAlbum(service.getAlbum(albumTO.getTitle()), albumTO);
         //init();
-        return "albums";
+        return "/albums";
     }
     
     public List<AlbumTO> getAlbumsWithArtist(ArtistTO artist) {

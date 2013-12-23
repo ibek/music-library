@@ -3,12 +3,14 @@
 <glassfish-web-app error-url="">
   <context-root>/pa165</context-root>
   <security-role-mapping>
-    <role-name>admin</role-name>
-    <principal-name>admin</principal-name>
+    <role-name>ADMIN</role-name>
+    <principal-name>ADMIN</principal-name>
+    <group-name>ADMIN</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>user</role-name>
-    <principal-name>user</principal-name>
+    <role-name>USER</role-name>
+    <principal-name>USER</principal-name>
+    <group-name>USER</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>

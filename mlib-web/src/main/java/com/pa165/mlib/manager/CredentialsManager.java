@@ -21,6 +21,7 @@ public class CredentialsManager implements Serializable {
     
     private String username;
     private String password;
+    private String role;
 
     /**
      * @return the username
@@ -48,6 +49,20 @@ public class CredentialsManager implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
     
 }

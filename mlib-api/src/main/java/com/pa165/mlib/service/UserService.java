@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface UserService {
     
-    UserTO createNewUser(UserTO user, Role... groups) throws DuplicateException ;
+    UserTO createNewUser(UserTO user, Role role) throws DuplicateException ;
     
     UserTO getUser(String name);
     

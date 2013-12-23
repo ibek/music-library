@@ -12,14 +12,14 @@
                 <h1>#{msg.albums}</h1>
                 <h:messages globalOnly="true"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="album_detail" rendered="#{loginManager.loggedIn}">
+                    <h:button value="#{msg.create}" outcome="/album_detail" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 <c:set var="allAlbums" value="#{albumManager.service.allAlbums}" scope="request" />
                 <rich:dataGrid value="#{allAlbums}" var="a" columns="3" elements="9" rendered="#{not empty allAlbums}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
-                            <h:button value="#{a.title}" outcome="album_detail">
+                            <h:button value="#{a.title}" outcome="/album_detail">
                                     <f:param name="album_name" value="#{a.title}"/>
                             </h:button>
                         </f:facet>

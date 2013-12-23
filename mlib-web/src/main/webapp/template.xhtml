@@ -16,15 +16,16 @@
         </div>
         <div id="menu">
             <h:form>
-                <h:button value="#{msg.home}" outcome="home" class="menu_button"/>
-                <h:button value="#{msg.genres}" outcome="genres" class="menu_button"/>
-                <h:button value="#{msg.artists}" outcome="artists" class="menu_button"/>
-                <h:button value="#{msg.albums}" outcome="albums" class="menu_button"/>
-                <h:button value="#{msg.songs}" outcome="songs" class="menu_button"/>
-                <h:button value="#{msg.login}" outcome="login" class="menu_button" rendered="#{!loginManager.loggedIn}"/>
-                <h:outputText value="#{msg.loggedas} #{loginManager.user.username}" rendered="#{loginManager.loggedIn}" style="color:white"/>
+                <h:button value="#{msg.home}" outcome="/home" class="menu_button"/>
+                <h:button value="#{msg.genres}" outcome="/genres" class="menu_button"/>
+                <h:button value="#{msg.artists}" outcome="/artists" class="menu_button"/>
+                <h:button value="#{msg.albums}" outcome="/albums" class="menu_button"/>
+                <h:button value="#{msg.songs}" outcome="/songs" class="menu_button"/>
+                <h:button value="#{msg.login}" outcome="/login" class="menu_button" rendered="#{!loginManager.loggedIn}" style="margin-left:5px;"/>
+                <h:button value="#{msg.users}" outcome="/administration/users" class="menu_button" rendered="#{loginManager.loggedIn and facesContext.externalContext.isUserInRole('ADMIN')}"/>
+                <h:outputText value="#{msg.loggedas} #{loginManager.user.username}" rendered="#{loginManager.loggedIn}" style="color:white;margin-left:5px;"/>
                 <h:commandButton id="logout" value="#{msg.logout}"
-                                 action="#{loginManager.logout}" rendered="#{loginManager.loggedIn}" />
+                                 action="#{loginManager.logout}" rendered="#{loginManager.loggedIn}" style="margin-left:5px;" />
             </h:form>
         </div>
         <div id="container">

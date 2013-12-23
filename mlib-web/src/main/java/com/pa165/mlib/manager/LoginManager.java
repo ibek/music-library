@@ -5,13 +5,16 @@
  */
 package com.pa165.mlib.manager;
 
+import com.pa165.mlib.dto.Role;
 import com.pa165.mlib.dto.UserTO;
-import com.pa165.mlib.entity.User;
+import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.UserService;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -48,17 +51,13 @@ public class LoginManager implements Serializable {
             logger.log(Level.INFO, "Logining {0}", cm.getUsername());
             request.login(cm.getUsername(), cm.getPassword());
             this.user = us.getUser(cm.getUsername());
-            if (this.user == null) { // IS nepouziva DB pro uzivatele
-                this.user = new UserTO();
-                this.user.setUsername(cm.getUsername());
-            }
-            return "home";
+            return "/home";
         } catch (Exception e) {
             e.printStackTrace();
             logger.log(Level.WARNING, "Wrong username and/or password.");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Wrong username and/or password."));
         }
-        return "login";
+        return "/login";
     }
 
     public String logout() {
@@ -68,7 +67,22 @@ public class LoginManager implements Serializable {
 
         final HttpServletRequest request = (HttpServletRequest) ec.getRequest();
         request.getSession(false).invalidate();
-        return "home";
+        return "/home";
+    }
+    
+    public String register() {
+        try {
+            logger.log(Level.INFO, "Registering {0}", cm.getUsername());
+            UserTO newuser = new UserTO();
+            newuser.setUsername(cm.getUsername());
+            newuser.setPassword(cm.getPassword());
+            us.createNewUser(newuser, Role.valueOf(cm.getRole()));
+            return "/home";
+        } catch (DuplicateException ex) {
+            logger.log(Level.WARNING, "User already exists.");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("User already exists."));
+        }
+        return "/administration/newuser";
     }
 
     public boolean isLoggedIn() {
@@ -101,6 +115,10 @@ public class LoginManager implements Serializable {
      */
     public void setUser(UserTO user) {
         this.user = user;
+    }
+    
+    public List<Role> getAllRoles() {
+        return Arrays.asList(Role.values());
     }
 
 }

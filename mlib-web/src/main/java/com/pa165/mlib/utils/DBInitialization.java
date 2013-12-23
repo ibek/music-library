@@ -25,8 +25,8 @@ import javax.inject.Inject;
  */
 @Startup
 @Singleton
-@DeclareRoles("admin")
-@RunAs("admin")
+@DeclareRoles("ADMIN")
+@RunAs("ADMIN")
 public class DBInitialization {
     
     @Inject

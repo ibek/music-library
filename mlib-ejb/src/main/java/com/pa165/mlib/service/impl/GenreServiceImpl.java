@@ -24,8 +24,8 @@ import javax.inject.Inject;
  */
 @MlibService
 @Stateless
-@DeclareRoles({"admin", "user"})
-@RolesAllowed("admin")
+@DeclareRoles({"ADMIN", "USER"})
+@RolesAllowed("ADMIN")
 public class GenreServiceImpl implements GenreService {
     
     @Inject

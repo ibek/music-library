@@ -15,7 +15,7 @@
                     <c:set var="s" value="#{songManager.init(param['song_title'])}" scope="request" />
                 </c:if>
                 <c:if test="#{empty param['song_title']}">
-                    <c:set var="s" value="#{songManager.init()}" scope="request" />
+                    <c:set var="s" value="#{songManager.initNew(param['song_album'])}" scope="request" />
                 </c:if>
                 
                 <h:form>
