@@ -46,12 +46,8 @@
         </auth-constraint>
     </security-constraint>
     <login-config>
-        <auth-method>FORM</auth-method>
+        <auth-method>BASIC</auth-method>
         <realm-name>mlib</realm-name>
-        <form-login-config>
-            <form-login-page>/login.jsf</form-login-page>
-            <form-error-page>/login.jsf?error=true</form-error-page>
-        </form-login-config>
     </login-config>
     <security-role>
         <description>The role to see content</description>
