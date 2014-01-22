@@ -13,3 +13,14 @@
 
 #REST client
 Can be found in github repository [music-library-client](https://github.com/tomparys/music-library-client).
+
+# Problems with Java versions and other
+    1. In case of an error while trying to connect to the database, try [this](http://stackoverflow.com/questions/21154400/unable-to-start-derby-database-from-netbeans-7-4), or specifically adding this to the java.policy file
+
+	grant {
+        	permission java.net.SocketPermission "localhost:1527", "listen,resolve";
+	};
+
+    2. In case of an error *java.net.BindException: Cannot assign requested address*
+
+        Try adjusting your /etc/hosts file so that it contains localhost defined as 127.0.0.1 and not other.
