@@ -1,2 +1,4 @@
 #/bin/sh
-mvn clean install embedded-glassfish:run
+mvn clean install
+cd mlib-ear
+mvn embedded-glassfish:run
