@@ -1,6 +1,7 @@
 package com.pa165.mlib.test.service;
 
 import com.pa165.mlib.dao.GenreDao;
+import com.pa165.mlib.dao.GroupDao;
 import com.pa165.mlib.dao.UserDao;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -30,22 +31,24 @@ public class UserServiceTest {
         us.setTransformer(transformer);
         
         UserDao ud = mock(UserDao.class);
-        User yaniv = new User();
-        yaniv.setUsername("Yaniv");
-        when(ud.getUser("Yaniv")).thenReturn(yaniv);
-        when(ud.getUser("Lukov")).thenReturn(null);
+        GroupDao gd = mock(GroupDao.class);
+        User lukov = new User();
+        lukov.setUsername("Lukov");
+        when(ud.getUser("Yaniv")).thenReturn(null);
+        when(ud.getUser("Lukov")).thenReturn(lukov);
         us.setUserDao(ud);
+        us.setGroupDao(gd);
         
         UserTO userto = new UserTO();
-        userto.setUsername("Yaniv");
+        userto.setUsername("Lukov");
+        userto.setPassword("heslo");
         UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
         
-        UserTO foundUser = us.getUser("Yaniv");
-        assertEquals(foundUser.getUsername(), "Yaniv");
+        assertEquals(createdUser.getUsername(), "Lukov");
     }
     
     @Test
-    public void removeGenreTest() throws Exception {
+    public void removeUserTest() throws Exception {
         UserServiceImpl us = new UserServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
         us.setTransformer(transformer);
@@ -59,9 +62,8 @@ public class UserServiceTest {
         
         UserTO userto = new UserTO();
         userto.setUsername("Yaniv");
-        UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
         
-        boolean removed = us.removeUser(createdUser);
+        boolean removed = us.removeUser(userto);
         assertTrue(removed);
     }
     
@@ -77,10 +79,6 @@ public class UserServiceTest {
         when(ud.getUser("Yaniv")).thenReturn(yaniv);
         when(ud.getUser("Lukov")).thenReturn(null);
         us.setUserDao(ud);
-        
-        UserTO userto = new UserTO();
-        userto.setUsername("Yaniv");
-        UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
         
         UserTO foundUser = us.getUser("Yaniv");
         assertEquals(foundUser.getUsername(), "Yaniv");

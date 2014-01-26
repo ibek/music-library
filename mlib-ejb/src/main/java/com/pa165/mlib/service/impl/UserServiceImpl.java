@@ -96,6 +96,10 @@ public class UserServiceImpl implements UserService {
         this.ud = userDao;
     }
     
+    public void setGroupDao(GroupDao groupDao) {
+        this.gd = groupDao;
+    }
+    
     public void setTransformer(EntityDTOTransformer transformer) {
         this.transformer = transformer;
     }
