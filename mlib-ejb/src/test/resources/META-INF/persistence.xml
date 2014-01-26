@@ -6,6 +6,8 @@
         <class>com.pa165.mlib.entity.Album</class>
         <class>com.pa165.mlib.entity.Artist</class>
         <class>com.pa165.mlib.entity.Song</class>
+        <class>com.pa165.mlib.entity.User</class>
+        <class>com.pa165.mlib.entity.Group</class>
         <properties>
             <property name="hibernate.connection.username" value="app"/>
             <property name="hibernate.connection.driver_class"
