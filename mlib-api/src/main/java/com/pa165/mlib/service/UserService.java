@@ -15,8 +15,6 @@ public interface UserService {
     
     UserTO getUser(String name);
     
-    UserTO updateUser(UserTO oldUser, UserTO newUser);
-    
     boolean removeUser(UserTO user);
     
     List<UserTO> getAllUsers();

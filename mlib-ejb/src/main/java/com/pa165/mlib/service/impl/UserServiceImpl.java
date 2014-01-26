@@ -83,21 +83,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public UserTO updateUser(UserTO oldUser, UserTO newUser) {
-        User user = ud.getUser(oldUser.getUsername());
-        user.setUsername(newUser.getUsername());
-        try {
-            user.setPasswordHash(new String(MessageDigest.getInstance("sha-256").digest(newUser.getPassword().getBytes())));
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        ud.updateUser(user);
-        return newUser;
-    }
-
-    @Override
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean removeUser(UserTO userTO) {
         User user = ud.getUser(userTO.getUsername());
         if (user == null) {

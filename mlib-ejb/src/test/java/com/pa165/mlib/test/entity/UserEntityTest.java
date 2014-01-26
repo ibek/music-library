@@ -98,29 +98,5 @@ public class UserEntityTest extends EntityTestBase {
         assertNull(foundUser2);
     }
     
-    @Test
-    public void testUserUpdate() throws Exception {
-        UserDaoImpl ud = new UserDaoImpl();
-        EntityManager em = getTestEntityManager();
-        ud.setEntityManager(em);
-        
-        User user = new User();
-        user.setUsername("ashton");
-        
-        em.getTransaction().begin();
-        ud.addUser(user);
-        em.getTransaction().commit();
-        
-        User foundUser = ud.getUser("ashton");
-        foundUser.setUsername("ashley");
-        
-        em.getTransaction().begin();
-        ud.updateUser(foundUser);
-        em.getTransaction().commit();
-        
-        User foundUser2 = ud.getUser("ashley");
-        assertTrue(foundUser2 != null);
-    }
-    
     
 }

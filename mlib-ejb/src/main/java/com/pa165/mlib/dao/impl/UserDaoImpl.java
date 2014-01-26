@@ -45,21 +45,15 @@ public class UserDaoImpl implements UserDao {
     }
     
     @Override
-    public User updateUser(User user) {
-        if (user == null) {
-            return null;
-        }
-        return em.merge(user);
-    }
-    
-    @Override
     public void removeUser(User user) {
         if(user != null && !em.contains(user)) {
             em.merge(user);
         }
         List<Group> lg = gd.getGroups(user);
-        for (Group g : lg) {
-            gd.removeGroup(g);
+        if (lg != null && lg.size() > 0) {
+            for (Group g : lg) {
+                gd.removeGroup(g);
+            }
         }
         em.remove(user);
     }
