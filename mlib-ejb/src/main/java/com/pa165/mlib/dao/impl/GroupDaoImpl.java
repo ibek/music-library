@@ -50,14 +50,14 @@ public class GroupDaoImpl implements GroupDao {
     
     @Override
     public List<Group> getAll() {
-        return em.createQuery("SELECT g FROM Group g ORDER BY g.username", Group.class)
+        return em.createQuery("SELECT g FROM USERS_GROUPS g ORDER BY g.user", Group.class)
                 .getResultList();
     }
     
     @Override
-    public List<Group> getGroups(User username) {
-         return em.createQuery("SELECT g FROM Group g WHERE g.username = :username", Group.class)
-                   .setParameter("username", username).getResultList();
+    public List<Group> getGroups(User user) {
+         return em.createQuery("SELECT g FROM USERS_GROUPS g WHERE g.user = :user", Group.class)
+                   .setParameter("user", user).getResultList();
     }
     
     public void setEntityManager(EntityManager em) {

@@ -2,6 +2,7 @@ package com.pa165.mlib.entity;
 
 import com.pa165.mlib.dto.Role;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

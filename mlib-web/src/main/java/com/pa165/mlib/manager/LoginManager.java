@@ -117,6 +117,10 @@ public class LoginManager implements Serializable {
         this.user = user;
     }
     
+    public void remove(UserTO user) {
+        us.removeUser(user);
+    }
+    
     public List<Role> getAllRoles() {
         return Arrays.asList(Role.values());
     }

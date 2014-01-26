@@ -1,7 +1,9 @@
 package com.pa165.mlib.dao.impl;
 
+import com.pa165.mlib.dao.GroupDao;
 import com.pa165.mlib.dao.UserDao;
 import com.pa165.mlib.dao.UserDao;
+import com.pa165.mlib.entity.Group;
 import com.pa165.mlib.entity.User;
 import com.pa165.mlib.entity.User;
 import com.pa165.mlib.exception.DuplicateException;
@@ -22,6 +24,9 @@ public class UserDaoImpl implements UserDao {
     
     @Inject
     Logger logger;
+    
+    @Inject
+    GroupDao gd;
     
     @PersistenceContext(unitName = "mlib-pu")
     EntityManager em;
@@ -52,6 +57,10 @@ public class UserDaoImpl implements UserDao {
         if(user != null && !em.contains(user)) {
             em.merge(user);
         }
+        List<Group> lg = gd.getGroups(user);
+        for (Group g : lg) {
+            gd.removeGroup(g);
+        }
         em.remove(user);
     }
     
@@ -76,6 +85,10 @@ public class UserDaoImpl implements UserDao {
     
     public void setEntityManager(EntityManager em) {
         this.em = em;
+    }
+    
+    public void setGroupDao(GroupDao gd) {
+        this.gd = gd;
     }
     
 }

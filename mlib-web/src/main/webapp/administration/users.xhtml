@@ -21,6 +21,9 @@
                         <f:facet name="header">
                             #{u.username}        
                         </f:facet>
+                        <h:form>
+                            <h:commandButton value="#{msg.remove}" action="#{loginManager.remove(u)}" rendered="#{facesContext.externalContext.isUserInRole('ADMIN') and loginManager.user.username != u.username}" />
+                        </h:form>
                     </rich:panel>
                     <f:facet name="footer">
                         <rich:dataScroller></rich:dataScroller>
