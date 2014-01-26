@@ -21,6 +21,7 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testAddUser() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
+        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -39,6 +40,7 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testGetAll() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
+        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -61,6 +63,7 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testGetUser() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
+        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -77,6 +80,7 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testUserRemove() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
+        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
