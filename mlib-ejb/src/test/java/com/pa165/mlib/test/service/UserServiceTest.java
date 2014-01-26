@@ -1,12 +1,17 @@
 package com.pa165.mlib.test.service;
 
 import com.pa165.mlib.dao.GenreDao;
+import com.pa165.mlib.dao.UserDao;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import com.pa165.mlib.dto.GenreTO;
+import com.pa165.mlib.dto.Role;
+import com.pa165.mlib.dto.UserTO;
 import com.pa165.mlib.entity.Genre;
+import com.pa165.mlib.entity.User;
 import com.pa165.mlib.service.impl.GenreServiceImpl;
+import com.pa165.mlib.service.impl.UserServiceImpl;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,115 +21,91 @@ import org.junit.Test;
  *
  * @author xbek
  */
-public class GenreServiceTest {
+public class UserServiceTest {
     
     @Test
-    public void createNewGenreTest() throws Exception {
-        GenreServiceImpl gs = new GenreServiceImpl();
+    public void createNewUserTest() throws Exception {
+        UserServiceImpl us = new UserServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
-        gs.setTransformer(transformer);
+        us.setTransformer(transformer);
         
-        GenreDao gd = mock(GenreDao.class);
-        Genre rock = new Genre();
-        rock.setName("rock");
-        when(gd.getGenre("rock")).thenReturn(rock);
-        when(gd.getGenre("trance")).thenReturn(null);
-        gs.setGenreDao(gd);
+        UserDao ud = mock(UserDao.class);
+        User yaniv = new User();
+        yaniv.setUsername("Yaniv");
+        when(ud.getUser("Yaniv")).thenReturn(yaniv);
+        when(ud.getUser("Lukov")).thenReturn(null);
+        us.setUserDao(ud);
         
-        GenreTO ng = new GenreTO();
-        ng.setName("rock");
-        GenreTO g = gs.createNewGenre(ng);
-        assertEquals(g.getName(), "rock");
+        UserTO userto = new UserTO();
+        userto.setUsername("Yaniv");
+        UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
         
-        GenreTO g2 = gs.getGenre("rock");
-        assertEquals(g, g2);
-    }
-    
-    @Test
-    public void getGenreTest() throws Exception {
-        GenreServiceImpl gs = new GenreServiceImpl();
-        EntityDTOTransformer transformer = new EntityDTOTransformer();
-        gs.setTransformer(transformer);
-        
-        GenreDao gd = mock(GenreDao.class);
-        Genre rock = new Genre();
-        rock.setName("rock");
-        when(gd.getGenre("rock")).thenReturn(rock);
-        when(gd.getGenre("trance")).thenReturn(null);
-        gs.setGenreDao(gd);
-        
-        GenreTO ng = new GenreTO();
-        ng.setName("rock");
-        GenreTO g = gs.createNewGenre(ng);
-        
-        GenreTO g2 = gs.getGenre("rock");
-        assertEquals(g, g2);
-    }
-    
-    @Test
-    public void updateGenreTest() throws Exception {
-        GenreServiceImpl gs = new GenreServiceImpl();
-        EntityDTOTransformer transformer = new EntityDTOTransformer();
-        gs.setTransformer(transformer);
-        
-        GenreDao gd = mock(GenreDao.class);
-        Genre rock = new Genre();
-        rock.setName("rock");
-        when(gd.getGenre("rock")).thenReturn(rock);
-        when(gd.getGenre("trance")).thenReturn(null);
-        gs.setGenreDao(gd);
-        
-        GenreTO ng = new GenreTO();
-        ng.setName("rock");
-        GenreTO g = gs.createNewGenre(ng);
-        
-        GenreTO g2 = new GenreTO();
-        ng.setName("trance");
-        GenreTO updated = gs.updateGenre(g, g2);
-        assertEquals(g2, updated);
+        UserTO foundUser = us.getUser("Yaniv");
+        assertEquals(foundUser.getUsername(), "Yaniv");
     }
     
     @Test
     public void removeGenreTest() throws Exception {
-        GenreServiceImpl gs = new GenreServiceImpl();
+        UserServiceImpl us = new UserServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
-        gs.setTransformer(transformer);
+        us.setTransformer(transformer);
         
-        GenreDao gd = mock(GenreDao.class);
-        Genre rock = new Genre();
-        rock.setName("rock");
-        when(gd.getGenre("rock")).thenReturn(rock);
-        when(gd.getGenre("trance")).thenReturn(null);
-        gs.setGenreDao(gd);
+        UserDao ud = mock(UserDao.class);
+        User yaniv = new User();
+        yaniv.setUsername("Yaniv");
+        when(ud.getUser("Yaniv")).thenReturn(yaniv);
+        when(ud.getUser("Lukov")).thenReturn(null);
+        us.setUserDao(ud);
         
-        GenreTO ng = new GenreTO();
-        ng.setName("rock");
-        GenreTO g = gs.createNewGenre(ng);
+        UserTO userto = new UserTO();
+        userto.setUsername("Yaniv");
+        UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
         
-        boolean removed = gs.removeGenre(g);
+        boolean removed = us.removeUser(createdUser);
         assertTrue(removed);
     }
     
     @Test
-    public void getAllGenresTest() throws Exception {
-        GenreServiceImpl gs = new GenreServiceImpl();
+    public void getUserTest() throws Exception {
+        UserServiceImpl us = new UserServiceImpl();
         EntityDTOTransformer transformer = new EntityDTOTransformer();
-        gs.setTransformer(transformer);
-        GenreDao gd = mock(GenreDao.class);
+        us.setTransformer(transformer);
         
-        when(gd.getAll()).thenReturn(new ArrayList<Genre>(){{
-            Genre rock = new Genre();
-            rock.setName("rock");
-            add(rock);
-            Genre trance = new Genre();
-            trance.setName("trance");
-            add(trance);
+        UserDao ud = mock(UserDao.class);
+        User yaniv = new User();
+        yaniv.setUsername("Yaniv");
+        when(ud.getUser("Yaniv")).thenReturn(yaniv);
+        when(ud.getUser("Lukov")).thenReturn(null);
+        us.setUserDao(ud);
+        
+        UserTO userto = new UserTO();
+        userto.setUsername("Yaniv");
+        UserTO createdUser = us.createNewUser(userto, Role.ADMIN);
+        
+        UserTO foundUser = us.getUser("Yaniv");
+        assertEquals(foundUser.getUsername(), "Yaniv");
+    }
+    
+    @Test
+    public void getAllUsersTest() throws Exception {
+        UserServiceImpl us = new UserServiceImpl();
+        EntityDTOTransformer transformer = new EntityDTOTransformer();
+        us.setTransformer(transformer);
+        
+        UserDao ud = mock(UserDao.class);
+        when(ud.getAll()).thenReturn(new ArrayList<User>(){{
+            User user = new User();
+            user.setUsername("albrecht");
+            add(user);
+            User user2 = new User();
+            user2.setUsername("francimore");
+            add(user2);
         }});
+        us.setUserDao(ud);
         
-        gs.setGenreDao(gd);
-        List<GenreTO> all = gs.getAllGenres();
+        List<UserTO> all = us.getAllUsers();
         assertEquals(2, all.size());
-        assertEquals("rock", all.get(0).getName());
-        assertEquals("trance", all.get(1).getName());
+        assertEquals("albrecht", all.get(0).getUsername());
+        assertEquals("francimore", all.get(1).getUsername());
     }
 }
