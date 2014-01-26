@@ -2,6 +2,7 @@ package com.pa165.mlib.test.entity;
 
 import com.pa165.mlib.dao.impl.GenreDaoImpl;
 import com.pa165.mlib.dao.impl.UserDaoImpl;
+import com.pa165.mlib.dao.impl.GroupDaoImpl;
 import com.pa165.mlib.entity.Genre;
 import com.pa165.mlib.entity.User;
 import com.pa165.mlib.test.EntityTestBase;
@@ -21,7 +22,6 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testAddUser() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
-        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -40,7 +40,6 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testGetAll() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
-        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -63,7 +62,6 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testGetUser() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
-        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
         
@@ -80,9 +78,11 @@ public class UserEntityTest extends EntityTestBase {
     @Test
     public void testUserRemove() throws Throwable {
         UserDaoImpl ud = new UserDaoImpl();
-        ud.setGroupDao(new GroupDaoImpl());
         EntityManager em = getTestEntityManager();
         ud.setEntityManager(em);
+        GroupDaoImpl gd = new GroupDaoImpl();
+        gd.setEntityManager(em);
+        ud.setGroupDao(gd);
         
         User user = new User();
         user.setUsername("emmanuel");
