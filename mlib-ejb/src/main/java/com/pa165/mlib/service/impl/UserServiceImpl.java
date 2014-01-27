@@ -10,7 +10,6 @@ import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.UserService;
 import com.pa165.mlib.utils.EntityDTOTransformer;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
@@ -19,8 +18,6 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 
 /**

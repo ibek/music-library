@@ -10,7 +10,6 @@ import com.pa165.mlib.dto.UserTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.UserService;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;

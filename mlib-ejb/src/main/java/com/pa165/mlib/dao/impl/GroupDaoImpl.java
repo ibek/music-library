@@ -1,8 +1,6 @@
 package com.pa165.mlib.dao.impl;
 
 import com.pa165.mlib.dao.GroupDao;
-import com.pa165.mlib.dao.GroupDao;
-import com.pa165.mlib.entity.Group;
 import com.pa165.mlib.entity.Group;
 import com.pa165.mlib.entity.User;
 import com.pa165.mlib.exception.DuplicateException;
@@ -11,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import org.hibernate.exception.ConstraintViolationException;
 

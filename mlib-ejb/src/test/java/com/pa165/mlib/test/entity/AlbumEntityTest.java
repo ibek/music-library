@@ -1,8 +1,5 @@
 package com.pa165.mlib.test.entity;
 
-import com.pa165.mlib.dao.AlbumDao;
-import com.pa165.mlib.dao.ArtistDao;
-import com.pa165.mlib.dao.SongDao;
 import com.pa165.mlib.dao.impl.AlbumDaoImpl;
 import com.pa165.mlib.dao.impl.ArtistDaoImpl;
 import com.pa165.mlib.dao.impl.SongDaoImpl;

@@ -4,7 +4,6 @@ import com.pa165.mlib.dto.GenreTO;
 import com.pa165.mlib.exception.DuplicateException;
 import com.pa165.mlib.service.GenreService;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 
 /**
  *

@@ -7,7 +7,6 @@
 package com.pa165.mlib.manager;
 
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
