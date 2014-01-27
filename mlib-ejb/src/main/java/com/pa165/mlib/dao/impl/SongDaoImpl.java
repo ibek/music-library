@@ -78,7 +78,7 @@ public class SongDaoImpl implements SongDao {
      */
     @Override
     public List<Song> getAll() {
-        return em.createQuery("SELECT s FROM Song s", Song.class)
+        return em.createQuery("SELECT s FROM Song s ORDER BY title", Song.class)
                 .getResultList();
     }
 
