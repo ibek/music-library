@@ -212,144 +212,31 @@ insert into ALBUM(title, released) values ('The Doors', 1967);
 insert into ALBUM(title, released) values ('The Velvet Underground', 1969);
 
 /* Inicializace tabulky Song */
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Tabidachi', 320, 1, '',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Hyakka Ryouran (Blooming)', 320, 2,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Madrugada', 320, 3,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Storm', 320, 4,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Namonaki Oka (A Hill with No Name)', 320, 5,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Tsugaru Jyangara Bushi', 320, 6,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Labyrinth (Modern Second Movement)', 320, 7,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Moyuru (Sprouting)', 320, 8,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Fukaki Umi No Kanata', 320, 9,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Tsugaru Jyangara Bushi 2', 320, 10,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Storm (TM Mix)', 320, 11,'',
-         (select id from GENRE where name = 'World'),
-         (select id from ALBUM where title = 'Yoshida Brothers'),
-         (select id from ARTIST where name = 'Yoshida Brothers'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Pigs on the Wing (Part One)', 128, 1,
-          'According to Nick Mason, and confirmed by Waters, it is a love song directed towards Waters new wife at the time, Carolyne. She was really the only one Rogers friends had ever met who could hold her own in an argument with him',
-         (select id from GENRE where name = 'Art Rock'),
-         (select id from ALBUM where title = 'Animals'),
-         (select id from ARTIST where name = 'Pink Floyd'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Dogs',  128, 2,'',
-         (select id from GENRE where name = 'Art Rock'),
-         (select id from ALBUM where title = 'Animals'),
-         (select id from ARTIST where name = 'Pink Floyd'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Pigs (Three Different Ones)', 128, 3,'',
-         (select id from GENRE where name = 'Art Rock'),
-         (select id from ALBUM where title = 'Animals'),
-         (select id from ARTIST where name = 'Pink Floyd'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Sheep', 128, 4,'',
-         (select id from GENRE where name = 'Art Rock'),
-         (select id from ALBUM where title = 'Animals'),
-         (select id from ARTIST where name = 'Pink Floyd'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Pigs on the Wing (Part Two)', 128, 5,'',
-         (select id from GENRE where name = 'Art Rock'),
-         (select id from ALBUM where title = 'Animals'),
-         (select id from ARTIST where name = 'Pink Floyd'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Even Less', 256, 1,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Piano Lessons', 256, 2,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Stupid Dream', 256, 3,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Pure Narcotic', 256, 4,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Slave Called Shiver', 256, 5,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Dont Hate Me', 256, 6,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('This Is No Rehearsal', 256, 7,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Baby Dream In Cellophane', 256, 8,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Stranger By The Minute', 256, 9,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('A Smart Kid', 256, 10,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Tinto Brass', 256, 11,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
-insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) 
-  values ('Stop Swimming', 256, 12,'',
-         (select id from GENRE where name = 'Progressive Rock'),
-         (select id from ALBUM where title = 'Stupid Dream'),
-         (select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Tabidachi', 320, 1, '', (select id from GENRE where name = 'World'), (select id from ALBUM where title = 'Yoshida Brothers'), (select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Hyakka Ryouran (Blooming)', 320, 2,'', (select id from GENRE where name = 'World'), (select id from ALBUM where title = 'Yoshida Brothers'), (select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Madrugada', 320, 3,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'), (select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Storm', 320, 4,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Namonaki Oka (A Hill with No Name)', 320, 5,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Tsugaru Jyangara Bushi', 320, 6,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Labyrinth (Modern Second Movement)', 320, 7,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Moyuru (Sprouting)', 320, 8,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Fukaki Umi No Kanata', 320, 9,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Tsugaru Jyangara Bushi 2', 320, 10,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Storm (TM Mix)', 320, 11,'',(select id from GENRE where name = 'World'),(select id from ALBUM where title = 'Yoshida Brothers'),(select id from ARTIST where name = 'Yoshida Brothers'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Pigs on the Wing (Part One)', 128, 1,'According to Nick Mason, and confirmed by Waters, it is a love song directed towards Waters new wife at the time, Carolyne. She was really the only one Rogers friends had ever met who could hold her own in an argument with him',(select id from GENRE where name = 'Art Rock'),(select id from ALBUM where title = 'Animals'),(select id from ARTIST where name = 'Pink Floyd'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Dogs',  128, 2,'',(select id from GENRE where name = 'Art Rock'),(select id from ALBUM where title = 'Animals'),(select id from ARTIST where name = 'Pink Floyd'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Pigs (Three Different Ones)', 128, 3,'',(select id from GENRE where name = 'Art Rock'),(select id from ALBUM where title = 'Animals'),(select id from ARTIST where name = 'Pink Floyd'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Sheep', 128, 4,'',(select id from GENRE where name = 'Art Rock'),(select id from ALBUM where title = 'Animals'),(select id from ARTIST where name = 'Pink Floyd'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Pigs on the Wing (Part Two)', 128, 5,'',(select id from GENRE where name = 'Art Rock'),(select id from ALBUM where title = 'Animals'),(select id from ARTIST where name = 'Pink Floyd'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Even Less', 256, 1,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Piano Lessons', 256, 2,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Stupid Dream', 256, 3,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Pure Narcotic', 256, 4,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Slave Called Shiver', 256, 5,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Dont Hate Me', 256, 6,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('This Is No Rehearsal', 256, 7,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Baby Dream In Cellophane', 256, 8,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Stranger By The Minute', 256, 9,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('A Smart Kid', 256, 10,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Tinto Brass', 256, 11,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
+insert into SONG(title, bitrate, position, commentary, genre_id, album_id, artist_id) values ('Stop Swimming', 256, 12,'',(select id from GENRE where name = 'Progressive Rock'),(select id from ALBUM where title = 'Stupid Dream'),(select id from ARTIST where name = 'Porcupine Tree'));
