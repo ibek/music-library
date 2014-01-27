@@ -77,7 +77,7 @@ public class ArtistDaoImpl implements ArtistDao {
      */
     @Override
     public List<Artist> getAll() {
-        return em.createQuery("SELECT a FROM Artist a", Artist.class)
+        return em.createQuery("SELECT a FROM Artist a ORDER by name", Artist.class)
                 .getResultList();
     }
 

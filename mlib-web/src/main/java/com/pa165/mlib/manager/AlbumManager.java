@@ -62,7 +62,7 @@ public class AlbumManager implements Serializable {
             service.createNewAlbum(albumTO);
         } catch (DuplicateException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("The album cannot be created because it already exists."));
-            return "/album_detail";
+            return "/album_edit";
         }
         return "/albums";
     }

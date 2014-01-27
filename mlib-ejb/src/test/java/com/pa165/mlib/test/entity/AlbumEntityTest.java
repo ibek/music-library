@@ -27,7 +27,7 @@ public class AlbumEntityTest extends EntityTestBase {
     public void testAlbumsWithArtist() throws Exception {
 
         Artist artist1 = new Artist();
-        artist1.setName("Yoshida Brothers");
+        artist1.setName("Yoshid Brothersr");
         ArtistDaoImpl arM = new ArtistDaoImpl();
         EntityManager em = getTestEntityManager();
         arM.setEntityManager(em);
@@ -37,7 +37,7 @@ public class AlbumEntityTest extends EntityTestBase {
         em.getTransaction().commit();
 
         Album album1 = new Album();
-        album1.setTitle("Best of Asia");
+        album1.setTitle("Best of Asi");
         album1.setReleased(2001);
         AlbumDaoImpl am = new AlbumDaoImpl();
         EntityManager em2 = getTestEntityManager();
@@ -47,14 +47,14 @@ public class AlbumEntityTest extends EntityTestBase {
         em2.getTransaction().commit();
 
         Album album2 = new Album();
-        album2.setTitle("Inside of the Sun");
+        album2.setTitle("Inside of the Su");
         album2.setReleased(2001);
         em2.getTransaction().begin();
         am.addAlbum(album2);
         em2.getTransaction().commit();
 
         Song song1 = new Song();
-        song1.setTitle("Comodo");
+        song1.setTitle("Comodor");
         song1.setArtist(artist1);
         song1.setAlbum(album1);
         SongDaoImpl sm = new SongDaoImpl();
@@ -65,7 +65,7 @@ public class AlbumEntityTest extends EntityTestBase {
         em3.getTransaction().commit();
 
         Song song2 = new Song();
-        song2.setTitle("Kodo");
+        song2.setTitle("Kodor");
         song2.setArtist(artist1);
         song2.setAlbum(album2);
         em3.getTransaction().begin();
@@ -73,7 +73,7 @@ public class AlbumEntityTest extends EntityTestBase {
         em3.getTransaction().commit();
 
         Song song3 = new Song();
-        song3.setTitle("Kagero");
+        song3.setTitle("Kageror");
         song3.setArtist(artist1);
         song3.setAlbum(album2);
         em3.getTransaction().begin();

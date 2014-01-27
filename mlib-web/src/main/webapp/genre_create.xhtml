@@ -8,23 +8,24 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.genre}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 
                 <c:if test="#{not empty param['genre_name']}">
                     <c:set var="a" value="#{genreManager.init(param['genre_name'])}" scope="request" />
                 </c:if>
                 <c:if test="#{empty param['genre_name']}">
-                    <c:set var="a" value="#{genretManager.init()}" scope="request" />
+                    <c:set var="a" value="#{genreManager.init()}" scope="request" />
                 </c:if>
+
+                <h1>#{msg.newGenre}</h1>
                 
                 <h:form>
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg.genreName}: " />
-                        <h:inputText value="#{genreManager.genreTO.name}" required="true" readonly="#{not empty param['genre_name'] or !facesContext.externalContext.isUserInRole('ADMIN')}" />
+                        <h:inputText value="#{genreManager.genreTO.name}" required="#{empty param['genre_name']}" readonly="#{not empty param['genre_name'] or !loginManager.loggedIn}" />
                     </h:panelGrid>
+                    
                     <h:commandButton value="#{msg.create}" action="#{genreManager.create}" rendered="#{empty param['genre_name'] and facesContext.externalContext.isUserInRole('ADMIN')}" />
-                    <h:commandButton value="#{msg.remove}" action="#{genreManager.remove}" rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}" />
                 </h:form>
                 
             </ui:define>

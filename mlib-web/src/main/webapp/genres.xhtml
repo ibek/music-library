@@ -12,12 +12,13 @@
                 <h1>#{msg.genres}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="/genre_detail" rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}">
+                    <h:button value="#{msg.create}" outcome="/genre_create" rendered="#{facesContext.externalContext.isUserInRole('ADMIN')}">
                     </h:button>
                 </h:form>
+                <p></p>
 
                 <c:set var="allGenres" value="#{genreManager.service.allGenres}" scope="request" />
-                <rich:dataGrid value="#{allGenres}" var="g" columns="3" elements="9" rendered="#{not empty allGenres}" styleClass="grid" >
+                <rich:dataGrid value="#{allGenres}" var="g" columns="4" elements="20" rendered="#{not empty allGenres}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{g.name}" outcome="/genre_detail">

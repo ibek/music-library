@@ -75,7 +75,7 @@ public class AlbumDaoImpl implements AlbumDao {
      */
     @Override
     public List<Album> getAll() {
-        return em.createQuery("SELECT a FROM Album a", Album.class)
+        return em.createQuery("SELECT a FROM Album a ORDER BY title", Album.class)
                 .getResultList();
     }
     

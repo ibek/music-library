@@ -8,7 +8,7 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.song}</h1>
+
                 <h:messages globalOnly="true" class="message"/>
                 
                 <c:if test="#{not empty param['song_title']}">
@@ -17,6 +17,8 @@
                 <c:if test="#{empty param['song_title']}">
                     <c:set var="s" value="#{songManager.initNew(param['song_album'])}" scope="request" />
                 </c:if>
+                
+                <h1>#{msg.newSong}</h1>
                 
                 <h:form>
                     <h:panelGrid columns="2">
@@ -50,8 +52,6 @@
                     </h:panelGrid>
                     
                     <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title'] and loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.update}" action="#{songManager.updateSong}" rendered="#{loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong}" rendered="#{loginManager.loggedIn}" />
                 </h:form>
                
             </ui:define>

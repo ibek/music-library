@@ -43,7 +43,7 @@ public class DBInitialization {
     
     @PostConstruct
     public void init() {
-        System.out.println("initializing database ...");
+        /*System.out.println("initializing database ...");
         GenreTO genre = new GenreTO();
         AlbumTO album = new AlbumTO();
         ArtistTO artist = new ArtistTO();
@@ -78,6 +78,7 @@ public class DBInitialization {
         } catch (DuplicateException ex) {
             
         }
+                */
     }
     
 }

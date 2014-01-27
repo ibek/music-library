@@ -8,7 +8,6 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.song}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 
                 <c:if test="#{not empty param['song_title']}">
@@ -17,41 +16,36 @@
                 <c:if test="#{empty param['song_title']}">
                     <c:set var="s" value="#{songManager.initNew(param['song_album'])}" scope="request" />
                 </c:if>
+
+                <h1>#{s.title}</h1>
+                <p>#{s.commentary}</p>
                 
                 <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="#{msg.songTitle}: " />
-                        <h:inputText value="#{s.title}" required="true" readonly="#{not empty param['song_title'] or !loginManager.loggedIn}" />
-                        
-                        <h:outputLabel value="#{msg.artist}: " />
-                        <h:selectOneMenu value="#{songManager.artist}" readonly="#{!loginManager.loggedIn}">
-                            <f:selectItems value="#{songManager.artistService.allArtists}" var="ar" itemLabel="#{ar.name}" itemValue="#{ar.name}" />
-                        </h:selectOneMenu>
+                    <h:panelGrid columns="2">                       
+                        <h:outputLabel style="font-weight: bold" value="#{msg.artist}: " />
+                        <h:button value="#{s.artist.name}" outcome="artist_detail">
+                                <f:param name="artist_name" value="#{s.artist.name}"/>
+                        </h:button>
 
-                        <h:outputLabel value="#{msg.album}: " />
-                        <h:selectOneMenu value="#{songManager.album}" readonly="#{!loginManager.loggedIn}">
-                            <f:selectItems value="#{songManager.albumService.allAlbums}" var="a" itemLabel="#{a.title}" itemValue="#{a.title}" />
-                        </h:selectOneMenu>
+                        <h:outputLabel style="font-weight: bold" value="#{msg.album}: " />
+                        <h:button value="#{s.album.title}" outcome="album_detail">
+                                <f:param name="album_name" value="#{s.album.title}"/>
+                        </h:button>
 
-                        <h:outputLabel value="#{msg.songPosition}: " />
-                        <h:inputText value="#{s.position}" required="false" />
+                        <h:outputLabel style="font-weight: bold" value="#{msg.songPosition}: " />
+                        <h:outputLabel value="#{s.position}" />
 
-                        <h:outputLabel value="#{msg.genre}: " />
-                        <h:selectOneMenu value="#{songManager.genre}" readonly="#{!loginManager.loggedIn}">
-                            <f:selectItems value="#{songManager.genreService.allGenres}" var="g" itemLabel="#{g.name}" itemValue="#{g.name}" />
-                        </h:selectOneMenu>
+                        <h:outputLabel style="font-weight: bold" value="#{msg.genre}: " />
+                        <h:outputLabel value="#{s.genre.name} " />
 
-                        <h:outputLabel value="#{msg.bitrate}: " />
-                        <h:inputText value="#{s.bitrate}" required="false" readonly="#{!loginManager.loggedIn}" />
-
-                        <h:outputLabel value="#{msg.commentary}: " />
-                        <h:inputText value="#{s.commentary}" required="false" readonly="#{!loginManager.loggedIn}" />
+                        <h:outputLabel style="font-weight: bold" value="#{msg.bitrate}: " />
+                        <h:outputLabel value="#{s.bitrate}" />
 
                     </h:panelGrid>
                     
-                    <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title'] and loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.update}" action="#{songManager.updateSong}" rendered="#{loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong}" rendered="#{loginManager.loggedIn}" />
+                    <h:button value="#{msg.updateOrDelete}" outcome="/song_edit" rendered="#{loginManager.loggedIn}">
+                            <f:param name="song_title" value="#{s.title}"/>
+                    </h:button>
                 </h:form>
                
             </ui:define>

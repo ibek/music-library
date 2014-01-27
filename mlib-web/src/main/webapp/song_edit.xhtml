@@ -8,7 +8,6 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.song}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 
                 <c:if test="#{not empty param['song_title']}">
@@ -17,12 +16,11 @@
                 <c:if test="#{empty param['song_title']}">
                     <c:set var="s" value="#{songManager.initNew(param['song_album'])}" scope="request" />
                 </c:if>
-                
+
+                <h1>#{s.title}</h1>
                 <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="#{msg.songTitle}: " />
-                        <h:inputText value="#{s.title}" required="true" readonly="#{not empty param['song_title'] or !loginManager.loggedIn}" />
-                        
+                    <h:inputHidden value="#{s.title}" required="true" />
+                    <h:panelGrid columns="2">                       
                         <h:outputLabel value="#{msg.artist}: " />
                         <h:selectOneMenu value="#{songManager.artist}" readonly="#{!loginManager.loggedIn}">
                             <f:selectItems value="#{songManager.artistService.allArtists}" var="ar" itemLabel="#{ar.name}" itemValue="#{ar.name}" />
@@ -48,8 +46,6 @@
                         <h:inputText value="#{s.commentary}" required="false" readonly="#{!loginManager.loggedIn}" />
 
                     </h:panelGrid>
-                    
-                    <h:commandButton value="#{msg.create}" action="#{songManager.create}" rendered="#{empty param['song_title'] and loginManager.loggedIn}" />
                     <h:commandButton value="#{msg.update}" action="#{songManager.updateSong}" rendered="#{loginManager.loggedIn}" />
                     <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong}" rendered="#{loginManager.loggedIn}" />
                 </h:form>

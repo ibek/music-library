@@ -12,12 +12,12 @@
                 <h1>#{msg.artists}</h1>
                 <h:messages globalOnly="true" class="message"/>
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="/artist_detail" rendered="#{loginManager.loggedIn}">
+                    <h:button value="#{msg.create}" outcome="/artist_create" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 
                 <c:set var="allArtists" value="#{artistManager.service.allArtists}" scope="request" />
-                <rich:dataGrid value="#{allArtists}" var="a" columns="3" elements="9" rendered="#{not empty allArtists}" styleClass="grid" >
+                <rich:dataGrid value="#{allArtists}" var="a" columns="4" elements="20" rendered="#{not empty allArtists}" styleClass="grid" >
                     <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{a.name}" outcome="/artist_detail">

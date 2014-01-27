@@ -34,7 +34,7 @@ h1 {
 }
 
 #main_content {
-    width: 800px;
+    width: 1100px;
     margin: 0 auto;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -56,6 +56,12 @@ h1 {
     background: #004a7e !important;
     color: white !important;
     font-weight: bold !important;
+     
+}
+
+.menu_button:hover  {
+    cursor: pointer;
+    background-color: #004d7e !important;
 }
 
 .message {
@@ -69,14 +75,14 @@ h1 {
 }
 
 table {
-    padding: 10px;
-    border: 2px solid grey;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
-    margin-top: 10px;
-    background-color: #ececec;
+    padding: 5px;
+    //border: 2px solid grey;
+    //-moz-border-radius: 5px;
+    //-webkit-border-radius: 5px;
+    //-khtml-border-radius: 5px;
+    //border-radius: 5px;
+    //margin-top: 5px;
+    //background-color: #ececec;
 }
 
 table.widerPadding th {

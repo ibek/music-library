@@ -13,12 +13,12 @@
                 <h:messages globalOnly="true" class="message"/>
                 
                 <h:form>
-                    <h:button value="#{msg.create}" outcome="/song_detail" rendered="#{loginManager.loggedIn}">
+                    <h:button value="#{msg.create}" outcome="/song_create" rendered="#{loginManager.loggedIn}">
                     </h:button>
                 </h:form>
                 
                 <c:set var="allSongs" value="#{songManager.songService.allSongs}" scope="request" />
-                <rich:dataGrid value="#{allSongs}" var="s" columns="3" elements="9" rendered="#{not empty allSongs}" styleClass="grid" >
+                <rich:dataGrid value="#{allSongs}" var="s" columns="4" elements="20" rendered="#{not empty allSongs}" styleClass="grid" >
                      <rich:panel>
                         <f:facet name="header">
                             <h:button value="#{s.title}" outcome="/song_detail">
@@ -26,18 +26,12 @@
                             </h:button>
                         </f:facet>
                         <h:panelGrid columns="2">
-                            <h:outputText value="#{msg.artist}"></h:outputText>
+                            <h:outputText style="font-weight: bold" value="#{msg.artist}: "></h:outputText>
                             <h:outputText value="#{s.artist.name}" />
-                            <h:outputText value="#{msg.album}"></h:outputText>
+                            <h:outputText style="font-weight: bold" value="#{msg.album}: "></h:outputText>
                             <h:outputText value="#{s.album.title}" />
-                            <h:outputText value="#{msg.songPosition}"></h:outputText>
-                            <h:outputText value="#{s.position}" />
-                            <h:outputText value="#{msg.genre}"></h:outputText>
+                            <h:outputText style="font-weight: bold" value="#{msg.genre}: "></h:outputText>
                             <h:outputText value="#{s.genre.name}" />
-                            <h:outputText value="#{msg.bitrate}"></h:outputText>
-                            <h:outputText value="#{s.bitrate}" />
-                            <h:outputText value="#{msg.commentary}"></h:outputText>
-                            <h:outputText value="#{s.commentary}" />
                         </h:panelGrid>                      
                     </rich:panel>
                     <f:facet name="footer">

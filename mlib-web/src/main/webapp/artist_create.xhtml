@@ -8,45 +8,22 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.artist}</h1>
+                
                 <h:messages globalOnly="true" class="message"/>
                 
-                <c:if test="#{not empty param['artist_name']}">
-                    <c:set var="a" value="#{artistManager.init(param['artist_name'])}" scope="request" />
-                </c:if>
-                <c:if test="#{empty param['artist_name']}">
-                    <c:set var="a" value="#{artistManager.init()}" scope="request" />
-                </c:if>
+                <c:set var="a" value="#{artistManager.init()}" scope="request" />
+                <h1>#{msg.newArtist}</h1>
                 
                 <h:form>
-                    <h:panelGrid columns="3">
+                    <h:panelGrid columns="2">
                         <h:outputLabel value="#{msg.artistName}: " />
-                        <h:inputText value="#{artistManager.artistTO.name}" required="true"  readonly="#{not empty param['artist_name'] or !loginManager.loggedIn}" />
+                        <h:inputText value="#{a.name}" required="true" />
                     </h:panelGrid>
-                    <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{empty param['artist_name'] and loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.remove}" action="#{artistManager.remove}" rendered="#{loginManager.loggedIn}" />
+                    
+                    <h:commandButton value="#{msg.create}" action="#{artistManager.create}" rendered="#{loginManager.loggedIn}" />
                 </h:form>
-                
-                <h2>#{msg.albums}</h2>
-                
-                <h:form>
-                    <c:set var="albums" value="#{albumManager.getAlbumsWithArtist(a)}" scope="request" />
-                    <h:dataTable value="#{albums}" var="a" rendered="#{not empty albums}">
-                        <h:column>
-                            <f:facet name="header">#{msg.title}</f:facet>
-                                
-                            <h:button value="#{a.title}" outcome="/album_detail">
-                                    <f:param name="album_name" value="#{a.title}"/>
-                            </h:button>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">#{msg.released}</f:facet>
-                                #{a.released}
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
+
             </ui:define>
         </ui:composition>
     </body>
 </html>
-

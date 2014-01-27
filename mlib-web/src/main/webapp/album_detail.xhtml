@@ -9,7 +9,7 @@
     <body>
         <ui:composition template="/template.xhtml">
             <ui:define name="content">
-                <h1>#{msg.album}</h1>
+                <h1>#{a.title}</h1>
                 <h:messages globalOnly="true"/>
                 <c:if test="#{not empty param['album_name']}">
                     <c:set var="a" value="#{albumManager.init(param['album_name'])}" scope="request" />
@@ -19,23 +19,18 @@
                 </c:if>
                 <h:form>
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="#{msg.title}: " />
-                        <h:inputText value="#{a.title}" required="#{empty param['album_name']}" readonly="#{not empty param['album_name'] or !loginManager.loggedIn}" />
-                        <h:outputLabel value="#{msg.released}: " />
-                        <h:inputText value="#{a.released}" required="false" readonly="#{!loginManager.loggedIn}" />                        
+                        <h:outputLabel style="font-weight: bold" value="#{msg.released}: " />
+                        <h:outputLabel value="#{a.released}" />                        
                     </h:panelGrid>
-                    <h:commandButton value="#{msg.create}" action="#{albumManager.create}" rendered="#{empty param['album_name'] and loginManager.loggedIn}" />
                     
-                    <h:commandButton value="#{msg.update}" action="#{albumManager.updateAlbum}" rendered="#{loginManager.loggedIn}" />
-                    <h:commandButton value="#{msg.remove}" action="#{albumManager.removeAlbum}" rendered="#{loginManager.loggedIn}" />
+                    <h:button value="#{msg.updateOrDelete}" outcome="/album_edit" rendered="#{loginManager.loggedIn}">
+                            <f:param name="album_name" value="#{a.title}"/>
+                    </h:button>
                     
                 </h:form>
                 
                 <h2>#{msg.songs}</h2>
-                
-                <h:button value="#{msg.add}" outcome="song_detail">
-                    <f:param name="song_album" value="#{a.title}"/>
-                </h:button><br/>
+
                 <h:form>
                     <c:set var="songs" value="#{songManager.getSongsInAlbum(a)}" scope="request" />
                     <h:dataTable value="#{songs}" var="song" rendered="#{not empty songs}">
@@ -58,12 +53,6 @@
                         <h:column>
                             <f:facet name="header">#{msg.genre}</f:facet>
                                 #{song.genre.name}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">#{msg.operation}</f:facet>
-                            <h:commandButton value="#{msg.remove}" action="#{songManager.removeSong(song, '/album_detail')}" rendered="#{loginManager.loggedIn}">
-                                <f:param name="album_name" value="#{a.title}" />
-                            </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:form>
